@@ -1,4 +1,4 @@
-package ru.chirkin;
+package ru.churkin;
 
 
 import java.io.IOException;

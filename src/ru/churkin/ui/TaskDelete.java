@@ -1,6 +1,6 @@
-package ru.chirkin.ui;
+package ru.churkin.ui;
 
-import ru.chirkin.entity.Task;
+import ru.churkin.entity.Task;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,26 +8,28 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TaskReadByID implements Command{
+public class TaskDelete implements Command {
 
-    private Map<String, Task> tempMap = new HashMap<>();
+    private Map<String, Task> taskMap = new HashMap<>();
 
     @Override
     public String name() {
-        return "taskReadByID";
+        return "taskDel";
     }
 
     @Override
     public String description() {
-        return "Read task by ID";
+        return "Task remove";
     }
 
     @Override
     public Object execute() throws IOException {
-        System.out.println("enter id");
+        System.out.println("enter task id for remove");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String id = reader.readLine();
+        taskMap.remove(id);
+        System.out.println("successful remove");
         reader.close();
-        return tempMap.get(id);
+        return true;
     }
 }

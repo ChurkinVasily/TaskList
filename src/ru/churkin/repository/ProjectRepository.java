@@ -1,7 +1,6 @@
-package ru.chirkin.repository;
+package ru.churkin.repository;
 
-import ru.chirkin.entity.Project;
-import ru.chirkin.entity.Task;
+import ru.churkin.entity.Project;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,11 +13,11 @@ public class ProjectRepository {
     public void createProject() {
         Project project = new Project();
         String id = UUID.randomUUID().toString();
+        project.setId(id);
         project.setName();
         project.setDescription();
-        project.setListTask(null);
         project.setTimeStart();
-        project.setTimeFin();
+        project.setTimeFinish();
         projectMap.put(id,project);
     }
 
@@ -35,9 +34,8 @@ public class ProjectRepository {
         Project project = projectMap.get(id);
         project.setName();
         project.setDescription();
-        project.setListTask(null);
         project.setTimeStart();
-        project.setTimeFin();
+        project.setTimeFinish();
         projectMap.put(id,project);
     }
 

@@ -1,6 +1,6 @@
-package ru.chirkin.ui;
+package ru.churkin.ui;
 
-import ru.chirkin.entity.Task;
+import ru.churkin.entity.Task;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,10 +24,11 @@ public class TaskCreate implements Command{
     public Object execute() throws IOException {
         System.out.println("enter new task parameters: name, description, timeStart, timeFinish");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        newTask.setProjectId(reader.readLine()); ///-------как пользователь введет этот огромный ID
         newTask.setName(reader.readLine());
         newTask.setDescription(reader.readLine());
-        newTask.setTimeFin(reader.readLine());
-        newTask.setTimeFin(reader.readLine());
+        newTask.setTimeFinish(reader.readLine());
+        newTask.setTimeFinish(reader.readLine());
         reader.close();
         return newTask;
     }
