@@ -25,6 +25,7 @@ public class TaskRepository {
             if (name.equals(entry.getValue().getName())) {
                 return entry.getValue();
             }
+            else return null;
         }
     }
 

@@ -5,8 +5,12 @@ import ru.chirkin.entity.Task;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TaskReadByID implements Command{
+
+    private Map<String, Task> tempMap = new HashMap<>();
 
     @Override
     public String name() {
@@ -23,6 +27,7 @@ public class TaskReadByID implements Command{
         System.out.println("enter id");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String id = reader.readLine();
-        return ;
+        reader.close();
+        return tempMap.get(id);
     }
 }
