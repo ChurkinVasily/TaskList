@@ -1,5 +1,7 @@
 package ru.churkin.entity;
 
+import ru.churkin.service.TaskService;
+
 public class Task {
 
     private String id;
@@ -14,6 +16,14 @@ public class Task {
     }
 
     public Task() {
+    }
+
+    public Task(TaskService taskService) {
+        this.name = taskService.getName();
+        this.description = taskService.getDescription();
+        this. timeStart = taskService.getTimeStart();
+        this.timeFinish = taskService.getTimeFinish();
+        this.projectId = taskService.getProjectId();
     }
 
     public String getId() {

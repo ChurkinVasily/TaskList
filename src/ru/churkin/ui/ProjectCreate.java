@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 
 public class ProjectCreate implements Command {
 
-    private Project newProject = new Project();
+    private BufferedReader reader;
 
     @Override
     public String name() {
@@ -21,14 +21,11 @@ public class ProjectCreate implements Command {
     }
 
     @Override
-    public Object execute() throws IOException {
+    public void execute() throws IOException {
         System.out.println("enter project parameters: name, description, start time, finish time");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        newProject.setName(reader.readLine());
-        newProject.setDescription(reader.readLine());
-        newProject.setTimeStart(reader.readLine());
-        newProject.setTimeFinish(reader.readLine());
-        reader.close();
-        return newProject;
+//        newProject.setName(reader.readLine());
+//        newProject.setDescription(reader.readLine());
+//        newProject.setTimeStart(reader.readLine());
+//        newProject.setTimeFinish(reader.readLine());
     }
 }

@@ -1,18 +1,28 @@
 package ru.churkin.ui;
 
 import ru.churkin.entity.Task;
+import ru.churkin.repository.TaskRepository;
+import ru.churkin.service.TaskService;
+import ru.churkin.service.TaskServiceImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class TaskCreate implements Command{
 
-    private Task newTask = new Task();
+    private BufferedReader reader;
+    private TaskRepository taskRepository;
+    private TaskServiceImpl taskServiceImpl;
 
-   @Override
+    public TaskCreate(BufferedReader reader, TaskRepository taskRepository, TaskServiceImpl taskServiceImpl) {
+        this.reader = reader;
+        this.taskRepository = taskRepository;
+        this.taskServiceImpl = taskServiceImpl;
+    }
+
+    @Override
     public String name() {
-        return "taskCreate";
+        return "tc";
     }
 
     @Override
@@ -21,15 +31,13 @@ public class TaskCreate implements Command{
     }
 
     @Override
-    public Object execute() throws IOException {
+    public void execute() throws IOException {
+        Task newTask = new Task();
         System.out.println("enter new task parameters: name, description, timeStart, timeFinish");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        newTask.setProjectId(reader.readLine()); ///-------как пользователь введет этот огромный ID
         newTask.setName(reader.readLine());
         newTask.setDescription(reader.readLine());
         newTask.setTimeFinish(reader.readLine());
         newTask.setTimeFinish(reader.readLine());
-        reader.close();
-        return newTask;
+        taskServiceImpl.createTask(newTask);
     }
 }

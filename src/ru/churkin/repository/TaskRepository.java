@@ -10,33 +10,26 @@ public class TaskRepository {
 
     private Map<String, Task> taskMap = new HashMap<>();
 
-    public void createTask() {
-        Task result = new Task();
+    public TaskRepository() {
+    }
+
+    public void createTask(Task task) {
         String id = UUID.randomUUID().toString();
-        result.setId(id);
-        result.setName();
-        result.setDescription();
-        result.setTimeStart();
-        result.setTimeFinish();
-        result.setProjectId();
-        taskMap.put(id,result);
+        task.setId(id);
+        taskMap.put(id, task);
     }
 
     public Task findTaskByName(String name) {
-        Task task2;
+        Task task = new Task();
         for (Map.Entry<String, Task> entry : taskMap.entrySet()) {
-            task2 = entry.getValue();
-            if (name.equals(task2.getName())) {
-               return task2; }
+            task = entry.getValue();
+            if (name.equals(task.getName())) {
+               return task; }
         }
+        return task;
     }
 
-    public void updateTask(String id) {
-        Task task = taskMap.get(id);
-        task.setName();
-        task.setDescription();
-        task.setTimeStart();
-        task.setTimeFinish();
+    public void updateTask(String id, Task task) {
         taskMap.put(id,task);
     }
 
@@ -44,8 +37,11 @@ public class TaskRepository {
         taskMap.remove(id);
     }
 
+    public Map<String, Task> getTaskMap() {
+        return taskMap;
+    }
 
-
-
-
+    public void setTaskMap(Map<String, Task> taskMap) {
+        this.taskMap = taskMap;
+    }
 }
