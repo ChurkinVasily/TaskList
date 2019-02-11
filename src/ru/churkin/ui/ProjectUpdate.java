@@ -7,37 +7,41 @@ import ru.churkin.service.ProjectServiceImpl;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class ProjectCreate implements Command {
+public class ProjectUpdate implements Command {
 
     private BufferedReader reader;
     private ProjectServiceImpl projectServiceImpl;
 
-    public ProjectCreate(BufferedReader reader, ProjectServiceImpl projectServiceImpl) {
+    public ProjectUpdate(BufferedReader reader, ProjectServiceImpl projectServiceImpl) {
         this.reader = reader;
         this.projectServiceImpl = projectServiceImpl;
     }
 
     @Override
     public String name() {
-        return "pc";
+        return "pu";
     }
 
     @Override
     public String description() {
-        return "create new Project";
+        return "Update project";
     }
 
     @Override
     public void execute() throws IOException {
         Project newProject = new Project();
-        System.out.println("enter new project parameters: name, description, timeStart, timeFinish");
+        System.out.println("enter project-name for update Project");
+        String name = reader.readLine();
+        System.out.println("enter new parameters: name, description, time start, time finish");
         newProject.setName(reader.readLine());
         newProject.setDescription(reader.readLine());
         newProject.setTimeStart(reader.readLine());
         newProject.setTimeFinish(reader.readLine());
-        boolean isCreate = projectServiceImpl.createProject(newProject);
-        if (isCreate)  { System.out.println("проет (Project) успешно создан");}
-        else System.out.println("вы задали существующее или пустое имя проекта");
-
+        boolean isUpdate = projectServiceImpl.updateProject(name, newProject);
+        if (isUpdate) {
+            System.out.println("project успешно обновлен"); }
+        else {
+            System.out.println("не удалось обновить Project. пустое или несуществующее имя");
+        }
     }
 }

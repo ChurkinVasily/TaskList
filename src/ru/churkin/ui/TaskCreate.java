@@ -1,22 +1,19 @@
 package ru.churkin.ui;
 
+import ru.churkin.api.Command;
 import ru.churkin.entity.Task;
-import ru.churkin.repository.TaskRepository;
-import ru.churkin.service.TaskService;
 import ru.churkin.service.TaskServiceImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class TaskCreate implements Command{
+public class TaskCreate implements Command {
 
     private BufferedReader reader;
-    private TaskRepository taskRepository;
     private TaskServiceImpl taskServiceImpl;
 
-    public TaskCreate(BufferedReader reader, TaskRepository taskRepository, TaskServiceImpl taskServiceImpl) {
+    public TaskCreate(BufferedReader reader, TaskServiceImpl taskServiceImpl) {
         this.reader = reader;
-        this.taskRepository = taskRepository;
         this.taskServiceImpl = taskServiceImpl;
     }
 
@@ -36,8 +33,11 @@ public class TaskCreate implements Command{
         System.out.println("enter new task parameters: name, description, timeStart, timeFinish");
         newTask.setName(reader.readLine());
         newTask.setDescription(reader.readLine());
+        newTask.setTimeStart(reader.readLine());
         newTask.setTimeFinish(reader.readLine());
-        newTask.setTimeFinish(reader.readLine());
-        taskServiceImpl.createTask(newTask);
+        newTask.setProjectId(reader.readLine());
+        boolean isCreate = taskServiceImpl.createTask(newTask);
+        if (isCreate)  { System.out.println("задача (Task) успешно создана");}
+        else System.out.println("вы задали существующее или пустое имя");
     }
 }

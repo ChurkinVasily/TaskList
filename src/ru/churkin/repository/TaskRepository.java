@@ -22,15 +22,15 @@ public class TaskRepository {
     public Task findTaskByName(String name) {
         Task task = new Task();
         for (Map.Entry<String, Task> entry : taskMap.entrySet()) {
-            task = entry.getValue();
-            if (name.equals(task.getName())) {
-               return task; }
+            if (name.equals(entry.getValue().getName())) {
+                task = entry.getValue();
+            }
         }
         return task;
     }
 
     public void updateTask(String id, Task task) {
-        taskMap.put(id,task);
+        taskMap.put(id, task);
     }
 
     public void deleteTask(String id) {

@@ -1,11 +1,12 @@
 package ru.churkin.service;
 
+import ru.churkin.api.TaskService;
 import ru.churkin.entity.Task;
 import ru.churkin.repository.TaskRepository;
 
 import java.util.Map;
 
-public class TaskServiceImpl implements Service {
+public class TaskServiceImpl implements TaskService {
 
     private TaskRepository taskRepository;
 
@@ -14,70 +15,66 @@ public class TaskServiceImpl implements Service {
     }
 
     @Override
-    public void createTask(Task task) {
+    public boolean createTask(Task task) {
         String taskName = task.getName();
-        int count = 0;
+        boolean isConsist = false;
         for (Map.Entry<String, Task> map : taskRepository.getTaskMap().entrySet()) {
             Task nTask = map.getValue();
             if (taskName.equals(nTask.getName())) {
-                ++count;
+                isConsist = true;
             }
         }
-        if (count > 0) {
-            System.out.println("это имя уже существует");
-        } else taskRepository.createTask(task);
+        if (isConsist || task.getName().equals("")) {
+            return false;
+        } else {
+            taskRepository.createTask(task);
+            return true;
+        }
     }
 
     @Override
     public Task findTaskByName(String name) {
-        Task task = new Task();
+        boolean isConsist = false;
         for (Map.Entry<String, Task> map : taskRepository.getTaskMap().entrySet()) {
             Task nTask = map.getValue();
             if (name.equals(nTask.getName())) {
-                task = taskRepository.findTaskByName(name);
+                isConsist = true;
             }
         }
-        return task;
+        if (isConsist) { return taskRepository.findTaskByName(name);}
+        else return null;
     }
 
     @Override
-    public void updateTask(String name, Task task) {
-        int count = 0;
+    public boolean updateTask(String name, Task task) {
+        boolean isConsist = false;
+        String id = "";
         for (Map.Entry<String, Task> map : taskRepository.getTaskMap().entrySet()) {
-            Task nTask = map.getValue();
-            if (name.equals(nTask.getName())) {
-                String id = nTask.getId();
-                taskRepository.updateTask(id, task);
-                ++count;
+            if (name.equals(map.getValue().getName())) {
+                id = map.getValue().getId();
+                isConsist = true;
             }
         }
-        if (count > 0) System.out.println("task успешно обновлен");
-        else {
-            System.out.println("это имя не существует. невозможно обновить Task");
-        }
+        if (!isConsist || name.equals("")) { return false; }
+        else {taskRepository.updateTask(id, task);
+            return true; }
     }
 
     @Override
-    public void deleteTask(String id) {
-        if (taskRepository.getTaskMap().containsKey(id)) {
-            taskRepository.deleteTask(id);
-            System.out.println("успешно удалено");
-        } else System.out.println("нет такого id. невозможно завершить операцию удаления");
+    public boolean deleteTask(String name) {
+        boolean isConsist = false;
+        String idForRemove = "";
+        for (Map.Entry<String, Task> map : taskRepository.getTaskMap().entrySet()) {
+            if (name.equals(map.getValue().getName())) {
+                idForRemove = map.getValue().getId();
+                isConsist = true;
+            }
+        }
+        if (!isConsist || name.equals("")) {
+            return false;
+        } else {
+            taskRepository.deleteTask(idForRemove);
+            return true;
+        }
     }
-
-//    private Map<String, Command> commandList;
-//
-//    public TaskServiceImpl(TaskRepository taskRepository, Map<String, Command> commandList) {
-//        this.taskRepository = taskRepository;
-//        this.commandList = commandList;
-//    }
-//
-//    public void execute(String commandName) throws IOException {
-//        Command command = commandList.get(commandName);
-//        if (command == null) {
-//            System.out.println("no such command");
-//        }
-//        command.execute();
-//    }
-
 }

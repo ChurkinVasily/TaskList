@@ -1,22 +1,19 @@
 package ru.churkin.ui;
 
+import ru.churkin.api.Command;
 import ru.churkin.entity.Task;
-import ru.churkin.repository.TaskRepository;
 import ru.churkin.service.TaskServiceImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
-public class TaskUpdate implements Command{
+public class TaskUpdate implements Command {
 
     private BufferedReader reader;
-    private TaskRepository taskRepository;
     private TaskServiceImpl taskServiceImpl;
 
-    public TaskUpdate(BufferedReader reader, TaskRepository taskRepository, TaskServiceImpl taskServiceImpl) {
+    public TaskUpdate(BufferedReader reader, TaskServiceImpl taskServiceImpl) {
         this.reader = reader;
-        this.taskRepository = taskRepository;
         this.taskServiceImpl = taskServiceImpl;
     }
 
@@ -41,6 +38,12 @@ public class TaskUpdate implements Command{
         newTask.setTimeStart(reader.readLine());
         newTask.setTimeFinish(reader.readLine());
         newTask.setProjectId(reader.readLine());
-        taskServiceImpl.updateTask(name, newTask);
+        boolean isUpdate = taskServiceImpl.updateTask(name, newTask);
+        if (isUpdate) {
+            System.out.println("task успешно обновлен"); }
+        else {
+            System.out.println("не удалось обновить Task. пустое или несуществующее имя");
+        }
+
     }
 }

@@ -1,7 +1,5 @@
 package ru.churkin.entity;
 
-import java.util.Date;
-
 public class Project {
 
     private String id;
@@ -50,4 +48,14 @@ public class Project {
         this.timeFinish = timeFinish;
     }
 
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", timeStart='" + timeStart + '\'' +
+                ", timeFinish='" + timeFinish + '\'' +
+                '}';
+    }
 }
