@@ -18,12 +18,12 @@ public class TaskReadByName implements Command {
 
     @Override
     public String name() {
-        return "tr";
+        return "tf";
     }
 
     @Override
     public String description() {
-        return "find task by Name";
+        return "Task Find by name";
     }
 
     @Override

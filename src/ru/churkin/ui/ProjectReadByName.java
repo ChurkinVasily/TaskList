@@ -18,12 +18,12 @@ public class ProjectReadByName implements Command {
 
     @Override
     public String name() {
-        return "pr";
+        return "pf";
     }
 
     @Override
     public String description() {
-        return "find project by name";
+        return "Project Find by name";
     }
 
     @Override

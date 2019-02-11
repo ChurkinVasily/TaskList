@@ -24,7 +24,7 @@ public class ProjectUpdate implements Command {
 
     @Override
     public String description() {
-        return "Update project";
+        return "Project Updating";
     }
 
     @Override

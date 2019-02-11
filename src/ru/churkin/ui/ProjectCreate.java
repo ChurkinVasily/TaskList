@@ -24,7 +24,7 @@ public class ProjectCreate implements Command {
 
     @Override
     public String description() {
-        return "create new Project";
+        return "Project Creation";
     }
 
     @Override

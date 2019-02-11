@@ -28,7 +28,7 @@ public class TaskDelete implements Command {
 
     @Override
     public String description() {
-        return "Task remove";
+        return "Task Deleting";
     }
 
     @Override

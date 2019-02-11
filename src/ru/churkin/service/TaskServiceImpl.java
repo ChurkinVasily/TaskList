@@ -52,6 +52,7 @@ public class TaskServiceImpl implements TaskService {
         for (Map.Entry<String, Task> map : taskRepository.getTaskMap().entrySet()) {
             if (name.equals(map.getValue().getName())) {
                 id = map.getValue().getId();
+                task.setId(id);
                 isConsist = true;
             }
         }

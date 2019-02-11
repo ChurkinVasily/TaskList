@@ -24,7 +24,7 @@ public class TaskUpdate implements Command {
 
     @Override
     public String description() {
-        return "Update task";
+        return "Task Updating";
     }
 
     @Override

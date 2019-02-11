@@ -51,6 +51,7 @@ public class ProjectServiceImpl implements ProjectService {
         for (Map.Entry<String, Project> map : projectRepository.getProjectMap().entrySet()) {
             if (name.equals(map.getValue().getName())) {
                 id = map.getValue().getId();
+                project.setId(id);
                 isConsist = true;
             }
         }

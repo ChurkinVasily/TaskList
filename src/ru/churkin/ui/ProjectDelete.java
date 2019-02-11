@@ -23,7 +23,7 @@ public class ProjectDelete implements Command {
 
     @Override
     public String description() {
-        return "Project remove";
+        return "Project Deleting";
     }
 
     @Override

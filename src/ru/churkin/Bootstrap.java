@@ -13,23 +13,24 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Starter {
+public class Bootstrap {
 
     public void init() throws IOException {
-        TaskRepository taskRepository = new TaskRepository();
-        ProjectRepository projectRepository = new ProjectRepository();
-        TaskServiceImpl taskServiceImpl = new TaskServiceImpl(taskRepository);
-        ProjectServiceImpl projectServiseImpl = new ProjectServiceImpl(projectRepository);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        final TaskRepository taskRepository = new TaskRepository();
+        final ProjectRepository projectRepository = new ProjectRepository();
+        final TaskServiceImpl taskServiceImpl = new TaskServiceImpl(taskRepository);
+        final ProjectServiceImpl projectServiceImpl = new ProjectServiceImpl(projectRepository);
+        final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         final TaskCreate taskCreate = new TaskCreate(reader, taskServiceImpl);
         final TaskDelete taskDelete = new TaskDelete(reader, taskServiceImpl);
         final TaskReadByName taskReadByID = new TaskReadByName(reader, taskServiceImpl);
         final TaskUpdate taskUpdate = new TaskUpdate(reader, taskServiceImpl);
-        final ProjectCreate projectCreate = new ProjectCreate(reader, projectServiseImpl);
-        final ProjectDelete projectDelete = new ProjectDelete(reader, projectServiseImpl);
-        final ProjectReadByName projectReadByName = new ProjectReadByName(reader, projectServiseImpl);
-        final ProjectUpdate projectUpdate = new ProjectUpdate(reader, projectServiseImpl);
+        final ProjectCreate projectCreate = new ProjectCreate(reader, projectServiceImpl);
+        final ProjectDelete projectDelete = new ProjectDelete(reader, projectServiceImpl);
+        final ProjectReadByName projectReadByName = new ProjectReadByName(reader, projectServiceImpl);
+        final ProjectUpdate projectUpdate = new ProjectUpdate(reader, projectServiceImpl);
 
         Map<String, Command> commandList = new HashMap<>();
         commandList.put(taskCreate.name(), taskCreate);

@@ -24,18 +24,17 @@ public class TaskCreate implements Command {
 
     @Override
     public String description() {
-        return "Create new task";
+        return "Task Creation";
     }
 
     @Override
     public void execute() throws IOException {
         Task newTask = new Task();
         System.out.println("enter new task parameters: name, description, timeStart, timeFinish");
-        newTask.setName(reader.readLine());
-        newTask.setDescription(reader.readLine());
-        newTask.setTimeStart(reader.readLine());
-        newTask.setTimeFinish(reader.readLine());
-        newTask.setProjectId(reader.readLine());
+        newTask.setName(reader.readLine().trim().toLowerCase());
+        newTask.setTimeStart(reader.readLine().trim());
+        newTask.setTimeFinish(reader.readLine().trim());
+        newTask.setProjectId(reader.readLine().trim());
         boolean isCreate = taskServiceImpl.createTask(newTask);
         if (isCreate)  { System.out.println("задача (Task) успешно создана");}
         else System.out.println("вы задали существующее или пустое имя");
