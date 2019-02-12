@@ -17,6 +17,9 @@ public class ProjectUpdate implements Command {
         this.projectServiceImpl = projectServiceImpl;
     }
 
+    public ProjectUpdate() {
+    }
+
     @Override
     public String name() {
         return "pu";
@@ -39,8 +42,8 @@ public class ProjectUpdate implements Command {
         newProject.setTimeFinish(reader.readLine());
         boolean isUpdate = projectServiceImpl.updateProject(name, newProject);
         if (isUpdate) {
-            System.out.println("project успешно обновлен"); }
-        else {
+            System.out.println("project успешно обновлен");
+        } else {
             System.out.println("не удалось обновить Project. пустое или несуществующее имя");
         }
     }

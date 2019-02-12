@@ -41,8 +41,9 @@ public class TaskServiceImpl implements TaskService {
                 isConsist = true;
             }
         }
-        if (isConsist) { return taskRepository.findTaskByName(name);}
-        else return null;
+        if (isConsist) {
+            return taskRepository.findTaskByName(name);
+        } else return null;
     }
 
     @Override
@@ -56,9 +57,12 @@ public class TaskServiceImpl implements TaskService {
                 isConsist = true;
             }
         }
-        if (!isConsist || name.equals("")) { return false; }
-        else {taskRepository.updateTask(id, task);
-            return true; }
+        if (!isConsist || name.equals("")) {
+            return false;
+        } else {
+            taskRepository.updateTask(id, task);
+            return true;
+        }
     }
 
     @Override

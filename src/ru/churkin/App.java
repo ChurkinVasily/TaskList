@@ -6,15 +6,16 @@ import java.io.IOException;
 
 public class App {
 
-     private static Class[] classes = {
-        TaskCreate.class, TaskDelete.class, TaskUpdate.class, TaskReadByName.class,
-        ProjectCreate.class, ProjectDelete.class, ProjectUpdate.class, ProjectReadByName.class
+    public static Class[] classes = {
+            TaskCreate.class, TaskDelete.class, TaskUpdate.class, TaskReadByName.class,
+            ProjectCreate.class, ProjectDelete.class, ProjectUpdate.class, ProjectReadByName.class
     };
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException {
 
         Bootstrap bootstrap = new Bootstrap();
-        bootstrap.init();
+        bootstrap.init(classes);
+
     }
 
 }

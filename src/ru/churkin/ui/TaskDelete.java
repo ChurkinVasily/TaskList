@@ -19,7 +19,8 @@ public class TaskDelete implements Command {
         this.taskServiceImpl = taskServiceImpl;
     }
 
-    private Map<String, Task> taskMap = new HashMap<>();
+    public TaskDelete() {
+    }
 
     @Override
     public String name() {

@@ -16,6 +16,9 @@ public class ProjectDelete implements Command {
         this.projectServiceImpl = projectServiceImpl;
     }
 
+    public ProjectDelete() {
+    }
+
     @Override
     public String name() {
         return "pd";

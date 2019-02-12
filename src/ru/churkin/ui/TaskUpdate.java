@@ -17,6 +17,9 @@ public class TaskUpdate implements Command {
         this.taskServiceImpl = taskServiceImpl;
     }
 
+    public TaskUpdate() {
+    }
+
     @Override
     public String name() {
         return "tu";
@@ -40,8 +43,8 @@ public class TaskUpdate implements Command {
         newTask.setProjectId(reader.readLine());
         boolean isUpdate = taskServiceImpl.updateTask(name, newTask);
         if (isUpdate) {
-            System.out.println("task успешно обновлен"); }
-        else {
+            System.out.println("task успешно обновлен");
+        } else {
             System.out.println("не удалось обновить Task. пустое или несуществующее имя");
         }
 

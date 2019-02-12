@@ -40,8 +40,9 @@ public class ProjectServiceImpl implements ProjectService {
                 isConsist = true;
             }
         }
-        if (isConsist) { return projectRepository.findProjectByName(name);}
-        else return null;
+        if (isConsist) {
+            return projectRepository.findProjectByName(name);
+        } else return null;
     }
 
     @Override
@@ -55,9 +56,12 @@ public class ProjectServiceImpl implements ProjectService {
                 isConsist = true;
             }
         }
-        if (!isConsist || name.equals("")) { return false; }
-        else {projectRepository.updateProject(id, project);
-            return true; }
+        if (!isConsist || name.equals("")) {
+            return false;
+        } else {
+            projectRepository.updateProject(id, project);
+            return true;
+        }
     }
 
     @Override

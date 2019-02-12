@@ -16,6 +16,9 @@ public class ProjectReadByName implements Command {
         this.projectServiceImpl = projectServiceImpl;
     }
 
+    public ProjectReadByName() {
+    }
+
     @Override
     public String name() {
         return "pf";
@@ -32,8 +35,7 @@ public class ProjectReadByName implements Command {
         String name = reader.readLine();
         try {
             System.out.println(projectServiceImpl.findProjectByName(name).toString());
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             System.out.println("нет проекта с таким именем");
         }
     }

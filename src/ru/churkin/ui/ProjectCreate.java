@@ -17,6 +17,9 @@ public class ProjectCreate implements Command {
         this.projectServiceImpl = projectServiceImpl;
     }
 
+    public ProjectCreate() {
+    }
+
     @Override
     public String name() {
         return "pc";
@@ -36,8 +39,9 @@ public class ProjectCreate implements Command {
         newProject.setTimeStart(reader.readLine());
         newProject.setTimeFinish(reader.readLine());
         boolean isCreate = projectServiceImpl.createProject(newProject);
-        if (isCreate)  { System.out.println("проет (Project) успешно создан");}
-        else System.out.println("вы задали существующее или пустое имя проекта");
+        if (isCreate) {
+            System.out.println("проет (Project) успешно создан");
+        } else System.out.println("вы задали существующее или пустое имя проекта");
 
     }
 }

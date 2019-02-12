@@ -16,6 +16,9 @@ public class TaskReadByName implements Command {
         this.taskServiceImpl = taskServiceImpl;
     }
 
+    public TaskReadByName() {
+    }
+
     @Override
     public String name() {
         return "tf";
@@ -32,8 +35,7 @@ public class TaskReadByName implements Command {
         String name = reader.readLine();
         try {
             System.out.println(taskServiceImpl.findTaskByName(name).toString());
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             System.out.println("нет задачи с таким именем");
         }
     }
