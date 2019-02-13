@@ -19,8 +19,7 @@ public class TaskServiceImpl implements TaskService {
         String taskName = task.getName();
         boolean isConsist = false;
         for (Map.Entry<String, Task> map : taskRepository.getTaskMap().entrySet()) {
-            Task nTask = map.getValue();
-            if (taskName.equals(nTask.getName())) {
+            if (taskName.equals(map.getValue().getName())) {
                 isConsist = true;
             }
         }
@@ -69,9 +68,9 @@ public class TaskServiceImpl implements TaskService {
     public boolean deleteTask(String name) {
         boolean isConsist = false;
         String idForRemove = "";
-        for (Map.Entry<String, Task> map : taskRepository.getTaskMap().entrySet()) {
-            if (name.equals(map.getValue().getName())) {
-                idForRemove = map.getValue().getId();
+        for (Map.Entry<String, Task> entry : taskRepository.getTaskMap().entrySet()) {
+            if (name.equals(entry.getValue().getName())) {
+                idForRemove = entry.getValue().getId();
                 isConsist = true;
             }
         }
@@ -81,5 +80,12 @@ public class TaskServiceImpl implements TaskService {
             taskRepository.deleteTask(idForRemove);
             return true;
         }
+    }
+
+    @Override
+    public Map<String, Task> getAllTasks() {
+        if (!taskRepository.getTaskMap().isEmpty()) {
+            return taskRepository.getTaskMap();
+        } else return null;
     }
 }

@@ -2,6 +2,8 @@ package ru.churkin.api;
 
 import ru.churkin.entity.Task;
 
+import java.util.Map;
+
 public interface TaskService {
 
     boolean createTask(Task task);
@@ -11,4 +13,6 @@ public interface TaskService {
     boolean updateTask(String id, Task task);
 
     boolean deleteTask(String id);
+
+    Map<String, Task> getAllTasks();
 }

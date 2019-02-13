@@ -10,4 +10,6 @@ public interface Command {
 
     void execute() throws IOException;
 
+    void setLocator(ServiceLocator serviceLocator);
+
 }

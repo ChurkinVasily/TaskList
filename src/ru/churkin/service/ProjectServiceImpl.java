@@ -29,7 +29,6 @@ public class ProjectServiceImpl implements ProjectService {
             projectRepository.createProject(project);
             return true;
         }
-
     }
 
     @Override
@@ -80,5 +79,13 @@ public class ProjectServiceImpl implements ProjectService {
             projectRepository.deleteProject(idForRemove);
             return true;
         }
+    }
+
+    @Override
+    public Map<String, Project> getAllProjects() {
+        if (!projectRepository.getProjectMap().isEmpty()) {
+            return projectRepository.getProjectMap();
+        }
+        return null;
     }
 }

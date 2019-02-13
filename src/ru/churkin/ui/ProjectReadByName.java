@@ -1,23 +1,8 @@
 package ru.churkin.ui;
 
-import ru.churkin.api.Command;
-import ru.churkin.service.ProjectServiceImpl;
-
-import java.io.BufferedReader;
 import java.io.IOException;
 
-public class ProjectReadByName implements Command {
-
-    private BufferedReader reader;
-    private ProjectServiceImpl projectServiceImpl;
-
-    public ProjectReadByName(BufferedReader reader, ProjectServiceImpl projectServiceImpl) {
-        this.reader = reader;
-        this.projectServiceImpl = projectServiceImpl;
-    }
-
-    public ProjectReadByName() {
-    }
+public class ProjectReadByName extends CommandAbstract {
 
     @Override
     public String name() {
@@ -32,9 +17,9 @@ public class ProjectReadByName implements Command {
     @Override
     public void execute() throws IOException {
         System.out.println("для просмотра нужного проекта (project) введите его имя");
-        String name = reader.readLine();
+        String name = serviceLocator.getTerminalService().nextLine();
         try {
-            System.out.println(projectServiceImpl.findProjectByName(name).toString());
+            System.out.println(serviceLocator.getProjectService().findProjectByName(name).toString());
         } catch (NullPointerException e) {
             System.out.println("нет проекта с таким именем");
         }
