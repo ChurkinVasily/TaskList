@@ -42,18 +42,11 @@ public class Bootstrap implements ServiceLocator {
 
         String userInput = reader.readLine();
         while (!"exit".equals(userInput)) {
-            if ("help".equals(userInput)) {
-                for (Map.Entry<String, Command> entry : commandList.entrySet()) {
-                    Command com = entry.getValue();
-                    System.out.println(entry.getKey() + " : " + com.description());
-                }
-            } else {
                 if (commandList.containsKey(userInput)) {
                     commandList.get(userInput).execute();
                 } else {
                     System.out.println("несуществующая команда");
                 }
-            }
             userInput = reader.readLine();
         }
     }
@@ -71,5 +64,10 @@ public class Bootstrap implements ServiceLocator {
     @Override
     public TerminalService getTerminalService() {
         return terminalService;
+    }
+
+    @Override
+    public Map<String, Command> getCommandMap() {
+        return commandList;
     }
 }

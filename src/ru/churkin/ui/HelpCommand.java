@@ -1,12 +1,15 @@
 package ru.churkin.ui;
 
+import ru.churkin.api.Command;
+
 import java.io.IOException;
+import java.util.Map;
 
 public class HelpCommand extends CommandAbstract {
 
     @Override
     public String name() {
-        return "help1";
+        return "help";
     }
 
     @Override
@@ -15,14 +18,11 @@ public class HelpCommand extends CommandAbstract {
     }
 
     @Override
-    public void execute() throws IOException {
-//        Map<String, Command> commandList =
-//        for (Map.Entry<String, Command> entry : commandList.entrySet()) {
-//            Command com = entry.getValue();
-//            System.out.println(entry.getKey() + " : " + com.description());
-//        }
-
-        System.out.println("help. I need somebody. Help");
-
+    public void execute() {
+        Map<String, Command> map = serviceLocator.getCommandMap();
+        for (Map.Entry<String, Command> entry : map.entrySet()) {
+            Command com = entry.getValue();
+            System.out.println(com.name() + " : " + com.description());
+        }
     }
 }

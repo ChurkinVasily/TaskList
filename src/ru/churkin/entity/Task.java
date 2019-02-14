@@ -8,6 +8,7 @@ public class Task {
     private String timeStart;
     private String timeFinish;
     private String projectId;
+//    private String userId;
 
     public Task(String name) {
         this.name = name;
@@ -63,6 +64,14 @@ public class Task {
     public void setProjectId(String projectId) {
         this.projectId = projectId;
     }
+
+//    public String getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(String userId) {
+//        this.userId = userId;
+//    }
 
     @Override
     public String toString() {
