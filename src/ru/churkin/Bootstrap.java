@@ -4,11 +4,14 @@ import ru.churkin.api.Command;
 import ru.churkin.api.ProjectService;
 import ru.churkin.api.ServiceLocator;
 import ru.churkin.api.TaskService;
+import ru.churkin.entity.User;
 import ru.churkin.repository.ProjectRepository;
 import ru.churkin.repository.TaskRepository;
+import ru.churkin.repository.UserRepository;
 import ru.churkin.service.ProjectServiceImpl;
 import ru.churkin.service.TaskServiceImpl;
 import ru.churkin.service.TerminalService;
+import ru.churkin.service.UserServiceImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,11 +25,14 @@ public class Bootstrap implements ServiceLocator {
     final ServiceLocator serviceLocator = this;
     final TaskRepository taskRepository = new TaskRepository();
     final ProjectRepository projectRepository = new ProjectRepository();
+    final UserRepository userRepository = new UserRepository();
     final TaskServiceImpl taskServiceImpl = new TaskServiceImpl(taskRepository);
     final ProjectServiceImpl projectServiceImpl = new ProjectServiceImpl(projectRepository);
+    final UserServiceImpl userServiceImpl = new UserServiceImpl(userRepository);
     final TerminalService terminalService = new TerminalService(reader);
 
-    Map<String, Command> commandList = new HashMap<>();
+    final Map<String, Command> commandList = new HashMap<>();
+    User user = new User();
 
     private Class[] cls;
 
@@ -62,9 +68,16 @@ public class Bootstrap implements ServiceLocator {
     }
 
     @Override
+    public UserServiceImpl getUserService() {
+        return userServiceImpl;
+    }
+
+    @Override
     public TerminalService getTerminalService() {
         return terminalService;
     }
+
+
 
     @Override
     public Map<String, Command> getCommandMap() {

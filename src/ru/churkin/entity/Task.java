@@ -8,7 +8,7 @@ public class Task {
     private String timeStart;
     private String timeFinish;
     private String projectId;
-//    private String userId;
+    private String userId;
 
     public Task(String name) {
         this.name = name;
@@ -65,13 +65,13 @@ public class Task {
         this.projectId = projectId;
     }
 
-//    public String getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(String userId) {
-//        this.userId = userId;
-//    }
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     @Override
     public String toString() {
@@ -82,6 +82,7 @@ public class Task {
                 ", timeStart='" + timeStart + '\'' +
                 ", timeFinish='" + timeFinish + '\'' +
                 ", projectId='" + projectId + '\'' +
+                ", userId='" + userId + '\'' +
                 '}';
     }
 }

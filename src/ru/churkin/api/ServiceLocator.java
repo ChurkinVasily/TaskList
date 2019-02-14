@@ -1,6 +1,7 @@
 package ru.churkin.api;
 
 import ru.churkin.service.TerminalService;
+import ru.churkin.service.UserServiceImpl;
 
 import java.util.Map;
 
@@ -11,6 +12,8 @@ public interface ServiceLocator {
     ProjectService getProjectService();
 
     TerminalService getTerminalService();
+
+    UserServiceImpl getUserService();
 
     Map<String, Command> getCommandMap();
 

@@ -8,10 +8,10 @@ import java.lang.reflect.InvocationTargetException;
 public class App {
 
     public static Class[] classes = {
-            TaskCreate.class, TaskDelete.class, TaskUpdate.class, TaskReadByName.class,
-            ProjectCreate.class, ProjectDelete.class, ProjectUpdate.class, ProjectReadByName.class,
-            TasksShowAll.class, ProjectShowAll.class,
-            HelpCommand.class
+            TaskCreate.class, TaskDelete.class, TaskUpdate.class, TaskReadByName.class, TasksShowAll.class,
+            ProjectCreate.class, ProjectDelete.class, ProjectUpdate.class, ProjectReadByName.class, ProjectShowAll.class,
+            HelpCommand.class,
+            UserCreate.class, UserLogin.class
     };
 
     public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {

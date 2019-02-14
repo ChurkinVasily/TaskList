@@ -2,9 +2,7 @@ package ru.churkin.repository;
 
 import ru.churkin.entity.Task;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class TaskRepository {
 
@@ -27,6 +25,16 @@ public class TaskRepository {
             }
         }
         return task;
+    }
+
+    public List<Task> findTasksByUserId(String userId) {
+        List<Task> list = new ArrayList<>();
+        for (Map.Entry<String, Task> entry : taskMap.entrySet()) {
+            if (userId.equals(entry.getValue().getUserId())) {
+                list.add(entry.getValue());
+            }
+        }
+        return list;
     }
 
     public void updateTask(String id, Task task) {

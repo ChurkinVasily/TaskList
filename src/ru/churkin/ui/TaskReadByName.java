@@ -6,12 +6,12 @@ public class TaskReadByName extends CommandAbstract {
 
     @Override
     public String name() {
-        return "tf";
+        return "tfn";
     }
 
     @Override
     public String description() {
-        return "Task Find by name";
+        return "Task Find by Name";
     }
 
     @Override
