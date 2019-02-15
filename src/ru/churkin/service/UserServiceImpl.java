@@ -1,6 +1,5 @@
 package ru.churkin.service;
 
-import ru.churkin.api.ServiceLocator;
 import ru.churkin.entity.User;
 import ru.churkin.repository.UserRepository;
 
@@ -63,10 +62,13 @@ public class UserServiceImpl {
         return isValidate;
     }
 
-    // Todo - реализовать метод:
+    public User getCurrentUser() {
+        return currentUser;
+    }
 
-    public User getUserByName(String name) {
-     User user = new User();
-        return user;
+    public void getUserByName(String userName) {
+     if (isExist(userName)) {
+         currentUser = userRepository.findUserByName(userName);
+     }
     }
 }

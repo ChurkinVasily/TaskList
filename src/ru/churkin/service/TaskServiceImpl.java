@@ -2,11 +2,8 @@ package ru.churkin.service;
 
 import ru.churkin.api.TaskService;
 import ru.churkin.entity.Task;
-import ru.churkin.entity.User;
 import ru.churkin.repository.TaskRepository;
-import ru.churkin.repository.UserRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +48,6 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<Task> findTaskByUserId(String userId) {
-        List<Task> taskList = new ArrayList<>();
         boolean isConsist = false;
         for (Map.Entry<String, Task> entry : taskRepository.getTaskMap().entrySet()) {
             if (userId.equals(entry.getValue().getUserId())) {

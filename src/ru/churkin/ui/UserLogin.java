@@ -27,9 +27,8 @@ public class UserLogin extends CommandAbstract {
             user.setName(userName);
             user.setPassword(userPassword);
             if (serviceLocator.getUserService().validateUser(user)) {
-                System.out.println("успешный вход");
-                /// - todo какое-то действие??????
-                /// установить юзера currentUser
+                System.out.println("успешный вход под именем " + userName);
+               serviceLocator.getUserService().getUserByName(userName);
             }
             else System.out.println("неверный пароль");
         }

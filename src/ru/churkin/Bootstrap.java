@@ -49,7 +49,12 @@ public class Bootstrap implements ServiceLocator {
         String userInput = reader.readLine();
         while (!"exit".equals(userInput)) {
                 if (commandList.containsKey(userInput)) {
-                    commandList.get(userInput).execute();
+                    try {
+                        commandList.get(userInput).execute();
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("требуется авторизация");
+                    }
                 } else {
                     System.out.println("несуществующая команда");
                 }

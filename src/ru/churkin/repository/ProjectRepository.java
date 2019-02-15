@@ -10,6 +10,12 @@ public class ProjectRepository {
 
     private Map<String, Project> projectMap = new HashMap<>();
 
+    {
+        projectMap.put("p1", new Project("p1", "proj1", "project 1", "111", "1111"));
+        projectMap.put("p2", new Project("p2", "proj2", "project 2", "222", "2222"));
+        projectMap.put("p3", new Project("p3", "proj3", "project 3", "333", "3333"));
+    }
+
     public ProjectRepository() {
     }
 

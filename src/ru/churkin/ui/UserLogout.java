@@ -16,8 +16,8 @@ public class UserLogout extends CommandAbstract {
 
     @Override
     public void execute() throws IOException {
-
-
+        String userId = serviceLocator.getUserService().currentUser.getId();
+        serviceLocator.getUserService().currentUser = null;
         System.out.println("вы вышли из профиля");
     }
 }

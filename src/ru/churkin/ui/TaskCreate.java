@@ -20,6 +20,7 @@ public class TaskCreate extends CommandAbstract {
     @Override
     public void execute() throws IOException {
         Task newTask = new Task();
+        newTask.setUserId(serviceLocator.getUserService().currentUser.getId());
         System.out.println("enter new task parameters: name, description, timeStart, timeFinish, project id");
         newTask.setName(serviceLocator.getTerminalService().nextLine());
         newTask.setDescription(serviceLocator.getTerminalService().nextLine());

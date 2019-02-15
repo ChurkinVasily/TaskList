@@ -2,7 +2,6 @@ package ru.churkin.ui;
 
 import ru.churkin.api.Command;
 
-import java.io.IOException;
 import java.util.Map;
 
 public class HelpCommand extends CommandAbstract {

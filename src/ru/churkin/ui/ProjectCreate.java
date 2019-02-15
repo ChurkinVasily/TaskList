@@ -18,6 +18,7 @@ public class ProjectCreate extends CommandAbstract {
 
     @Override
     public void execute() throws IOException {
+        String userId = serviceLocator.getUserService().currentUser.getId();
         Project newProject = new Project();
         System.out.println("enter new project parameters: name, description, timeStart, timeFinish");
         newProject.setName(serviceLocator.getTerminalService().nextLine());

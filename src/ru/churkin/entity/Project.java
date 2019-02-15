@@ -8,6 +8,17 @@ public class Project {
     private String timeStart;
     private String timeFinish;
 
+    public Project(String id, String name, String description, String timeStart, String timeFinish) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.timeStart = timeStart;
+        this.timeFinish = timeFinish;
+    }
+
+    public Project() {
+    }
+
     public String getId() {
         return id;
     }

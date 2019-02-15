@@ -16,6 +16,7 @@ public class ProjectDelete extends CommandAbstract {
 
     @Override
     public void execute() throws IOException {
+        String userId = serviceLocator.getUserService().currentUser.getId();
         System.out.println("введите имя проекта (project) для удаления");
         String id = serviceLocator.getTerminalService().nextLine();
         boolean isDelete = serviceLocator.getProjectService().deleteProject(id);

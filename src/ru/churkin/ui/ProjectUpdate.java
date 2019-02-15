@@ -18,6 +18,7 @@ public class ProjectUpdate extends CommandAbstract {
 
     @Override
     public void execute() throws IOException {
+        String userId = serviceLocator.getUserService().currentUser.getId();
         Project newProject = new Project();
         System.out.println("enter project-name for update Project");
         String name = serviceLocator.getTerminalService().nextLine();

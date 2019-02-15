@@ -18,6 +18,7 @@ public class ProjectShowAll extends CommandAbstract {
 
     @Override
     public void execute() {
+        String userId = serviceLocator.getUserService().currentUser.getId();
         Map<String, Project> projects = serviceLocator.getProjectService().getAllProjects();
         if (projects != null) {
             for (Map.Entry<String, Project> entry : projects.entrySet()) {

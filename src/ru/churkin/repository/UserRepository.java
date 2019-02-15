@@ -10,6 +10,12 @@ public class UserRepository {
 
     private Map<String, User> userMap = new HashMap<>();
 
+    {
+        userMap.put("u1", new User("u1", "user1", "pass1"));
+        userMap.put("u2", new User("u2", "user2", "pass2"));
+        userMap.put("u3", new User("u3", "user3", "pass3"));
+    }
+
     public void createUser(User user) {
         String id = UUID.randomUUID().toString();
         user.setId(id);
@@ -17,12 +23,11 @@ public class UserRepository {
     }
 
     public User findUserByName(String name) {
-        User user = new User();
+        User user = null;
         for (Map.Entry<String, User> entry : userMap.entrySet()) {
             if (name.equals(entry.getValue().getName())) {
                 user = entry.getValue();
             }
-            else user = null;
         }
         return user;
     }

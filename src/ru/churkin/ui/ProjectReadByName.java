@@ -16,6 +16,7 @@ public class ProjectReadByName extends CommandAbstract {
 
     @Override
     public void execute() throws IOException {
+        String userId = serviceLocator.getUserService().currentUser.getId();
         System.out.println("для просмотра нужного проекта (project) введите его имя");
         String name = serviceLocator.getTerminalService().nextLine();
         try {
