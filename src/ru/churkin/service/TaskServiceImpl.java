@@ -1,17 +1,17 @@
 package ru.churkin.service;
 
+import ru.churkin.api.ITaskRepository;
 import ru.churkin.api.TaskService;
 import ru.churkin.entity.Task;
-import ru.churkin.repository.TaskRepository;
 
 import java.util.List;
 import java.util.Map;
 
 public class TaskServiceImpl implements TaskService {
 
-    private TaskRepository taskRepository;
+    private ITaskRepository taskRepository;
 
-    public TaskServiceImpl(TaskRepository taskRepository) {
+    public TaskServiceImpl(ITaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
 

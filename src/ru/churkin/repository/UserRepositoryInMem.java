@@ -1,12 +1,13 @@
 package ru.churkin.repository;
 
+import ru.churkin.api.IUserRepository;
 import ru.churkin.entity.User;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class UserRepository {
+public class UserRepositoryInMem implements IUserRepository {
 
     private Map<String, User> userMap = new HashMap<>();
 

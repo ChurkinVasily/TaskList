@@ -1,16 +1,16 @@
 package ru.churkin.service;
 
+import ru.churkin.api.IProjectRepository;
 import ru.churkin.api.ProjectService;
 import ru.churkin.entity.Project;
-import ru.churkin.repository.ProjectRepository;
 
 import java.util.Map;
 
 public class ProjectServiceImpl implements ProjectService {
 
-    private ProjectRepository projectRepository;
+    private IProjectRepository projectRepository;
 
-    public ProjectServiceImpl(ProjectRepository projectRepository) {
+    public ProjectServiceImpl(IProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
     }
 
@@ -58,7 +58,7 @@ public class ProjectServiceImpl implements ProjectService {
         if (!isConsist || name.equals("")) {
             return false;
         } else {
-            projectRepository.updateProject(id, project);
+            projectRepository.updateProject(project);
             return true;
         }
     }

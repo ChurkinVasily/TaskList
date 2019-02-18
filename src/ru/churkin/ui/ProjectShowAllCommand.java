@@ -4,7 +4,7 @@ import ru.churkin.entity.Project;
 
 import java.util.Map;
 
-public class ProjectShowAll extends CommandAbstract {
+public class ProjectShowAllCommand extends AbstractCommand {
 
     @Override
     public String name() {

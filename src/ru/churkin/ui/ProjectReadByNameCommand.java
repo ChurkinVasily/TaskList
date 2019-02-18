@@ -2,7 +2,7 @@ package ru.churkin.ui;
 
 import java.io.IOException;
 
-public class ProjectReadByName extends CommandAbstract {
+public class ProjectReadByNameCommand extends AbstractCommand {
 
     @Override
     public String name() {

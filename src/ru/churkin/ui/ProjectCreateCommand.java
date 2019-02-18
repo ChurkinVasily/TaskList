@@ -4,7 +4,7 @@ import ru.churkin.entity.Project;
 
 import java.io.IOException;
 
-public class ProjectCreate extends CommandAbstract {
+public class ProjectCreateCommand extends AbstractCommand {
 
     @Override
     public String name() {

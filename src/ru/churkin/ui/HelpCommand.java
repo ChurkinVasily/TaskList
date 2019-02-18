@@ -4,7 +4,7 @@ import ru.churkin.api.Command;
 
 import java.util.Map;
 
-public class HelpCommand extends CommandAbstract {
+public class HelpCommand extends AbstractCommand {
 
     @Override
     public String name() {

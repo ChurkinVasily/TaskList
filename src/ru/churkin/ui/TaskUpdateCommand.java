@@ -4,7 +4,7 @@ import ru.churkin.entity.Task;
 
 import java.io.IOException;
 
-public class TaskUpdate extends CommandAbstract {
+public class TaskUpdateCommand extends AbstractCommand {
 
     @Override
     public String name() {

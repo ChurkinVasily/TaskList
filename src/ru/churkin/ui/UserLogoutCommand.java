@@ -2,7 +2,7 @@ package ru.churkin.ui;
 
 import java.io.IOException;
 
-public class UserLogout extends CommandAbstract {
+public class UserLogoutCommand extends AbstractCommand {
 
     @Override
     public String name() {

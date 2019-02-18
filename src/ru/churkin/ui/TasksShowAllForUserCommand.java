@@ -4,7 +4,7 @@ import ru.churkin.entity.Task;
 
 import java.util.List;
 
-public class TasksShowAllForUser extends CommandAbstract {
+public class TasksShowAllForUserCommand extends AbstractCommand {
 
     @Override
     public String name() {

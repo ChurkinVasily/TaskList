@@ -2,7 +2,7 @@ package ru.churkin.ui;
 
 import java.io.IOException;
 
-public class TaskDelete extends CommandAbstract {
+public class TaskDeleteCommand extends AbstractCommand {
 
     @Override
     public String name() {

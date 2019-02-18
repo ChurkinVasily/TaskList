@@ -4,7 +4,7 @@ import ru.churkin.entity.User;
 
 import java.io.IOException;
 
-public class UserCreate extends CommandAbstract {
+public class UserCreateCommand extends AbstractCommand {
 
     @Override
     public String name() {

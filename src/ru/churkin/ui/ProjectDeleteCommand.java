@@ -2,7 +2,7 @@ package ru.churkin.ui;
 
 import java.io.IOException;
 
-public class ProjectDelete extends CommandAbstract {
+public class ProjectDeleteCommand extends AbstractCommand {
 
     @Override
     public String name() {

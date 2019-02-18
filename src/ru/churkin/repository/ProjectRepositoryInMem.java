@@ -1,12 +1,13 @@
 package ru.churkin.repository;
 
+import ru.churkin.api.IProjectRepository;
 import ru.churkin.entity.Project;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class ProjectRepository {
+public class ProjectRepositoryInMem implements IProjectRepository {
 
     private Map<String, Project> projectMap = new HashMap<>();
 
@@ -16,15 +17,17 @@ public class ProjectRepository {
         projectMap.put("p3", new Project("p3", "proj3", "project 3", "333", "3333"));
     }
 
-    public ProjectRepository() {
+    public ProjectRepositoryInMem() {
     }
 
+    @Override
     public void createProject(Project project) {
         String id = UUID.randomUUID().toString();
         project.setId(id);
         projectMap.put(id, project);
     }
 
+    @Override
     public Project findProjectByName(String name) {
         Project project = new Project();
         for (Map.Entry<String, Project> entry : projectMap.entrySet()) {
@@ -35,14 +38,17 @@ public class ProjectRepository {
         return project;
     }
 
-    public void updateProject(String id, Project project) {
-        projectMap.put(id, project);
+    @Override
+    public void updateProject(Project project) {
+        projectMap.put(project.getId(), project);
     }
 
+    @Override
     public void deleteProject(String id) {
         projectMap.remove(id);
     }
 
+    @Override
     public Map<String, Project> getProjectMap() {
         return projectMap;
     }

@@ -1,7 +1,7 @@
 package ru.churkin.service;
 
+import ru.churkin.api.IUserRepository;
 import ru.churkin.entity.User;
-import ru.churkin.repository.UserRepository;
 
 import java.util.Map;
 
@@ -9,9 +9,9 @@ public class UserServiceImpl {
 
     public User currentUser = null;
 
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(IUserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

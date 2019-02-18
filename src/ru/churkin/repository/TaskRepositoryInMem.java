@@ -1,10 +1,11 @@
 package ru.churkin.repository;
 
+import ru.churkin.api.ITaskRepository;
 import ru.churkin.entity.Task;
 
 import java.util.*;
 
-public class TaskRepository {
+public class TaskRepositoryInMem implements ITaskRepository {
 
     private Map<String, Task> taskMap = new HashMap<>();
 
@@ -14,15 +15,17 @@ public class TaskRepository {
         taskMap.put("t3", new Task("t3", "task3", "task 3", "t333", "t3333", "p2", "u1"));
     }
 
-    public TaskRepository() {
+    public TaskRepositoryInMem() {
     }
 
+    @Override
     public void createTask(Task task) {
         String id = UUID.randomUUID().toString();
         task.setId(id);
         taskMap.put(id, task);
     }
 
+    @Override
     public Task findTaskByName(String name) {
         Task task = new Task();
         for (Map.Entry<String, Task> entry : taskMap.entrySet()) {
@@ -33,6 +36,7 @@ public class TaskRepository {
         return task;
     }
 
+    @Override
     public List<Task> findTasksByUserId(String userId) {
         List<Task> list = new ArrayList<>();
         for (Map.Entry<String, Task> entry : taskMap.entrySet()) {
@@ -43,14 +47,17 @@ public class TaskRepository {
         return list;
     }
 
-    public void updateTask(String id, Task task) {
-        taskMap.put(id, task);
+    @Override
+    public void updateTask(Task task) {
+        taskMap.put(task.getId(), task);
     }
 
+    @Override
     public void deleteTask(String id) {
         taskMap.remove(id);
     }
 
+    @Override
     public Map<String, Task> getTaskMap() {
         return taskMap;
     }

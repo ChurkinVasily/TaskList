@@ -5,7 +5,7 @@ import ru.churkin.api.ServiceLocator;
 
 import java.io.IOException;
 
-public abstract class CommandAbstract implements Command {
+public abstract class AbstractCommand implements Command {
 
     protected ServiceLocator serviceLocator;
 
