@@ -42,7 +42,7 @@ public class UserServiceImpl {
     public boolean isExist(String userName) {
         boolean isTrue = false;
         for (Map.Entry<String, User> entry : userRepository.getUserMap().entrySet()) {
-            if (userName.equals(entry.getValue().getName())) {
+           if (userName.equals(entry.getValue().getName())) {
                 isTrue = true;
             }
         }

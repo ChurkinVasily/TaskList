@@ -72,7 +72,7 @@ public class TaskServiceImpl implements TaskService {
         if (!isConsist || name.equals("")) {
             return false;
         } else {
-            taskRepository.updateTask(id, task);
+            taskRepository.updateTask(task);
             return true;
         }
     }

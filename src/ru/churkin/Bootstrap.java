@@ -1,9 +1,7 @@
 package ru.churkin;
 
 import ru.churkin.api.*;
-import ru.churkin.repository.ProjectRepositoryInMem;
-import ru.churkin.repository.TaskRepositoryInMem;
-import ru.churkin.repository.UserRepositoryInMem;
+import ru.churkin.repository.*;
 import ru.churkin.service.ProjectServiceImpl;
 import ru.churkin.service.TaskServiceImpl;
 import ru.churkin.service.TerminalService;
@@ -19,11 +17,13 @@ public class Bootstrap implements ServiceLocator {
 
     final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     final ServiceLocator serviceLocator = this;
-    final ITaskRepository taskRepository = new TaskRepositoryInMem();
-//    final ITaskRepository taskRepository = new TaskRepositoryDB();
-    final IProjectRepository projectRepository = new ProjectRepositoryInMem();
-//    final IProjectRepository projectRepository = new ProjectRepositoryDB();
-    final IUserRepository userRepository = new UserRepositoryInMem();
+
+//    final ITaskRepository taskRepository = new TaskRepositoryInMem();
+    final ITaskRepository taskRepository = new TaskRepositoryDB();
+//    final IProjectRepository projectRepository = new ProjectRepositoryInMem();
+    final IProjectRepository projectRepository = new ProjectRepositoryDB();
+//    final IUserRepository userRepository = new UserRepositoryInMem();
+    final IUserRepository userRepository = new UserRepositoryDB();
 
     final TaskServiceImpl taskServiceImpl = new TaskServiceImpl(taskRepository);
     final ProjectServiceImpl projectServiceImpl = new ProjectServiceImpl(projectRepository);
