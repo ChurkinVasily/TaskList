@@ -5,6 +5,11 @@ import java.io.IOException;
 public class ProjectReadByNameCommand extends AbstractCommand {
 
     @Override
+    public boolean isAuth() {
+        return true;
+    }
+
+    @Override
     public String name() {
         return "pf";
     }
@@ -16,7 +21,6 @@ public class ProjectReadByNameCommand extends AbstractCommand {
 
     @Override
     public void execute() throws IOException {
-        String userId = serviceLocator.getUserService().currentUser.getId();
         System.out.println("для просмотра нужного проекта (project) введите его имя");
         String name = serviceLocator.getTerminalService().nextLine();
         try {

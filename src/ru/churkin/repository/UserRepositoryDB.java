@@ -104,11 +104,10 @@ public class UserRepositoryDB implements IUserRepository {
     @Override
     public Map<String, User> getUserMap() {
         Map<String, User> userMap = null;
-        try {
-            Connection connection = DriverManager.getConnection(URL, DB_USER_NAME, DB_PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(GET_ALL_USERS);
-            ResultSet rs = ps.executeQuery();
-            System.out.println(rs.getString("id"));
+        try (Connection connection = DriverManager.getConnection(URL, DB_USER_NAME, DB_PASSWORD);
+             PreparedStatement ps = connection.prepareStatement(GET_ALL_USERS);
+             ResultSet rs = ps.executeQuery()){
+//            System.out.println(rs.getString("id"));
             while (rs.next()) {
                 userMap.put(rs.getString("id"),
                         new User(rs.getString("id"),

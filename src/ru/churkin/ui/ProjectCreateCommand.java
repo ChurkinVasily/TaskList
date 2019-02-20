@@ -7,6 +7,11 @@ import java.io.IOException;
 public class ProjectCreateCommand extends AbstractCommand {
 
     @Override
+    public boolean isAuth() {
+        return true;
+    }
+
+    @Override
     public String name() {
         return "pc";
     }
@@ -18,7 +23,6 @@ public class ProjectCreateCommand extends AbstractCommand {
 
     @Override
     public void execute() throws IOException {
-        String userId = serviceLocator.getUserService().currentUser.getId();
         Project newProject = new Project();
         System.out.println("enter new project parameters: name, description, timeStart, timeFinish");
         newProject.setName(serviceLocator.getTerminalService().nextLine());

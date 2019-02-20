@@ -7,6 +7,11 @@ import java.io.IOException;
 public class ProjectUpdateCommand extends AbstractCommand {
 
     @Override
+    public boolean isAuth() {
+        return true;
+    }
+
+    @Override
     public String name() {
         return "pu";
     }
@@ -18,7 +23,6 @@ public class ProjectUpdateCommand extends AbstractCommand {
 
     @Override
     public void execute() throws IOException {
-        String userId = serviceLocator.getUserService().currentUser.getId();
         Project newProject = new Project();
         System.out.println("enter project-name for update Project");
         String name = serviceLocator.getTerminalService().nextLine();

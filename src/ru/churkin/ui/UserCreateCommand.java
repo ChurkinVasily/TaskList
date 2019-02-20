@@ -7,6 +7,11 @@ import java.io.IOException;
 public class UserCreateCommand extends AbstractCommand {
 
     @Override
+    public boolean isAuth() {
+        return false;
+    }
+
+    @Override
     public String name() {
         return "reg";
     }

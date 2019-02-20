@@ -7,6 +7,11 @@ import java.io.IOException;
 public class TaskUpdateCommand extends AbstractCommand {
 
     @Override
+    public boolean isAuth() {
+        return true;
+    }
+
+    @Override
     public String name() {
         return "tu";
     }

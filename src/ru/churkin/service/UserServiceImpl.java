@@ -16,23 +16,24 @@ public class UserServiceImpl {
     }
 
     public boolean createNewUser(User user) {
-     String userName = user.getName();
-     String userPassword = user.getPassword();
-     boolean isConsist = false;
-     if (userName.equals("") || userPassword.equals("")) {
-         return false;
-     } else {
-         for (Map.Entry<String, User> entry : userRepository.getUserMap().entrySet()) {
-             if (!isConsist && userName.equals(entry.getValue().getName())) {
-                 isConsist = true;
-             }
-         }
-     }
-     if (isConsist) { return false; }
-     else {
-         userRepository.createUser(user);
-         return true;
-     }
+        String userName = user.getName();
+        String userPassword = user.getPassword();
+        boolean isConsist = false;
+        if (userName.equals("") || userPassword.equals("")) {
+            return false;
+        } else {
+            for (Map.Entry<String, User> entry : userRepository.getUserMap().entrySet()) {
+                if (!isConsist && userName.equals(entry.getValue().getName())) {
+                    isConsist = true;
+                }
+            }
+        }
+        if (isConsist) {
+            return false;
+        } else {
+            userRepository.createUser(user);
+            return true;
+        }
     }
 
     public User findUserById(String id) {
@@ -42,7 +43,7 @@ public class UserServiceImpl {
     public boolean isExist(String userName) {
         boolean isTrue = false;
         for (Map.Entry<String, User> entry : userRepository.getUserMap().entrySet()) {
-           if (userName.equals(entry.getValue().getName())) {
+            if (userName.equals(entry.getValue().getName())) {
                 isTrue = true;
             }
         }
@@ -50,16 +51,18 @@ public class UserServiceImpl {
     }
 
     public boolean validateUser(User user) {
-        String userName = user.getName();
-        String userPassword = user.getPassword();
-        Boolean isValidate = false;
-        for (Map.Entry<String, User> entry : userRepository.getUserMap().entrySet()) {
-            if (userName.equals(entry.getValue().getName())
-                && userPassword.equals(entry.getValue().getPassword())) {
-                isValidate = true;
+        if (user != null) {
+            String userName = user.getName();
+            String userPassword = user.getPassword();
+            boolean isValidate = false;
+            for (Map.Entry<String, User> entry : userRepository.getUserMap().entrySet()) {
+                if (userName != null && userName.equals(entry.getValue().getName())
+                        && userPassword.equals(entry.getValue().getPassword())) {
+                    isValidate = true;
+                }
             }
-        }
-        return isValidate;
+            return isValidate;
+        } else return false;
     }
 
     public User getCurrentUser() {
@@ -67,8 +70,9 @@ public class UserServiceImpl {
     }
 
     public void getUserByName(String userName) {
-     if (isExist(userName)) {
-         currentUser = userRepository.findUserByName(userName);
-     }
+        if (isExist(userName)) {
+            currentUser = userRepository.findUserByName(userName);
+        }
     }
+
 }

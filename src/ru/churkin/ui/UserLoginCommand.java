@@ -7,6 +7,11 @@ import java.io.IOException;
 public class UserLoginCommand extends AbstractCommand {
 
     @Override
+    public boolean isAuth() {
+        return false;
+    }
+
+    @Override
     public String name() {
         return "login";
     }

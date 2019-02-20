@@ -7,6 +7,11 @@ import java.util.Map;
 public class HelpCommand extends AbstractCommand {
 
     @Override
+    public boolean isAuth() {
+        return false;
+    }
+
+    @Override
     public String name() {
         return "help";
     }

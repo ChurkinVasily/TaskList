@@ -5,6 +5,11 @@ import java.io.IOException;
 public class ProjectDeleteCommand extends AbstractCommand {
 
     @Override
+    public boolean isAuth() {
+        return true;
+    }
+
+    @Override
     public String name() {
         return "pd";
     }
@@ -16,7 +21,6 @@ public class ProjectDeleteCommand extends AbstractCommand {
 
     @Override
     public void execute() throws IOException {
-        String userId = serviceLocator.getUserService().currentUser.getId();
         System.out.println("введите имя проекта (project) для удаления");
         String id = serviceLocator.getTerminalService().nextLine();
         boolean isDelete = serviceLocator.getProjectService().deleteProject(id);

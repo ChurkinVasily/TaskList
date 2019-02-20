@@ -7,6 +7,11 @@ import java.util.List;
 public class TasksShowAllForUserCommand extends AbstractCommand {
 
     @Override
+    public boolean isAuth() {
+        return true;
+    }
+
+    @Override
     public String name() {
         return "shat";
     }

@@ -7,6 +7,11 @@ import java.util.Map;
 public class ProjectShowAllCommand extends AbstractCommand {
 
     @Override
+    public boolean isAuth() {
+        return true;
+    }
+
+    @Override
     public String name() {
         return "shap";
     }
@@ -18,7 +23,6 @@ public class ProjectShowAllCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        String userId = serviceLocator.getUserService().currentUser.getId();
         Map<String, Project> projects = serviceLocator.getProjectService().getAllProjects();
         if (projects != null) {
             for (Map.Entry<String, Project> entry : projects.entrySet()) {

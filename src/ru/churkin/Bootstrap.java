@@ -1,6 +1,7 @@
 package ru.churkin;
 
 import ru.churkin.api.*;
+import ru.churkin.entity.User;
 import ru.churkin.repository.*;
 import ru.churkin.service.ProjectServiceImpl;
 import ru.churkin.service.TaskServiceImpl;
@@ -18,12 +19,12 @@ public class Bootstrap implements ServiceLocator {
     final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     final ServiceLocator serviceLocator = this;
 
-//    final ITaskRepository taskRepository = new TaskRepositoryInMem();
-    final ITaskRepository taskRepository = new TaskRepositoryDB();
-//    final IProjectRepository projectRepository = new ProjectRepositoryInMem();
-    final IProjectRepository projectRepository = new ProjectRepositoryDB();
-//    final IUserRepository userRepository = new UserRepositoryInMem();
-    final IUserRepository userRepository = new UserRepositoryDB();
+    final ITaskRepository taskRepository = new TaskRepositoryInMem();
+    final IProjectRepository projectRepository = new ProjectRepositoryInMem();
+    final IUserRepository userRepository = new UserRepositoryInMem();
+//    final ITaskRepository taskRepository = new TaskRepositoryDB();
+//    final IProjectRepository projectRepository = new ProjectRepositoryDB();
+//    final IUserRepository userRepository = new UserRepositoryDB();
 
     final TaskServiceImpl taskServiceImpl = new TaskServiceImpl(taskRepository);
     final ProjectServiceImpl projectServiceImpl = new ProjectServiceImpl(projectRepository);
@@ -51,12 +52,9 @@ public class Bootstrap implements ServiceLocator {
         String userInput = reader.readLine();
         while (!"exit".equals(userInput)) {
                 if (commandList.containsKey(userInput)) {
-                    try {
-                        commandList.get(userInput).execute();
-                    }
-                    catch (NullPointerException e) {
-                        System.out.println("требуется авторизация");
-                    }
+                    Command cmnd = commandList.get(userInput);
+                    User user = userServiceImpl.currentUser;
+                    cmnd.execute(user);
                 } else {
                     System.out.println("несуществующая команда");
                 }

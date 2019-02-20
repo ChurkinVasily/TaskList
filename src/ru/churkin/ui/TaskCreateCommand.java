@@ -8,6 +8,11 @@ import java.io.IOException;
 public class TaskCreateCommand extends AbstractCommand {
 
     @Override
+    public boolean isAuth() {
+        return true;
+    }
+
+    @Override
     public String name() {
         return "tc";
     }
