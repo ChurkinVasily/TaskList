@@ -33,14 +33,10 @@ public class UserLoginCommand extends AbstractCommand {
             user.setPassword(userPassword);
             if (serviceLocator.getUserService().validateUser(user)) {
                 System.out.println("успешный вход под именем " + userName);
-               serviceLocator.getUserService().getUserByName(userName);
-            }
-            else System.out.println("неверный пароль");
-        }
-        else {
+                serviceLocator.getUserService().getUserByName(userName);
+            } else System.out.println("неверный пароль");
+        } else {
             System.out.println("не существующее имя пользователя");
         }
-
-
     }
 }

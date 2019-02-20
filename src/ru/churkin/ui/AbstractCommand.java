@@ -22,11 +22,9 @@ public abstract class AbstractCommand implements Command {
     public abstract String description();
 
     public void execute(User user) throws IOException {
-        if (!isAuth() || (isAuth() && serviceLocator.getUserService().validateUser(user)))
-        {
+        if (!isAuth() || (isAuth() && serviceLocator.getUserService().validateUser(user))) {
             this.execute();
-        }
-        else System.out.println("требуется авторизация");
+        } else System.out.println("требуется авторизация");
     }
 
     public abstract void execute() throws IOException;

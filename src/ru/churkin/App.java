@@ -4,6 +4,7 @@ import ru.churkin.ui.*;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 
 public class App {
 
@@ -14,9 +15,10 @@ public class App {
             UserCreateCommand.class, UserLoginCommand.class, UserLogoutCommand.class
     };
 
-    public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+    public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, SQLException {
 
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.init(classes);
+
     }
 }

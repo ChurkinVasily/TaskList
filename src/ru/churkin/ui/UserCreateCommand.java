@@ -31,8 +31,7 @@ public class UserCreateCommand extends AbstractCommand {
         boolean isCreate = serviceLocator.getUserService().createNewUser(newUser);
         if (isCreate) {
             System.out.println("новый пользователь успешно создан");
-        }
-        else {
+        } else {
             System.out.println("введено пустое или существующее имя пользователя или пустой пароль");
         }
     }

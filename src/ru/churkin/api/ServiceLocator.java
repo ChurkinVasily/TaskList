@@ -1,5 +1,6 @@
 package ru.churkin.api;
 
+import ru.churkin.repository.ConnectionDB;
 import ru.churkin.service.TerminalService;
 import ru.churkin.service.UserServiceImpl;
 
@@ -16,5 +17,7 @@ public interface ServiceLocator {
     UserServiceImpl getUserService();
 
     Map<String, Command> getCommandMap();
+
+    ConnectionDB connDB();
 
 }

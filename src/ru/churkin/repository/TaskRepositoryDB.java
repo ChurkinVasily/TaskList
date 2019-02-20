@@ -4,19 +4,24 @@ import ru.churkin.api.ITaskRepository;
 import ru.churkin.entity.Task;
 
 import java.sql.*;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import static ru.churkin.Bootstrap.*;
+import java.util.*;
 
 public class TaskRepositoryDB implements ITaskRepository {
 
-    public static final String CREATE_TASK = "insert into tasks (id, name, description, timeStart, timeFinish, projectID, userID) values ('?', '?', '?', '?', '?', '?', '?');";
-    public static final String FIND_TASK_BY_NAME = "select * from tasks where name = '?';";
-    public static final String FIND_TASK_BY_USER_ID = "select * from tasks where userID = '?';";
-    public static final String UPDATE_TASK = "update tasks set name = '?', description = '?', timeStart = '?', timeFinish = '?', projectID = '?', userID = '?' where id = '?';";
-    public static final String DELETE_TASK = "delete from tasks where id = '?';";
+    private Connection connection;
+
+    public TaskRepositoryDB(Connection connection) {
+        this.connection = connection;
+    }
+
+    public TaskRepositoryDB() {
+    }
+
+    public static final String CREATE_TASK = "insert into tasks (id, name, description, timeStart, timeFinish, projectID, userID) values (?, ?, ?, ?, ?, ?, ?);";
+    public static final String FIND_TASK_BY_NAME = "select * from tasks where name = ?;";
+    public static final String FIND_TASK_BY_USER_ID = "select * from tasks where userID = ?;";
+    public static final String UPDATE_TASK = "update tasks set name = ?, description = ?, timeStart = ?, timeFinish = ?, projectID = ?, userID = ? where id = ?;";
+    public static final String DELETE_TASK = "delete from tasks where id = ?;";
     public static final String GET_TASKS = "select * from tasks;";
 
     @Override
@@ -24,7 +29,6 @@ public class TaskRepositoryDB implements ITaskRepository {
         String id = UUID.randomUUID().toString();
         task.setId(id);
         try {
-            Connection connection = DriverManager.getConnection(URL, DB_USER_NAME, DB_PASSWORD);
             PreparedStatement ps = connection.prepareStatement(CREATE_TASK);
             ps.setString(1, id);
             ps.setString(2, task.getName());
@@ -35,24 +39,21 @@ public class TaskRepositoryDB implements ITaskRepository {
             ps.setString(7, task.getUserId());
             ps.executeUpdate();
             ps.close();
-            connection.close();
-
         } catch (SQLException e) {
             System.out.println("mistake when create task");
             e.printStackTrace();
         }
-
     }
 
     @Override
     public Task findTaskByName(String name) {
-        Task task = null;
+        Task task = new Task();
 
         try {
-            Connection connection = DriverManager.getConnection(URL, DB_USER_NAME, DB_PASSWORD);
             PreparedStatement ps = connection.prepareStatement(FIND_TASK_BY_NAME);
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
+            rs.first();
             task.setId(rs.getString("id"));
             task.setName(rs.getString("name"));
             task.setDescription(rs.getString("description"));
@@ -60,10 +61,8 @@ public class TaskRepositoryDB implements ITaskRepository {
             task.setTimeFinish(rs.getString("timeFinish"));
             task.setProjectId(rs.getString("projectID"));
             task.setUserId(rs.getString("userID"));
-
             rs.close();
             ps.close();
-            connection.close();
         } catch (SQLException e) {
             System.out.println("mistake when find task by name");
             e.printStackTrace();
@@ -73,26 +72,27 @@ public class TaskRepositoryDB implements ITaskRepository {
 
     @Override
     public List<Task> findTasksByUserId(String userId) {
-        List<Task> taskList = null;
+        List<Task> taskList = new ArrayList<>();
 
         try {
-            Connection connection = DriverManager.getConnection(URL, DB_USER_NAME, DB_PASSWORD);
             PreparedStatement ps = connection.prepareStatement(FIND_TASK_BY_USER_ID);
+            ps.setString(1, userId);
             ResultSet rs = ps.executeQuery();
+            rs.beforeFirst();
 
-            while(rs.next()) {
+            while (rs.next()) {
                 taskList.add(new Task(rs.getString("id"),
-                                    rs.getString("name"),
-                                    rs.getString("description"),
-                                    rs.getString("timeStart"),
-                                    rs.getString("timeFinish"),
-                                    rs.getString("projectID"),
-                                    rs.getString("userID"))
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getString("timeStart"),
+                        rs.getString("timeFinish"),
+                        rs.getString("projectID"),
+                        rs.getString("userID"))
                 );
             }
             rs.close();
             ps.close();
-            connection.close();
+//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -101,9 +101,7 @@ public class TaskRepositoryDB implements ITaskRepository {
 
     @Override
     public void updateTask(Task task) {
-
         try {
-            Connection connection = DriverManager.getConnection(URL, DB_USER_NAME, DB_PASSWORD);
             PreparedStatement ps = connection.prepareStatement(UPDATE_TASK);
             ps.setString(1, task.getName());
             ps.setString(2, task.getDescription());
@@ -113,10 +111,7 @@ public class TaskRepositoryDB implements ITaskRepository {
             ps.setString(6, task.getUserId());
             ps.setString(7, task.getId());
             ps.executeUpdate();
-
             ps.close();
-            connection.close();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -126,12 +121,10 @@ public class TaskRepositoryDB implements ITaskRepository {
     public void deleteTask(String id) {
 
         try {
-            Connection connection = DriverManager.getConnection(URL, DB_USER_NAME, DB_PASSWORD);
             PreparedStatement ps = connection.prepareStatement(DELETE_TASK);
             ps.setString(1, id);
             ps.executeUpdate();
             ps.close();
-            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -141,12 +134,12 @@ public class TaskRepositoryDB implements ITaskRepository {
 
     @Override
     public Map<String, Task> getTaskMap() {
-        Map<String, Task> taskMap = null;
+        Map<String, Task> taskMap = new HashMap<>();
 
         try {
-            Connection connection = DriverManager.getConnection(URL, DB_USER_NAME, DB_PASSWORD);
-            PreparedStatement ps = connection.prepareStatement(GET_TASKS);
-            ResultSet rs = ps.executeQuery();
+            Statement ps = connection.createStatement();
+            ResultSet rs = ps.executeQuery(GET_TASKS);
+            rs.beforeFirst();
 
             while (rs.next()) {
                 taskMap.put(rs.getString("id"),
@@ -160,7 +153,6 @@ public class TaskRepositoryDB implements ITaskRepository {
             }
             rs.close();
             ps.close();
-            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();

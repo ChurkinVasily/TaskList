@@ -1,7 +1,5 @@
 package ru.churkin.ui;
 
-import java.io.IOException;
-
 public class UserLogoutCommand extends AbstractCommand {
 
     @Override
@@ -20,8 +18,7 @@ public class UserLogoutCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws IOException {
-//        String userId = serviceLocator.getUserService().currentUser.getId();
+    public void execute() {
         serviceLocator.getUserService().currentUser = null;
         System.out.println("вы вышли из профиля");
     }

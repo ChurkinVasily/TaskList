@@ -3,7 +3,6 @@ package ru.churkin.api;
 import ru.churkin.entity.User;
 
 import java.util.Map;
-import java.util.UUID;
 
 public interface IUserRepository {
 
