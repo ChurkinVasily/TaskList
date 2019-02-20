@@ -2,6 +2,7 @@ package ru.churkin.ui;
 
 import ru.churkin.entity.Project;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 public class ProjectShowAllCommand extends AbstractCommand {
@@ -22,7 +23,7 @@ public class ProjectShowAllCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws SQLException {
         Map<String, Project> projects = serviceLocator.getProjectService().getAllProjects();
         if (projects != null) {
             for (Map.Entry<String, Project> entry : projects.entrySet()) {

@@ -3,6 +3,7 @@ package ru.churkin.ui;
 import ru.churkin.entity.Task;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 
 public class TaskCreateCommand extends AbstractCommand {
@@ -23,7 +24,7 @@ public class TaskCreateCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws IOException {
+    public void execute() throws IOException, SQLException {
         Task newTask = new Task();
         newTask.setUserId(serviceLocator.getUserService().currentUser.getId());
         System.out.println("enter new task parameters: name, description, timeStart, timeFinish, project id");

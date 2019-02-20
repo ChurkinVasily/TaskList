@@ -1,6 +1,7 @@
 package ru.churkin.ui;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class TaskDeleteCommand extends AbstractCommand {
 
@@ -20,7 +21,7 @@ public class TaskDeleteCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws IOException {
+    public void execute() throws IOException, SQLException {
         System.out.println("введите имя задачи (task) для удаления");
         String name = serviceLocator.getTerminalService().nextLine();
         boolean isDelete = serviceLocator.getTaskService().deleteTask(name);

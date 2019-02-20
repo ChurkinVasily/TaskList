@@ -3,6 +3,7 @@ package ru.churkin.ui;
 import ru.churkin.entity.Project;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ProjectCreateCommand extends AbstractCommand {
 
@@ -22,7 +23,7 @@ public class ProjectCreateCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws IOException {
+    public void execute() throws IOException, SQLException {
         Project newProject = new Project();
         System.out.println("enter new project parameters: name, description, timeStart, timeFinish");
         newProject.setName(serviceLocator.getTerminalService().nextLine());

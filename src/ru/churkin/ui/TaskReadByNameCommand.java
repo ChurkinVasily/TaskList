@@ -3,6 +3,7 @@ package ru.churkin.ui;
 import ru.churkin.entity.Task;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class TaskReadByNameCommand extends AbstractCommand {
 
@@ -22,7 +23,7 @@ public class TaskReadByNameCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws IOException {
+    public void execute() throws IOException, SQLException {
         String userId = serviceLocator.getUserService().currentUser.getId();
         System.out.println("для просмотра нужной задачи (task) введите ее имя");
         String name = serviceLocator.getTerminalService().nextLine();

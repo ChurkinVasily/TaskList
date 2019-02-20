@@ -3,6 +3,7 @@ package ru.churkin.service;
 import ru.churkin.api.IUserRepository;
 import ru.churkin.entity.User;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 public class UserServiceImpl {
@@ -15,7 +16,7 @@ public class UserServiceImpl {
         this.userRepository = userRepository;
     }
 
-    public boolean createNewUser(User user) {
+    public boolean createNewUser(User user) throws SQLException {
         String userName = user.getName();
         String userPassword = user.getPassword();
         boolean isConsist = false;
@@ -36,11 +37,11 @@ public class UserServiceImpl {
         }
     }
 
-    public User findUserById(String id) {
+    public User findUserById(String id) throws SQLException {
         return (userRepository.findUserById(id));
     }
 
-    public boolean isExist(String userName) {
+    public boolean isExist(String userName) throws SQLException {
         boolean isTrue = false;
         for (Map.Entry<String, User> entry : userRepository.getUserMap().entrySet()) {
             if (userName.equals(entry.getValue().getName())) {
@@ -50,7 +51,7 @@ public class UserServiceImpl {
         return isTrue;
     }
 
-    public boolean validateUser(User user) {
+    public boolean validateUser(User user) throws SQLException {
         if (user != null) {
             String userName = user.getName();
             String userPassword = user.getPassword();
@@ -69,7 +70,7 @@ public class UserServiceImpl {
         return currentUser;
     }
 
-    public void getUserByName(String userName) {
+    public void getUserByName(String userName) throws SQLException {
         if (isExist(userName)) {
             currentUser = userRepository.findUserByName(userName);
         }

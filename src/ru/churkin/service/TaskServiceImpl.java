@@ -4,6 +4,7 @@ import ru.churkin.api.ITaskRepository;
 import ru.churkin.api.TaskService;
 import ru.churkin.entity.Task;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public boolean createTask(Task task) {
+    public boolean createTask(Task task) throws SQLException {
         String taskName = task.getName();
         boolean isConsist = false;
         for (Map.Entry<String, Task> entry : taskRepository.getTaskMap().entrySet()) {
@@ -33,7 +34,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task findTaskByName(String name) {
+    public Task findTaskByName(String name) throws SQLException {
         boolean isConsist = false;
         for (Map.Entry<String, Task> map : taskRepository.getTaskMap().entrySet()) {
             Task nTask = map.getValue();
@@ -47,7 +48,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<Task> findTaskByUserId(String userId) {
+    public List<Task> findTaskByUserId(String userId) throws SQLException {
         boolean isConsist = false;
         for (Map.Entry<String, Task> entry : taskRepository.getTaskMap().entrySet()) {
             if (userId.equals(entry.getValue().getUserId())) {
@@ -59,7 +60,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public boolean updateTask(String name, Task task) {
+    public boolean updateTask(String name, Task task) throws SQLException {
         boolean isConsist = false;
         String id = "";
         for (Map.Entry<String, Task> map : taskRepository.getTaskMap().entrySet()) {
@@ -78,7 +79,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public boolean deleteTask(String name) {
+    public boolean deleteTask(String name) throws SQLException {
         boolean isConsist = false;
         String idForRemove = "";
         for (Map.Entry<String, Task> entry : taskRepository.getTaskMap().entrySet()) {
@@ -96,7 +97,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Map<String, Task> getAllTasks() {
+    public Map<String, Task> getAllTasks() throws SQLException {
         if (!taskRepository.getTaskMap().isEmpty()) {
             return taskRepository.getTaskMap();
         } else return null;

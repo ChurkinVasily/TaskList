@@ -1,6 +1,7 @@
 package ru.churkin.ui;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ProjectDeleteCommand extends AbstractCommand {
 
@@ -20,7 +21,7 @@ public class ProjectDeleteCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws IOException {
+    public void execute() throws IOException, SQLException {
         System.out.println("введите имя проекта (project) для удаления");
         String id = serviceLocator.getTerminalService().nextLine();
         boolean isDelete = serviceLocator.getProjectService().deleteProject(id);

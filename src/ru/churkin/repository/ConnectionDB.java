@@ -8,17 +8,13 @@ public class ConnectionDB {
 
     private Connection connection = null;
 
-    public Connection getConnection(String url, String name, String pass) {
+    public Connection getConnection(String url, String name, String pass) throws SQLException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        try {
-            connection = DriverManager.getConnection(url, name, pass);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        connection = DriverManager.getConnection(url, name, pass);
         return connection;
     }
 

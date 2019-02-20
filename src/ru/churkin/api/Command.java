@@ -3,6 +3,7 @@ package ru.churkin.api;
 import ru.churkin.entity.User;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public interface Command {
 
@@ -12,9 +13,7 @@ public interface Command {
 
     String description();
 
-    void execute() throws IOException;
-
-    void execute(User user) throws IOException;
+    void execute() throws IOException, SQLException;
 
     void setLocator(ServiceLocator serviceLocator);
 

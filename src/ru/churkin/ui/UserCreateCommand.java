@@ -3,6 +3,7 @@ package ru.churkin.ui;
 import ru.churkin.entity.User;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class UserCreateCommand extends AbstractCommand {
 
@@ -22,7 +23,7 @@ public class UserCreateCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws IOException {
+    public void execute() throws IOException, SQLException {
         User newUser = new User();
         System.out.println("Введите имя нового пользователя");
         newUser.setName(serviceLocator.getTerminalService().nextLine());

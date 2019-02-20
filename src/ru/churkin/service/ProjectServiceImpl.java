@@ -4,6 +4,7 @@ import ru.churkin.api.IProjectRepository;
 import ru.churkin.api.ProjectService;
 import ru.churkin.entity.Project;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 public class ProjectServiceImpl implements ProjectService {
@@ -15,7 +16,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public boolean createProject(Project project) {
+    public boolean createProject(Project project) throws SQLException {
         String projectName = project.getName();
         boolean isConsist = false;
         for (Map.Entry<String, Project> map : projectRepository.getProjectMap().entrySet()) {
@@ -32,7 +33,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project findProjectByName(String name) {
+    public Project findProjectByName(String name) throws SQLException {
         boolean isConsist = false;
         for (Map.Entry<String, Project> map : projectRepository.getProjectMap().entrySet()) {
             if (name.equals(map.getValue().getName())) {
@@ -45,7 +46,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public boolean updateProject(String name, Project project) {
+    public boolean updateProject(String name, Project project) throws SQLException {
         boolean isConsist = false;
         String id = "";
         for (Map.Entry<String, Project> map : projectRepository.getProjectMap().entrySet()) {
@@ -64,7 +65,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public boolean deleteProject(String name) {
+    public boolean deleteProject(String name) throws SQLException {
         boolean isConsist = false;
         String idForRemove = "";
         for (Map.Entry<String, Project> map : projectRepository.getProjectMap().entrySet()) {
@@ -82,7 +83,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Map<String, Project> getAllProjects() {
+    public Map<String, Project> getAllProjects() throws SQLException {
         if (!projectRepository.getProjectMap().isEmpty()) {
             return projectRepository.getProjectMap();
         }

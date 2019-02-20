@@ -5,6 +5,7 @@ import ru.churkin.api.ServiceLocator;
 import ru.churkin.entity.User;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public abstract class AbstractCommand implements Command {
 
@@ -21,11 +22,5 @@ public abstract class AbstractCommand implements Command {
 
     public abstract String description();
 
-    public void execute(User user) throws IOException {
-        if (!isAuth() || (isAuth() && serviceLocator.getUserService().validateUser(user))) {
-            this.execute();
-        } else System.out.println("требуется авторизация");
-    }
-
-    public abstract void execute() throws IOException;
+    public abstract void execute() throws IOException, SQLException;
 }

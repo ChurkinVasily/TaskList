@@ -3,6 +3,7 @@ package ru.churkin.ui;
 import ru.churkin.entity.Task;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class TaskUpdateCommand extends AbstractCommand {
 
@@ -22,7 +23,7 @@ public class TaskUpdateCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws IOException {
+    public void execute() throws IOException, SQLException {
         Task newTask = new Task();
         String userId = serviceLocator.getUserService().currentUser.getId();
         System.out.println("enter task-name for update Task");

@@ -2,6 +2,7 @@ package ru.churkin.ui;
 
 import ru.churkin.entity.Task;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class TasksShowAllForUserCommand extends AbstractCommand {
@@ -22,7 +23,7 @@ public class TasksShowAllForUserCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws SQLException {
         String userId = serviceLocator.getUserService().currentUser.getId();
         List<Task> tasks = serviceLocator.getTaskService().findTaskByUserId(userId);
         if (tasks != null) {

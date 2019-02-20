@@ -3,6 +3,7 @@ package ru.churkin.ui;
 import ru.churkin.entity.Project;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ProjectUpdateCommand extends AbstractCommand {
 
@@ -22,7 +23,7 @@ public class ProjectUpdateCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws IOException {
+    public void execute() throws IOException, SQLException {
         Project newProject = new Project();
         System.out.println("enter project-name for update Project");
         String name = serviceLocator.getTerminalService().nextLine();

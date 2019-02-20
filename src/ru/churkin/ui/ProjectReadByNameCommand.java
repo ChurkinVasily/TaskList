@@ -1,6 +1,7 @@
 package ru.churkin.ui;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ProjectReadByNameCommand extends AbstractCommand {
 
@@ -20,7 +21,7 @@ public class ProjectReadByNameCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws IOException {
+    public void execute() throws IOException, SQLException {
         System.out.println("для просмотра нужного проекта (project) введите его имя");
         String name = serviceLocator.getTerminalService().nextLine();
         try {
