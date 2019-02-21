@@ -71,6 +71,7 @@ public class Bootstrap implements ServiceLocator {
         }
 
         conn.closeConnection();
+
     }
 
     @Override
