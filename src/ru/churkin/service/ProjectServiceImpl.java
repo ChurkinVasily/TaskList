@@ -2,6 +2,7 @@ package ru.churkin.service;
 
 import ru.churkin.api.IProjectRepository;
 import ru.churkin.api.ProjectService;
+import ru.churkin.repository.ProjectMapper;
 import ru.churkin.entity.Project;
 
 import java.sql.SQLException;

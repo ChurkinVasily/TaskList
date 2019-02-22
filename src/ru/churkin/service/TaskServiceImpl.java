@@ -1,7 +1,10 @@
 package ru.churkin.service;
 
+import org.apache.ibatis.session.SqlSession;
 import ru.churkin.api.ITaskRepository;
 import ru.churkin.api.TaskService;
+import ru.churkin.repository.ConnectionDB;
+import ru.churkin.repository.TaskMapper;
 import ru.churkin.entity.Task;
 
 import java.sql.SQLException;
@@ -10,11 +13,17 @@ import java.util.Map;
 
 public class TaskServiceImpl implements TaskService {
 
-    private ITaskRepository taskRepository;
+//    private ITaskRepository taskRepository;
 
-    public TaskServiceImpl(ITaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
-    }
+    private ConnectionDB connectionDB;
+
+    private SqlSession sqlSession = connectionDB.getSqlSessionFactory().openSession();
+
+    TaskMapper taskRepository = sqlSession.getMapper(TaskMapper.class);
+
+//    public TaskServiceImpl(ITaskRepository taskRepository) {
+//        this.taskRepository = taskRepository;
+//    }
 
     @Override
     public boolean createTask(Task task) throws SQLException {

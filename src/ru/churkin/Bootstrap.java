@@ -1,16 +1,26 @@
 package ru.churkin;
 
+import org.apache.ibatis.datasource.pooled.PooledDataSource;
+import org.apache.ibatis.mapping.Environment;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import ru.churkin.api.*;
+import ru.churkin.entity.Project;
+import ru.churkin.entity.Task;
+import ru.churkin.repository.ProjectMapper;
+import ru.churkin.repository.TaskMapper;
+import ru.churkin.repository.UserMapper;
 import ru.churkin.entity.User;
 import ru.churkin.repository.ConnectionDB;
-import ru.churkin.repository.ProjectRepositoryJDBC;
-import ru.churkin.repository.TaskRepositoryJDBC;
-import ru.churkin.repository.UserRepositoryJDBC;
 import ru.churkin.service.ProjectServiceImpl;
 import ru.churkin.service.TaskServiceImpl;
 import ru.churkin.service.TerminalService;
 import ru.churkin.service.UserServiceImpl;
 
+import javax.sql.DataSource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,23 +33,35 @@ public class Bootstrap implements ServiceLocator {
 
     final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     final ServiceLocator serviceLocator = this;
-    public static final String URL = "jdbc:mysql://localhost:3306/tasklistdb";
-    public static final String DB_USER_NAME = "root";
-    public static final String DB_PASSWORD = "root";
+    final TerminalService terminalService = new TerminalService(reader);
+
+/// --- In Memory block ----
 //    final ITaskRepository taskRepository = new TaskRepositoryInMem();
 //    final IProjectRepository projectRepository = new ProjectRepositoryInMem();
 //    final IUserRepository userRepository = new UserRepositoryInMem();
+/// ------------------
 
+// ---- JDBC block ----
     final ConnectionDB conn = new ConnectionDB();
-    Connection connection = conn.getConnection(URL, DB_USER_NAME, DB_PASSWORD);
-    final ITaskRepository taskRepository = new TaskRepositoryJDBC(connection);
-    final IProjectRepository projectRepository = new ProjectRepositoryJDBC(connection);
-    final IUserRepository userRepository = new UserRepositoryJDBC(connection);
+//    Connection connection = conn.getConnection();
+//    final ITaskRepository taskRepository = new TaskRepositoryJDBC(connection);
+//    final IProjectRepository projectRepository = new ProjectRepositoryJDBC(connection);
+//    final IUserRepository userRepository = new UserRepositoryJDBC(connection);
+ //---------
 
-    final TaskServiceImpl taskServiceImpl = new TaskServiceImpl(taskRepository);
-    final ProjectServiceImpl projectServiceImpl = new ProjectServiceImpl(projectRepository);
-    final UserServiceImpl userServiceImpl = new UserServiceImpl(userRepository);
-    final TerminalService terminalService = new TerminalService(reader);
+//    final TaskServiceImpl taskServiceImpl = new TaskServiceImpl(taskRepository);
+//    final ProjectServiceImpl projectServiceImpl = new ProjectServiceImpl(projectRepository);
+//    final UserServiceImpl userServiceImpl = new UserServiceImpl(userRepository);
+
+/// ---- MyBatis block
+    final ConnectionDB connMyBatis = new ConnectionDB();
+    final SqlSessionFactory sqlSessionFactory = connMyBatis.getSqlSessionFactory();
+    final SqlSession sqlSession = sqlSessionFactory.openSession();
+    final TaskServiceImpl taskServiceImpl = new TaskServiceImpl(TaskMapper.class);
+    final ProjectServiceImpl projectServiceImpl = new ProjectServiceImpl(ProjectMapper.class);
+    final UserServiceImpl userServiceImpl = new UserServiceImpl(UserMapper.class);
+///-------------
+
 
 
     final Map<String, Command> commandList = new HashMap<>();
@@ -70,7 +92,8 @@ public class Bootstrap implements ServiceLocator {
             userInput = reader.readLine();
         }
 
-        conn.closeConnection();
+//        conn.closeConnection();
+        sqlSession.close();
     }
 
     @Override
@@ -98,6 +121,8 @@ public class Bootstrap implements ServiceLocator {
         return commandList;
     }
 
+
+
     @Override
     public ConnectionDB connDB() {
         return conn;
@@ -109,4 +134,6 @@ public class Bootstrap implements ServiceLocator {
             command.execute();
         } else System.out.println("требуется авторизация");
     }
+
+
 }

@@ -1,5 +1,8 @@
 package ru.churkin.entity;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("project")
 public class Project {
 
     private String id;

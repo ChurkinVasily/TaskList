@@ -1,5 +1,8 @@
 package ru.churkin.entity;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("user")
 public class User {
 
     private String id;

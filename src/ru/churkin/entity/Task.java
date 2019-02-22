@@ -1,5 +1,8 @@
 package ru.churkin.entity;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("task")
 public class Task {
 
     private String id;

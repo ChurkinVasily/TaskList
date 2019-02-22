@@ -1,6 +1,7 @@
 package ru.churkin.service;
 
 import ru.churkin.api.IUserRepository;
+import ru.churkin.repository.UserMapper;
 import ru.churkin.entity.User;
 
 import java.sql.SQLException;
