@@ -11,7 +11,7 @@
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-                <property name="driver" value="${com.mysql.jdbc.Driver}"/> <!--jdbc.driverClassName -->
+                <property name="driver" value="${com.mysql.jdbc.Driver}"/>
                 <property name="url" value="${jdbc:mysql://localhost:3306/tasklistdb}"/>
                 <property name="username" value="${root}"/>
                 <property name="password" value="${root}"/>
@@ -20,9 +20,9 @@
     </environments>
 
     <mappers>
-        <!--<mapper resource="com/mybatis3/mappers/StudentMapper.xml"/>-->
-         <!--<package name="com.mybatis3.mappers"/> -->
-        <package name="ru.churkin.data.mappers"/>
+        <mapper class="ru.churkin.repository.TaskMapper"/>
+        <mapper class="ru.churkin.repository.ProjectMapper"/>
+        <mapper class="ru.churkin.repository.UserMapper"/>
     </mappers>
 
 </configuration>

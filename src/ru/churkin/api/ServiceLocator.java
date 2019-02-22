@@ -18,6 +18,4 @@ public interface ServiceLocator {
 
     Map<String, Command> getCommandMap();
 
-    ConnectionDB connDB();
-
 }

@@ -1,20 +1,33 @@
 package ru.churkin.service;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import ru.churkin.api.IProjectRepository;
 import ru.churkin.api.ProjectService;
 import ru.churkin.repository.ProjectMapper;
 import ru.churkin.entity.Project;
+import ru.churkin.repository.TaskMapper;
 
 import java.sql.SQLException;
 import java.util.Map;
 
 public class ProjectServiceImpl implements ProjectService {
 
-    private IProjectRepository projectRepository;
+//    private IProjectRepository projectRepository;
 
-    public ProjectServiceImpl(IProjectRepository projectRepository) {
-        this.projectRepository = projectRepository;
+    private SqlSessionFactory sqlSessionFactory;
+
+
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    ProjectMapper projectRepository = sqlSession.getMapper(ProjectMapper.class);
+
+    public ProjectServiceImpl(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
     }
+
+//    public ProjectServiceImpl(IProjectRepository projectRepository) {
+//        this.projectRepository = projectRepository;
+//    }
 
     @Override
     public boolean createProject(Project project) throws SQLException {

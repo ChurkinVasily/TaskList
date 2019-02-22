@@ -15,6 +15,13 @@ public interface TaskMapper extends ITaskRepository{
     void createTask(Task task);
 
     @Select("select * from tasks where name = #{name}")
+    @Results(value = {@Result(property = "id", column = "id"),
+            @Result(property = "name", column = "name"),
+            @Result(property = "description", column = "description"),
+            @Result(property = "timeStart", column = "timeStart"),
+            @Result(property = "timeFinish", column = "timeFinish"),
+            @Result(property = "projectID", column = "projectID"),
+            @Result(property = "userID", column = "userID")})
     Task findTaskByName(String name);
 
     @Select("select * from tasks where userID = #{userID}")

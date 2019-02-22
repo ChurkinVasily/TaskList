@@ -1,6 +1,9 @@
 package ru.churkin.service;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import ru.churkin.api.IUserRepository;
+import ru.churkin.repository.ProjectMapper;
 import ru.churkin.repository.UserMapper;
 import ru.churkin.entity.User;
 
@@ -11,11 +14,14 @@ public class UserServiceImpl {
 
     public User currentUser = null;
 
-    private IUserRepository userRepository;
+    private SqlSessionFactory sqlSessionFactory;
 
-    public UserServiceImpl(IUserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserServiceImpl(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
     }
+
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    UserMapper userRepository = sqlSession.getMapper(UserMapper.class);
 
     public boolean createNewUser(User user) throws SQLException {
         String userName = user.getName();

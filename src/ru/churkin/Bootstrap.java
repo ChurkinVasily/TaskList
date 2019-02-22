@@ -1,18 +1,11 @@
 package ru.churkin;
 
-import org.apache.ibatis.datasource.pooled.PooledDataSource;
-import org.apache.ibatis.mapping.Environment;
-import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
-import ru.churkin.api.*;
-import ru.churkin.entity.Project;
-import ru.churkin.entity.Task;
-import ru.churkin.repository.ProjectMapper;
-import ru.churkin.repository.TaskMapper;
-import ru.churkin.repository.UserMapper;
+import ru.churkin.api.Command;
+import ru.churkin.api.ProjectService;
+import ru.churkin.api.ServiceLocator;
+import ru.churkin.api.TaskService;
 import ru.churkin.entity.User;
 import ru.churkin.repository.ConnectionDB;
 import ru.churkin.service.ProjectServiceImpl;
@@ -20,11 +13,9 @@ import ru.churkin.service.TaskServiceImpl;
 import ru.churkin.service.TerminalService;
 import ru.churkin.service.UserServiceImpl;
 
-import javax.sql.DataSource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,34 +26,12 @@ public class Bootstrap implements ServiceLocator {
     final ServiceLocator serviceLocator = this;
     final TerminalService terminalService = new TerminalService(reader);
 
-/// --- In Memory block ----
-//    final ITaskRepository taskRepository = new TaskRepositoryInMem();
-//    final IProjectRepository projectRepository = new ProjectRepositoryInMem();
-//    final IUserRepository userRepository = new UserRepositoryInMem();
-/// ------------------
-
-// ---- JDBC block ----
-    final ConnectionDB conn = new ConnectionDB();
-//    Connection connection = conn.getConnection();
-//    final ITaskRepository taskRepository = new TaskRepositoryJDBC(connection);
-//    final IProjectRepository projectRepository = new ProjectRepositoryJDBC(connection);
-//    final IUserRepository userRepository = new UserRepositoryJDBC(connection);
- //---------
-
-//    final TaskServiceImpl taskServiceImpl = new TaskServiceImpl(taskRepository);
-//    final ProjectServiceImpl projectServiceImpl = new ProjectServiceImpl(projectRepository);
-//    final UserServiceImpl userServiceImpl = new UserServiceImpl(userRepository);
-
-/// ---- MyBatis block
     final ConnectionDB connMyBatis = new ConnectionDB();
     final SqlSessionFactory sqlSessionFactory = connMyBatis.getSqlSessionFactory();
-    final SqlSession sqlSession = sqlSessionFactory.openSession();
-    final TaskServiceImpl taskServiceImpl = new TaskServiceImpl(TaskMapper.class);
-    final ProjectServiceImpl projectServiceImpl = new ProjectServiceImpl(ProjectMapper.class);
-    final UserServiceImpl userServiceImpl = new UserServiceImpl(UserMapper.class);
-///-------------
-
-
+//    final SqlSession sqlSession = sqlSessionFactory.openSession();
+    final TaskServiceImpl taskServiceImpl = new TaskServiceImpl(sqlSessionFactory);
+    final ProjectServiceImpl projectServiceImpl = new ProjectServiceImpl(sqlSessionFactory);
+    final UserServiceImpl userServiceImpl = new UserServiceImpl(sqlSessionFactory);
 
     final Map<String, Command> commandList = new HashMap<>();
 
@@ -93,7 +62,7 @@ public class Bootstrap implements ServiceLocator {
         }
 
 //        conn.closeConnection();
-        sqlSession.close();
+//        sqlSession.close();
     }
 
     @Override
@@ -119,13 +88,6 @@ public class Bootstrap implements ServiceLocator {
     @Override
     public Map<String, Command> getCommandMap() {
         return commandList;
-    }
-
-
-
-    @Override
-    public ConnectionDB connDB() {
-        return conn;
     }
 
     public void execute(Command command) throws IOException, SQLException {
