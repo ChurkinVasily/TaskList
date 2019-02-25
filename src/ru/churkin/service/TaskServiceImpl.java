@@ -56,14 +56,13 @@ public class TaskServiceImpl implements TaskService {
             if (isConsist) {
                 return mapper.findTaskByName(name);
             } else return null;
-        }
-        finally {
+        } finally {
             session.close();
         }
     }
 
     @Override
-    public List<Task> findTaskByUserId(String userId)  {
+    public List<Task> findTaskByUserId(String userId) {
         SqlSession session = sqlSessionFactory.openSession();
         TaskMapper mapper = session.getMapper(TaskMapper.class);
         try {
@@ -75,14 +74,13 @@ public class TaskServiceImpl implements TaskService {
             }
             if (isConsist) return mapper.findTasksByUserId(userId);
             else return null;
-        }
-        finally {
+        } finally {
             session.close();
         }
     }
 
     @Override
-    public boolean updateTask(String name, Task task)  {
+    public boolean updateTask(String name, Task task) {
         SqlSession session = sqlSessionFactory.openSession();
         TaskMapper mapper = session.getMapper(TaskMapper.class);
         boolean isConsist = false;
@@ -105,7 +103,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public boolean deleteTask(String name)  {
+    public boolean deleteTask(String name) {
         SqlSession session = sqlSessionFactory.openSession();
         TaskMapper mapper = session.getMapper(TaskMapper.class);
         boolean isConsist = false;
@@ -127,16 +125,15 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Map<String, Task> getAllTasks()  {
+    public Map<String, Task> getAllTasks() {
         SqlSession session = sqlSessionFactory.openSession();
         TaskMapper mapper = session.getMapper(TaskMapper.class);
         try {
             if (!mapper.getTaskMap().isEmpty()) {
                 return mapper.getTaskMap();
             } else return null;
-        }
-        finally {
-           session.close();
+        } finally {
+            session.close();
         }
     }
 }

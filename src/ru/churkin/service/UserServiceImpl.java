@@ -47,8 +47,7 @@ public class UserServiceImpl {
         UserMapper mapper = session.getMapper(UserMapper.class);
         try {
             return (mapper.findUserById(id));
-        }
-        finally {
+        } finally {
             session.close();
         }
     }
@@ -64,8 +63,7 @@ public class UserServiceImpl {
                 }
             }
             return isTrue;
-        }
-        finally {
+        } finally {
             session.close();
         }
     }
@@ -86,8 +84,7 @@ public class UserServiceImpl {
                 }
                 return isValidate;
             } else return false;
-        }
-        finally {
+        } finally {
             session.close();
         }
     }
@@ -103,8 +100,7 @@ public class UserServiceImpl {
             if (isExist(userName)) {
                 currentUser = mapper.findUserByName(userName);
             }
-        }
-        finally {
+        } finally {
             session.close();
         }
     }

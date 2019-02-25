@@ -40,7 +40,7 @@ public class ConnectionDB {
     }
 
     public SqlSessionFactory getSqlSessionFactory() {
-        DataSource dataSource = new PooledDataSource(DRIVER, URL, DB_USER_NAME , DB_PASSWORD);
+        DataSource dataSource = new PooledDataSource(DRIVER, URL, DB_USER_NAME, DB_PASSWORD);
         Environment environment = new Environment("development", new JdbcTransactionFactory(), dataSource);
         Configuration configuration = new Configuration(environment);
         configuration.getTypeAliasRegistry().registerAlias("task", Task.class);

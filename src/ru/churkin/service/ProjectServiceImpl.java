@@ -54,8 +54,7 @@ public class ProjectServiceImpl implements ProjectService {
             if (isConsist) {
                 return mapper.findProjectByName(name);
             } else return null;
-        }
-        finally {
+        } finally {
             session.close();
         }
     }
@@ -114,8 +113,7 @@ public class ProjectServiceImpl implements ProjectService {
                 return mapper.getProjectMap();
             }
             return null;
-        }
-        finally {
+        } finally {
             session.close();
         }
     }

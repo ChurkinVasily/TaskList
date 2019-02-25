@@ -7,7 +7,7 @@ import ru.churkin.entity.Task;
 import java.util.List;
 import java.util.Map;
 
-public interface TaskMapper extends ITaskRepository{
+public interface TaskMapper extends ITaskRepository {
 
     @Insert("insert into tasks (id, name, description, timeStart, timeFinish, projectID, userID) values (#{id}, #{name}, #{description}, #{timeStart}, #{timeFinish}, #{projectId}, #{userId})")
     void createTask(Task task);

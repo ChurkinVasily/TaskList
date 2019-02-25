@@ -6,7 +6,7 @@ import ru.churkin.entity.Project;
 
 import java.util.Map;
 
-public interface ProjectMapper extends IProjectRepository{
+public interface ProjectMapper extends IProjectRepository {
 
     @Insert("insert into projects (id, name, description, timeStart, timeFinish) values (#{id}, #{name}, #{description}, #{timeStart}, #{timeFinish})")
     void createProject(Project project);
