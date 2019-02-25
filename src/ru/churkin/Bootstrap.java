@@ -1,6 +1,5 @@
 package ru.churkin;
 
-import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import ru.churkin.api.Command;
 import ru.churkin.api.ProjectService;
@@ -28,7 +27,6 @@ public class Bootstrap implements ServiceLocator {
 
     final ConnectionDB connMyBatis = new ConnectionDB();
     final SqlSessionFactory sqlSessionFactory = connMyBatis.getSqlSessionFactory();
-//    final SqlSession sqlSession = sqlSessionFactory.openSession();
     final TaskServiceImpl taskServiceImpl = new TaskServiceImpl(sqlSessionFactory);
     final ProjectServiceImpl projectServiceImpl = new ProjectServiceImpl(sqlSessionFactory);
     final UserServiceImpl userServiceImpl = new UserServiceImpl(sqlSessionFactory);
@@ -37,7 +35,7 @@ public class Bootstrap implements ServiceLocator {
 
     private Class[] cls;
 
-    public Bootstrap() throws SQLException {
+    public Bootstrap() {
     }
 
     public void init(Class[] cls) throws IOException, IllegalAccessException, InstantiationException, SQLException {
@@ -60,9 +58,6 @@ public class Bootstrap implements ServiceLocator {
             }
             userInput = reader.readLine();
         }
-
-//        conn.closeConnection();
-//        sqlSession.close();
     }
 
     @Override

@@ -2,12 +2,9 @@ package ru.churkin.service;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import ru.churkin.api.IUserRepository;
-import ru.churkin.repository.ProjectMapper;
-import ru.churkin.repository.UserMapper;
 import ru.churkin.entity.User;
+import ru.churkin.repository.UserMapper;
 
-import java.sql.SQLException;
 import java.util.Map;
 
 public class UserServiceImpl {
@@ -19,9 +16,6 @@ public class UserServiceImpl {
     public UserServiceImpl(SqlSessionFactory sqlSessionFactory) {
         this.sqlSessionFactory = sqlSessionFactory;
     }
-
-//    SqlSession sqlSession = sqlSessionFactory.openSession();
-//    UserMapper userRepository = sqlSession.getMapper(UserMapper.class);
 
     public boolean createNewUser(User user) {
         SqlSession session = sqlSessionFactory.openSession();

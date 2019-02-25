@@ -1,11 +1,9 @@
 package ru.churkin.repository;
 
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.session.SqlSession;
 import ru.churkin.api.ITaskRepository;
 import ru.churkin.entity.Task;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 

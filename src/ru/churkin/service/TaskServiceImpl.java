@@ -2,11 +2,9 @@ package ru.churkin.service;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import ru.churkin.api.ITaskRepository;
 import ru.churkin.api.TaskService;
-import ru.churkin.repository.ConnectionDB;
-import ru.churkin.repository.TaskMapper;
 import ru.churkin.entity.Task;
+import ru.churkin.repository.TaskMapper;
 
 import java.util.List;
 import java.util.Map;
@@ -140,6 +138,5 @@ public class TaskServiceImpl implements TaskService {
         finally {
            session.close();
         }
-
     }
 }

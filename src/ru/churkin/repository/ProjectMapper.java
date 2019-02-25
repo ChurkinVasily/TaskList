@@ -1,11 +1,9 @@
 package ru.churkin.repository;
 
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.session.SqlSession;
 import ru.churkin.api.IProjectRepository;
 import ru.churkin.entity.Project;
 
-import java.sql.SQLException;
 import java.util.Map;
 
 public interface ProjectMapper extends IProjectRepository{
