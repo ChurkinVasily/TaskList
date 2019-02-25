@@ -20,8 +20,8 @@ public interface TaskMapper extends ITaskRepository{
             @Result(property = "description", column = "description"),
             @Result(property = "timeStart", column = "timeStart"),
             @Result(property = "timeFinish", column = "timeFinish"),
-            @Result(property = "projectID", column = "projectID"),
-            @Result(property = "userID", column = "userID")})
+            @Result(property = "projectId", column = "projectID"),
+            @Result(property = "userId", column = "userID")})
     Task findTaskByName(String name);
 
     @Select("select * from tasks where userID = #{userID}")
@@ -30,11 +30,11 @@ public interface TaskMapper extends ITaskRepository{
             @Result(property = "description", column = "description"),
             @Result(property = "timeStart", column = "timeStart"),
             @Result(property = "timeFinish", column = "timeFinish"),
-            @Result(property = "projectID", column = "projectID"),
-            @Result(property = "userID", column = "userID")})
+            @Result(property = "projectId", column = "projectID"),
+            @Result(property = "userId", column = "userID")})
     List<Task> findTasksByUserId(String userId);
 
-    @Update("update tasks set name = #{name}, description = #{description}, timeStart = #{timeStart}, timeFinish = #{timeFinish}, projectID = #{projectID}, userID = #{userID} where id = #{id}")
+    @Update("update tasks set name = #{name}, description = #{description}, timeStart = #{timeStart}, timeFinish = #{timeFinish}, projectID = #{projectId}, userID = #{userId} where id = #{id}")
     void updateTask(Task task);
 
     @Delete("delete from tasks where id = #{id}")

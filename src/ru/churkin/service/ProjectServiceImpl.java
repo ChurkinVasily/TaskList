@@ -2,38 +2,30 @@ package ru.churkin.service;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import ru.churkin.api.IProjectRepository;
 import ru.churkin.api.ProjectService;
-import ru.churkin.repository.ProjectMapper;
 import ru.churkin.entity.Project;
-import ru.churkin.repository.TaskMapper;
+import ru.churkin.repository.ProjectMapper;
 
-import java.sql.SQLException;
 import java.util.Map;
+import java.util.UUID;
 
 public class ProjectServiceImpl implements ProjectService {
 
-//    private IProjectRepository projectRepository;
-
     private SqlSessionFactory sqlSessionFactory;
-
-
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    ProjectMapper projectRepository = sqlSession.getMapper(ProjectMapper.class);
 
     public ProjectServiceImpl(SqlSessionFactory sqlSessionFactory) {
         this.sqlSessionFactory = sqlSessionFactory;
     }
 
-//    public ProjectServiceImpl(IProjectRepository projectRepository) {
-//        this.projectRepository = projectRepository;
-//    }
-
     @Override
-    public boolean createProject(Project project) throws SQLException {
+    public boolean createProject(Project project) {
+        SqlSession session = sqlSessionFactory.openSession();
+        ProjectMapper mapper = session.getMapper(ProjectMapper.class);
+        String id = UUID.randomUUID().toString();
+        project.setId(id);
         String projectName = project.getName();
         boolean isConsist = false;
-        for (Map.Entry<String, Project> map : projectRepository.getProjectMap().entrySet()) {
+        for (Map.Entry<String, Project> map : mapper.getProjectMap().entrySet()) {
             if (projectName.equals(map.getValue().getName())) {
                 isConsist = true;
             }
@@ -41,29 +33,40 @@ public class ProjectServiceImpl implements ProjectService {
         if (isConsist || project.getName().equals("")) {
             return false;
         } else {
-            projectRepository.createProject(project);
+            mapper.createProject(project);
+            session.commit();
+            session.close();
             return true;
         }
     }
 
     @Override
-    public Project findProjectByName(String name) throws SQLException {
-        boolean isConsist = false;
-        for (Map.Entry<String, Project> map : projectRepository.getProjectMap().entrySet()) {
-            if (name.equals(map.getValue().getName())) {
-                isConsist = true;
+    public Project findProjectByName(String name) {
+        SqlSession session = sqlSessionFactory.openSession();
+        ProjectMapper mapper = session.getMapper(ProjectMapper.class);
+        try {
+            boolean isConsist = false;
+            for (Map.Entry<String, Project> map : mapper.getProjectMap().entrySet()) {
+                if (name.equals(map.getValue().getName())) {
+                    isConsist = true;
+                }
             }
+            if (isConsist) {
+                return mapper.findProjectByName(name);
+            } else return null;
         }
-        if (isConsist) {
-            return projectRepository.findProjectByName(name);
-        } else return null;
+        finally {
+            session.close();
+        }
     }
 
     @Override
-    public boolean updateProject(String name, Project project) throws SQLException {
+    public boolean updateProject(String name, Project project) {
+        SqlSession session = sqlSessionFactory.openSession();
+        ProjectMapper mapper = session.getMapper(ProjectMapper.class);
         boolean isConsist = false;
         String id = "";
-        for (Map.Entry<String, Project> map : projectRepository.getProjectMap().entrySet()) {
+        for (Map.Entry<String, Project> map : mapper.getProjectMap().entrySet()) {
             if (name.equals(map.getValue().getName())) {
                 id = map.getValue().getId();
                 project.setId(id);
@@ -73,16 +76,20 @@ public class ProjectServiceImpl implements ProjectService {
         if (!isConsist || name.equals("")) {
             return false;
         } else {
-            projectRepository.updateProject(project);
+            mapper.updateProject(project);
+            session.commit();
+            session.close();
             return true;
         }
     }
 
     @Override
-    public boolean deleteProject(String name) throws SQLException {
+    public boolean deleteProject(String name) {
+        SqlSession session = sqlSessionFactory.openSession();
+        ProjectMapper mapper = session.getMapper(ProjectMapper.class);
         boolean isConsist = false;
         String idForRemove = "";
-        for (Map.Entry<String, Project> map : projectRepository.getProjectMap().entrySet()) {
+        for (Map.Entry<String, Project> map : mapper.getProjectMap().entrySet()) {
             if (name.equals(map.getValue().getName())) {
                 idForRemove = map.getValue().getId();
                 isConsist = true;
@@ -91,16 +98,25 @@ public class ProjectServiceImpl implements ProjectService {
         if (!isConsist || name.equals("")) {
             return false;
         } else {
-            projectRepository.deleteProject(idForRemove);
+            mapper.deleteProject(idForRemove);
+            session.commit();
+            session.close();
             return true;
         }
     }
 
     @Override
-    public Map<String, Project> getAllProjects() throws SQLException {
-        if (!projectRepository.getProjectMap().isEmpty()) {
-            return projectRepository.getProjectMap();
+    public Map<String, Project> getAllProjects() {
+        SqlSession session = sqlSessionFactory.openSession();
+        ProjectMapper mapper = session.getMapper(ProjectMapper.class);
+        try {
+            if (!mapper.getProjectMap().isEmpty()) {
+                return mapper.getProjectMap();
+            }
+            return null;
         }
-        return null;
+        finally {
+            session.close();
+        }
     }
 }

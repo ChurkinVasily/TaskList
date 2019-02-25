@@ -8,9 +8,9 @@ import ru.churkin.repository.ConnectionDB;
 import ru.churkin.repository.TaskMapper;
 import ru.churkin.entity.Task;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class TaskServiceImpl implements TaskService {
 
@@ -20,13 +20,12 @@ public class TaskServiceImpl implements TaskService {
         this.sqlSessionFactory = sqlSessionFactory;
     }
 
-//    SqlSession sqlSession = sqlSessionFactory.openSession();
-//    TaskMapper taskRepository = sqlSession.getMapper(TaskMapper.class);
-
     @Override
     public boolean createTask(Task task) {
         SqlSession session = sqlSessionFactory.openSession();
         TaskMapper mapper = session.getMapper(TaskMapper.class);
+        String id = UUID.randomUUID().toString();
+        task.setId(id);
         String taskName = task.getName();
         boolean isConsist = false;
         for (Map.Entry<String, Task> entry : mapper.getTaskMap().entrySet()) {
@@ -48,30 +47,40 @@ public class TaskServiceImpl implements TaskService {
     public Task findTaskByName(String name) {
         SqlSession session = sqlSessionFactory.openSession();
         TaskMapper mapper = session.getMapper(TaskMapper.class);
-        boolean isConsist = false;
-        for (Map.Entry<String, Task> map : mapper.getTaskMap().entrySet()) {
-            Task nTask = map.getValue();
-            if (name.equals(nTask.getName())) {
-                isConsist = true;
+        try {
+            boolean isConsist = false;
+            for (Map.Entry<String, Task> map : mapper.getTaskMap().entrySet()) {
+                Task nTask = map.getValue();
+                if (name.equals(nTask.getName())) {
+                    isConsist = true;
+                }
             }
+            if (isConsist) {
+                return mapper.findTaskByName(name);
+            } else return null;
         }
-        if (isConsist) {
-            return mapper.findTaskByName(name);
-        } else return null;
+        finally {
+            session.close();
+        }
     }
 
     @Override
     public List<Task> findTaskByUserId(String userId)  {
         SqlSession session = sqlSessionFactory.openSession();
         TaskMapper mapper = session.getMapper(TaskMapper.class);
-        boolean isConsist = false;
-        for (Map.Entry<String, Task> entry : mapper.getTaskMap().entrySet()) {
-            if (userId.equals(entry.getValue().getUserId())) {
-                isConsist = true;
+        try {
+            boolean isConsist = false;
+            for (Map.Entry<String, Task> entry : mapper.getTaskMap().entrySet()) {
+                if (userId.equals(entry.getValue().getUserId())) {
+                    isConsist = true;
+                }
             }
+            if (isConsist) return mapper.findTasksByUserId(userId);
+            else return null;
         }
-        if (isConsist) return mapper.findTasksByUserId(userId);
-        else return null;
+        finally {
+            session.close();
+        }
     }
 
     @Override
@@ -123,8 +132,14 @@ public class TaskServiceImpl implements TaskService {
     public Map<String, Task> getAllTasks()  {
         SqlSession session = sqlSessionFactory.openSession();
         TaskMapper mapper = session.getMapper(TaskMapper.class);
-        if (!mapper.getTaskMap().isEmpty()) {
-            return mapper.getTaskMap();
-        } else return null;
+        try {
+            if (!mapper.getTaskMap().isEmpty()) {
+                return mapper.getTaskMap();
+            } else return null;
+        }
+        finally {
+           session.close();
+        }
+
     }
 }

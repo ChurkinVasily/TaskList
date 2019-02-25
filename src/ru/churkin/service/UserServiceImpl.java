@@ -20,17 +20,19 @@ public class UserServiceImpl {
         this.sqlSessionFactory = sqlSessionFactory;
     }
 
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    UserMapper userRepository = sqlSession.getMapper(UserMapper.class);
+//    SqlSession sqlSession = sqlSessionFactory.openSession();
+//    UserMapper userRepository = sqlSession.getMapper(UserMapper.class);
 
-    public boolean createNewUser(User user) throws SQLException {
+    public boolean createNewUser(User user) {
+        SqlSession session = sqlSessionFactory.openSession();
+        UserMapper mapper = session.getMapper(UserMapper.class);
         String userName = user.getName();
         String userPassword = user.getPassword();
         boolean isConsist = false;
         if (userName.equals("") || userPassword.equals("")) {
             return false;
         } else {
-            for (Map.Entry<String, User> entry : userRepository.getUserMap().entrySet()) {
+            for (Map.Entry<String, User> entry : mapper.getUserMap().entrySet()) {
                 if (!isConsist && userName.equals(entry.getValue().getName())) {
                     isConsist = true;
                 }
@@ -39,47 +41,77 @@ public class UserServiceImpl {
         if (isConsist) {
             return false;
         } else {
-            userRepository.createUser(user);
+            mapper.createUser(user);
+            session.commit();
+            session.close();
             return true;
         }
     }
 
-    public User findUserById(String id) throws SQLException {
-        return (userRepository.findUserById(id));
-    }
-
-    public boolean isExist(String userName) throws SQLException {
-        boolean isTrue = false;
-        for (Map.Entry<String, User> entry : userRepository.getUserMap().entrySet()) {
-            if (userName.equals(entry.getValue().getName())) {
-                isTrue = true;
-            }
+    public User findUserById(String id) {
+        SqlSession session = sqlSessionFactory.openSession();
+        UserMapper mapper = session.getMapper(UserMapper.class);
+        try {
+            return (mapper.findUserById(id));
         }
-        return isTrue;
+        finally {
+            session.close();
+        }
     }
 
-    public boolean validateUser(User user) throws SQLException {
-        if (user != null) {
-            String userName = user.getName();
-            String userPassword = user.getPassword();
-            boolean isValidate = false;
-            for (Map.Entry<String, User> entry : userRepository.getUserMap().entrySet()) {
-                if (userName != null && userName.equals(entry.getValue().getName())
-                        && userPassword.equals(entry.getValue().getPassword())) {
-                    isValidate = true;
+    public boolean isExist(String userName) {
+        SqlSession session = sqlSessionFactory.openSession();
+        UserMapper mapper = session.getMapper(UserMapper.class);
+        try {
+            boolean isTrue = false;
+            for (Map.Entry<String, User> entry : mapper.getUserMap().entrySet()) {
+                if (userName.equals(entry.getValue().getName())) {
+                    isTrue = true;
                 }
             }
-            return isValidate;
-        } else return false;
+            return isTrue;
+        }
+        finally {
+            session.close();
+        }
+    }
+
+    public boolean validateUser(User user) {
+        SqlSession session = sqlSessionFactory.openSession();
+        UserMapper mapper = session.getMapper(UserMapper.class);
+        try {
+            if (user != null) {
+                String userName = user.getName();
+                String userPassword = user.getPassword();
+                boolean isValidate = false;
+                for (Map.Entry<String, User> entry : mapper.getUserMap().entrySet()) {
+                    if (userName != null && userName.equals(entry.getValue().getName())
+                            && userPassword.equals(entry.getValue().getPassword())) {
+                        isValidate = true;
+                    }
+                }
+                return isValidate;
+            } else return false;
+        }
+        finally {
+            session.close();
+        }
     }
 
     public User getCurrentUser() {
         return currentUser;
     }
 
-    public void getUserByName(String userName) throws SQLException {
-        if (isExist(userName)) {
-            currentUser = userRepository.findUserByName(userName);
+    public void getUserByName(String userName) {
+        SqlSession session = sqlSessionFactory.openSession();
+        UserMapper mapper = session.getMapper(UserMapper.class);
+        try {
+            if (isExist(userName)) {
+                currentUser = mapper.findUserByName(userName);
+            }
+        }
+        finally {
+            session.close();
         }
     }
 
