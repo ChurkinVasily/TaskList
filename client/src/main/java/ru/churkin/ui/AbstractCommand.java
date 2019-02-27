@@ -2,7 +2,6 @@ package ru.churkin.ui;
 
 import ru.churkin.api.Command;
 import ru.churkin.api.ServiceLocator;
-import ru.churkin.entity.User;
 
 import java.io.IOException;
 import java.sql.SQLException;

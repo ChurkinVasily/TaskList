@@ -1,7 +1,5 @@
 package ru.churkin.api;
 
-import ru.churkin.entity.User;
-
 import java.io.IOException;
 import java.sql.SQLException;
 

@@ -7,7 +7,11 @@
     <groupId>ru.churkin</groupId>
     <artifactId>TaskListCopy</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <modules>
+        <module>server</module>
+        <module>client</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <build>
         <plugins>

@@ -1,12 +1,13 @@
 package ru.churkin.service;
 
 import ru.churkin.api.IUserRepository;
+import ru.churkin.api.UserService;
 import ru.churkin.entity.User;
 
 import java.sql.SQLException;
 import java.util.Map;
 
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
 
     public User currentUser = null;
 

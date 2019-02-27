@@ -12,12 +12,12 @@ public interface ServiceLocator {
 
     ProjectService getProjectService();
 
-    TerminalService getTerminalService();
+//    TerminalService getTerminalService();
 
     UserServiceImpl getUserService();
 
-    Map<String, Command> getCommandMap();
+//    Map<String, Command> getCommandMap();
 
-    ConnectionDB connDB();
+//    ConnectionDB connDB();
 
 }

@@ -3,10 +3,9 @@ package ru.churkin;
 import ru.churkin.ui.*;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 
-public class App {
+public class AppClient {
 
     public static Class[] classes = {
             TaskCreateCommand.class, TaskDeleteCommand.class, TaskUpdateCommand.class, TaskReadByNameCommand.class, TasksShowAllForUserCommand.class,
@@ -17,8 +16,9 @@ public class App {
 
     public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, SQLException {
 
-        Bootstrap bootstrap = new Bootstrap();
+        BootstrapClient bootstrap = new BootstrapClient();
         bootstrap.init(classes);
 
     }
+
 }
