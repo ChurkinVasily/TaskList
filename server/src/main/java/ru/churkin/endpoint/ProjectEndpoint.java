@@ -39,6 +39,6 @@ public class ProjectEndpoint implements IProjectEndpoint {
 
     @Override
     public Map<String, Project> getAllProjects() throws SQLException {
-        return serviceLocator.getProjectService().getAllProjects();
+        return serviceLocator.getProjectService().getProjectAll();
     }
 }

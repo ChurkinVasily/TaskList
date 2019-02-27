@@ -12,17 +12,17 @@ import java.util.Map;
 public interface IProjectEndpoint {
 
     @WebMethod
-    boolean createProject(@WebParam Project project) throws SQLException;
+    boolean createProject(@WebParam(name = "project") Project project) throws Exception;
 
     @WebMethod
-    Project findProjectByName(@WebParam String name) throws SQLException;
+    Project findProjectByName(@WebParam(name = "name") String name) throws Exception;
 
     @WebMethod
-    boolean updateProject(@WebParam String id, @WebParam Project project) throws SQLException;
+    boolean updateProject(@WebParam(name = "id") String id, @WebParam(name = "project") Project project) throws Exception;
 
     @WebMethod
-    boolean deleteProject(@WebParam String id) throws SQLException;
+    boolean deleteProject(@WebParam(name = "id") String id) throws Exception;
 
     @WebMethod
-    Map<String, Project> getAllProjects() throws SQLException;
+    Map<String, Project> getAllProjects() throws Exception;
 }

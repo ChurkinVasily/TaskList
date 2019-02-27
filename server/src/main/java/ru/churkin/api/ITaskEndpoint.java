@@ -13,20 +13,20 @@ import java.util.Map;
 public interface ITaskEndpoint {
 
     @WebMethod
-    boolean createTask(@WebParam Task task) throws SQLException;
+    boolean createTask(@WebParam(name = "task") Task task) throws Exception;
 
     @WebMethod
-    Task findTaskByName(@WebParam String name) throws SQLException;
+    Task findTaskByName(@WebParam(name = "name") String name) throws Exception;
 
     @WebMethod
-    List<Task> findTaskByUserId(@WebParam String id) throws SQLException;
+    List<Task> findTaskByUserId(@WebParam(name = "id") String id) throws Exception;
 
     @WebMethod
-    boolean updateTask(@WebParam String id, @WebParam Task task) throws SQLException;
+    boolean updateTask(@WebParam(name = "id") String id, @WebParam(name = "task") Task task) throws Exception;
 
     @WebMethod
-    boolean deleteTask(@WebParam String id) throws SQLException;
+    boolean deleteTask(@WebParam String id) throws Exception;
 
     @WebMethod
-    Map<String, Task> getAllTasks() throws SQLException;
+    Map<String, Task> getAllTasks() throws Exception;
 }

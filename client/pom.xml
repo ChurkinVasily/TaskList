@@ -22,7 +22,7 @@
                         <id>generate-sources</id>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <sourceRoot>src/main/java</sourceRoot>
+                            <sourceRoot>${project.basedir}src/main/java</sourceRoot>
                             <wsdlOptions>
                                 <wsdlOption>
                                     <wsdl>http://localhost:8080/TaskList/user?wsdl</wsdl>

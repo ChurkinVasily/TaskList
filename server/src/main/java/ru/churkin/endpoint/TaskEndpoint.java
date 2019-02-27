@@ -1,13 +1,11 @@
 package ru.churkin.endpoint;
 
 import ru.churkin.api.ITaskEndpoint;
-import ru.churkin.api.ITaskRepository;
 import ru.churkin.api.ServiceLocator;
 import ru.churkin.entity.Task;
 
 import javax.jws.WebService;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +45,6 @@ public class TaskEndpoint implements ITaskEndpoint {
 
     @Override
     public Map<String, Task> getAllTasks() throws SQLException {
-        return serviceLocator.getTaskService().getAllTasks();
+        return serviceLocator.getTaskService().getTasksAll();
     }
 }

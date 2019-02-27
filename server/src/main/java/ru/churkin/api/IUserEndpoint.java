@@ -11,22 +11,22 @@ import java.sql.SQLException;
 public interface IUserEndpoint {
 
     @WebMethod
-    boolean createNewUser(@WebParam User user) throws SQLException;
+    boolean createNewUser(@WebParam(name = "user") User user) throws SQLException;
 
     @WebMethod
-    User findUserById(@WebParam String id) throws SQLException;
+    User findUserById(@WebParam(name = "id") String id) throws SQLException;
 
     @WebMethod
-    boolean isExist(@WebParam String userName) throws SQLException;
+    boolean isExist(@WebParam(name = "userName") String userName) throws SQLException;
 
     @WebMethod
-    boolean validateUser(@WebParam User user) throws SQLException;
+    boolean validateUser(@WebParam(name = "user") User user) throws SQLException;
 
     @WebMethod
     User getCurrentUser();
 
     @WebMethod
-    void getUserByName(@WebParam String userName) throws SQLException;
+    void getUserByName(@WebParam(name = "userName") String userName) throws SQLException;
 
 
 }

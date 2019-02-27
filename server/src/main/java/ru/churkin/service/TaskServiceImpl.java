@@ -97,7 +97,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Map<String, Task> getAllTasks() throws SQLException {
+    public Map<String, Task> getTasksAll() throws SQLException {
         if (!taskRepository.getTaskMap().isEmpty()) {
             return taskRepository.getTaskMap();
         } else return null;

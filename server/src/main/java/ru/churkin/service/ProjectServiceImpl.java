@@ -83,7 +83,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Map<String, Project> getAllProjects() throws SQLException {
+    public Map<String, Project> getProjectAll() throws SQLException {
         if (!projectRepository.getProjectMap().isEmpty()) {
             return projectRepository.getProjectMap();
         }

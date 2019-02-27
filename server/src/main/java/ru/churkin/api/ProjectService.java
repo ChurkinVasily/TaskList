@@ -15,6 +15,6 @@ public interface ProjectService {
 
     boolean deleteProject(String id) throws SQLException;
 
-    Map<String, Project> getAllProjects() throws SQLException;
+    Map<String, Project> getProjectAll() throws SQLException;
 
 }
