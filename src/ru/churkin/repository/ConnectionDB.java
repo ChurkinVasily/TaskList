@@ -23,21 +23,21 @@ public class ConnectionDB {
     public static final String DB_USER_NAME = "root";
     public static final String DB_PASSWORD = "root";
 
-    private Connection connection = null;
-
-    public Connection getConnection() throws SQLException {
-        try {
-            Class.forName(DRIVER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        connection = DriverManager.getConnection(URL, DB_USER_NAME, DB_PASSWORD);
-        return connection;
-    }
-
-    public void closeConnection() throws SQLException {
-        connection.close();
-    }
+//    private Connection connection = null;
+//
+//    public Connection getConnection() throws SQLException {
+//        try {
+//            Class.forName(DRIVER);
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        connection = DriverManager.getConnection(URL, DB_USER_NAME, DB_PASSWORD);
+//        return connection;
+//    }
+//
+//    public void closeConnection() throws SQLException {
+//        connection.close();
+//    }
 
     public SqlSessionFactory getSqlSessionFactory() {
         DataSource dataSource = new PooledDataSource(DRIVER, URL, DB_USER_NAME, DB_PASSWORD);
