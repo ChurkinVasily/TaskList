@@ -5,28 +5,27 @@ import ru.churkin.entity.User;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import java.sql.SQLException;
 
 @WebService
 public interface IUserEndpoint {
 
     @WebMethod
-    boolean createNewUser(@WebParam(name = "user") User user) throws SQLException;
+    boolean createNewUser(@WebParam(name = "user") User user) throws Exception;
 
     @WebMethod
-    User findUserById(@WebParam(name = "id") String id) throws SQLException;
+    User findUserById(@WebParam(name = "id") String id) throws Exception;
 
     @WebMethod
-    boolean isExist(@WebParam(name = "userName") String userName) throws SQLException;
+    boolean isExist(@WebParam(name = "userName") String userName) throws Exception;
 
     @WebMethod
-    boolean validateUser(@WebParam(name = "user") User user) throws SQLException;
+    boolean validateUser(@WebParam(name = "user") User user) throws Exception;
 
     @WebMethod
     User getCurrentUser();
 
     @WebMethod
-    void getUserByName(@WebParam(name = "userName") String userName) throws SQLException;
+    void getUserByName(@WebParam(name = "userName") String userName) throws Exception;
 
 
 }
