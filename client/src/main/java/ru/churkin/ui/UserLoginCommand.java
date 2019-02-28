@@ -1,9 +1,9 @@
 package ru.churkin.ui;
 
-import ru.churkin.entity.User;
+import ru.churkin.endpoint.Exception_Exception;
+import ru.churkin.endpoint.User;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class UserLoginCommand extends AbstractCommand {
 
@@ -23,18 +23,18 @@ public class UserLoginCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws IOException, SQLException {
+    public void execute() throws IOException, Exception_Exception {
         User user = new User();
         System.out.println("введите ваше Имя пользователя (userName)");
         String userName = serviceLocator.getTerminalService().nextLine();
-        if (serviceLocator.getUserService().isExist(userName)) {
+        if (serviceLocator.getUserEndpoint().isExist(userName)) {
             System.out.println("введите пароль");
             String userPassword = serviceLocator.getTerminalService().nextLine();
             user.setName(userName);
             user.setPassword(userPassword);
-            if (serviceLocator.getUserService().validateUser(user)) {
+            if (serviceLocator.getUserEndpoint().validateUser(user)) {
                 System.out.println("успешный вход под именем " + userName);
-                serviceLocator.getUserService().getUserByName(userName);
+                serviceLocator.getUserEndpoint().getUserByName(userName);
             } else System.out.println("неверный пароль");
         } else {
             System.out.println("не существующее имя пользователя");

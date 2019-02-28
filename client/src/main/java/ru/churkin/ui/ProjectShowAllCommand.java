@@ -1,9 +1,9 @@
 package ru.churkin.ui;
 
-import ru.churkin.entity.Project;
+import ru.churkin.endpoint.Exception_Exception;
+import ru.churkin.endpoint.Project;
 
-import java.sql.SQLException;
-import java.util.Map;
+import java.util.List;
 
 public class ProjectShowAllCommand extends AbstractCommand {
 
@@ -23,11 +23,11 @@ public class ProjectShowAllCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws SQLException {
-        Map<String, Project> projects = serviceLocator.getProjectService().getAllProjects();
+    public void execute() throws Exception_Exception {
+        List<Project> projects = serviceLocator.getProjectEndpoint().getAllProjects();
         if (projects != null) {
-            for (Map.Entry<String, Project> entry : projects.entrySet()) {
-                System.out.println(entry.getValue());
+            for (Project project : projects) {
+                System.out.println(project);
             }
         } else {
             System.out.println("список проектов пуст");

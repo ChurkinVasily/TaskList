@@ -27,5 +27,8 @@ public interface IUserEndpoint {
     @WebMethod
     void getUserByName(@WebParam(name = "userName") String userName) throws Exception;
 
+    @WebMethod
+    void setCurrentUser(@WebParam(name = "user") User user) throws Exception;
+
 
 }

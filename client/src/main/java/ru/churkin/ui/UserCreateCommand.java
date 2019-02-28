@@ -1,9 +1,9 @@
 package ru.churkin.ui;
 
-import ru.churkin.entity.User;
+import ru.churkin.endpoint.Exception_Exception;
+import ru.churkin.endpoint.User;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class UserCreateCommand extends AbstractCommand {
 
@@ -23,13 +23,13 @@ public class UserCreateCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws IOException, SQLException {
+    public void execute() throws IOException, Exception_Exception {
         User newUser = new User();
         System.out.println("Введите имя нового пользователя");
         newUser.setName(serviceLocator.getTerminalService().nextLine());
         System.out.println("Установите пароль нового пользователя");
         newUser.setPassword(serviceLocator.getTerminalService().nextLine());
-        boolean isCreate = serviceLocator.getUserService().createNewUser(newUser);
+        boolean isCreate = serviceLocator.getUserEndpoint().createNewUser(newUser);
         if (isCreate) {
             System.out.println("новый пользователь успешно создан");
         } else {

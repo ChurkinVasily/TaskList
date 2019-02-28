@@ -1,5 +1,7 @@
 package ru.churkin.ui;
 
+import ru.churkin.endpoint.Exception_Exception;
+
 public class UserLogoutCommand extends AbstractCommand {
 
     @Override
@@ -18,8 +20,8 @@ public class UserLogoutCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() {
-        serviceLocator.getUserService().currentUser = null;
+    public void execute() throws Exception_Exception {
+        serviceLocator.getUserEndpoint().setCurrentUser(null);
         System.out.println("вы вышли из профиля");
     }
 }

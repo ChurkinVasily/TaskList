@@ -1,7 +1,8 @@
 package ru.churkin.ui;
 
+import ru.churkin.endpoint.Exception_Exception;
+
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class TaskDeleteCommand extends AbstractCommand {
 
@@ -21,10 +22,10 @@ public class TaskDeleteCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws IOException, SQLException {
+    public void execute() throws IOException, Exception_Exception {
         System.out.println("введите имя задачи (task) для удаления");
         String name = serviceLocator.getTerminalService().nextLine();
-        boolean isDelete = serviceLocator.getTaskService().deleteTask(name);
+        boolean isDelete = serviceLocator.getTaskEndpoint().deleteTask(name);
         if (isDelete) System.out.println("успешно удалено");
         else System.out.println("ошибка удаления. введено пустое или не существующее имя");
     }

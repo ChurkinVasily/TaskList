@@ -1,5 +1,6 @@
 package ru.churkin;
 
+import ru.churkin.endpoint.Exception_Exception;
 import ru.churkin.ui.*;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ public class AppClient {
             UserCreateCommand.class, UserLoginCommand.class, UserLogoutCommand.class
     };
 
-    public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, SQLException {
+    public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, SQLException, Exception_Exception {
 
         BootstrapClient bootstrap = new BootstrapClient();
         bootstrap.init(classes);

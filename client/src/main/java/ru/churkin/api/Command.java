@@ -1,5 +1,7 @@
 package ru.churkin.api;
 
+import ru.churkin.endpoint.Exception_Exception;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -11,7 +13,7 @@ public interface Command {
 
     String description();
 
-    void execute() throws IOException, SQLException;
+    void execute() throws IOException, SQLException, Exception_Exception;
 
     void setLocator(ServiceLocator serviceLocator);
 

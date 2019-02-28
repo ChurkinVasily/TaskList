@@ -13,16 +13,13 @@ import ru.churkin.service.TaskServiceImpl;
 import ru.churkin.service.UserServiceImpl;
 
 import javax.xml.ws.Endpoint;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.sql.SQLException;
+//import java.io.BufferedReader;
+//import java.io.InputStreamReader;
 
 public class Bootstrap implements ServiceLocator {
 
-    final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+//    final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     final ServiceLocator serviceLocator = this;
-//    final TerminalService terminalService = new TerminalService(reader);
 
     final ConnectionDB connMyBatis = new ConnectionDB();
     final SqlSessionFactory sqlSessionFactory = connMyBatis.getSqlSessionFactory();
@@ -33,37 +30,16 @@ public class Bootstrap implements ServiceLocator {
     final UserEndpoint userEndpoint = new UserEndpoint(serviceLocator);
     final TaskEndpoint taskEndpoint = new TaskEndpoint(serviceLocator);
     final ProjectEndpoint projectEndpoint = new ProjectEndpoint(serviceLocator);
-//    final Map<String, Command> commandList = new HashMap<>();
-
-//    private Class[] cls;
 
     public Bootstrap() {
     }
 
-    public void init() throws IOException, IllegalAccessException, InstantiationException, SQLException {
+    public void init() {
 
-        Endpoint.publish("http://localhost:8080/TaskList/user?wsdl", userEndpoint);
-        Endpoint.publish("http://localhost:8080/TaskList/project?wsdl", projectEndpoint);
         Endpoint.publish("http://localhost:8080/TaskList/task?wsdl", taskEndpoint);
+        Endpoint.publish("http://localhost:8080/TaskList/project?wsdl", projectEndpoint);
+        Endpoint.publish("http://localhost:8080/TaskList/user?wsdl", userEndpoint);
 
-//        this.cls = cls;
-//
-//        for (Class cl : cls) {
-//            Command com = (Command) cl.newInstance();
-//            com.setLocator(serviceLocator);
-//            commandList.put(com.name(), com);
-//        }
-//
-//        String userInput = reader.readLine();
-//        while (!"exit".equals(userInput)) {
-//            if (commandList.containsKey(userInput)) {
-//                Command cmnd = commandList.get(userInput);
-//                this.execute(cmnd);
-//            } else {
-//                System.out.println("несуществующая команда");
-//            }
-//            userInput = reader.readLine();
-//        }
     }
 
     @Override
@@ -80,23 +56,4 @@ public class Bootstrap implements ServiceLocator {
     public UserServiceImpl getUserService() {
         return userServiceImpl;
     }
-
-//    @Override
-//    public TerminalService getTerminalService() {
-//        return terminalService;
-//    }
-
-//    @Override
-//    public Map<String, Command> getCommandMap() {
-//        return commandList;
-//    }
-
-//    public void execute(Command command) throws IOException, SQLException {
-//        User user = serviceLocator.getUserService().currentUser;
-//        if (!command.isAuth() || (command.isAuth() && serviceLocator.getUserService().validateUser(user))) {
-//            command.execute();
-//        } else System.out.println("требуется авторизация");
-//    }
-
-
 }

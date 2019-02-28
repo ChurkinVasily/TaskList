@@ -6,7 +6,6 @@ import ru.churkin.entity.User;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import java.sql.SQLException;
 
 @WebService
 public class UserEndpoint implements IUserEndpoint {
@@ -40,6 +39,11 @@ public class UserEndpoint implements IUserEndpoint {
     @Override
     public User getCurrentUser() {
         return serviceLocator.getUserService().getCurrentUser();
+    }
+
+    @Override
+    public void setCurrentUser(User user) throws Exception {
+        serviceLocator.getUserService().setCurrentUser(user);
     }
 
     @Override

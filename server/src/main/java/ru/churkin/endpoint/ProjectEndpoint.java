@@ -20,22 +20,22 @@ public class ProjectEndpoint implements IProjectEndpoint {
     }
 
     @Override
-    public boolean createProject(@WebParam(name = "project") Project project) throws SQLException {
+    public boolean createProject(@WebParam(name = "project") Project project) throws Exception {
         return serviceLocator.getProjectService().createProject(project);
     }
 
     @Override
-    public Project findProjectByName(@WebParam(name = "name") String name) throws SQLException {
+    public Project findProjectByName(@WebParam(name = "name") String name) throws Exception {
         return serviceLocator.getProjectService().findProjectByName(name);
     }
 
     @Override
-    public boolean updateProject(@WebParam(name = "id") String id, @WebParam(name = "project") Project project) throws SQLException {
+    public boolean updateProject(@WebParam(name = "id") String id, @WebParam(name = "project") Project project) throws Exception {
         return serviceLocator.getProjectService().updateProject(id, project);
     }
 
     @Override
-    public boolean deleteProject(@WebParam(name = "id")String id) throws SQLException {
+    public boolean deleteProject(@WebParam(name = "id")String id) throws Exception {
         return serviceLocator.getProjectService().deleteProject(id);
     }
 

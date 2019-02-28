@@ -20,27 +20,27 @@ public class TaskEndpoint implements ITaskEndpoint {
     }
 
     @Override
-    public boolean createTask(@WebParam(name = "task")Task task) throws SQLException {
+    public boolean createTask(@WebParam(name = "task")Task task) throws Exception {
         return serviceLocator.getTaskService().createTask(task);
     }
 
     @Override
-    public Task findTaskByName(@WebParam(name = "name") String name) throws SQLException {
+    public Task findTaskByName(@WebParam(name = "name") String name) throws Exception {
         return serviceLocator.getTaskService().findTaskByName(name);
     }
 
     @Override
-    public List<Task> findTaskByUserId(@WebParam(name = "id") String id) throws SQLException {
+    public List<Task> findTaskByUserId(@WebParam(name = "id") String id) throws Exception {
         return serviceLocator.getTaskService().findTaskByUserId(id);
     }
 
     @Override
-    public boolean updateTask(@WebParam(name = "id")String id, @WebParam(name = "task")Task task) throws SQLException {
+    public boolean updateTask(@WebParam(name = "id")String id, @WebParam(name = "task")Task task) throws Exception {
         return serviceLocator.getTaskService().updateTask(id, task);
     }
 
     @Override
-    public boolean deleteTask(@WebParam(name = "id") String id) throws SQLException {
+    public boolean deleteTask(@WebParam(name = "id") String id) throws Exception {
         return serviceLocator.getTaskService().deleteTask(id);
     }
 

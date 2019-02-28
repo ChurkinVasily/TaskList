@@ -1,9 +1,9 @@
 package ru.churkin.ui;
 
-import ru.churkin.entity.Task;
+import ru.churkin.endpoint.Exception_Exception;
+import ru.churkin.endpoint.Task;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class TaskReadByNameCommand extends AbstractCommand {
 
@@ -23,14 +23,14 @@ public class TaskReadByNameCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws IOException, SQLException {
-        String userId = serviceLocator.getUserService().currentUser.getId();
+    public void execute() throws IOException, Exception_Exception {
+        String userId = serviceLocator.getUserEndpoint().getCurrentUser().getId();
         System.out.println("для просмотра нужной задачи (task) введите ее имя");
         String name = serviceLocator.getTerminalService().nextLine();
-        Task task = serviceLocator.getTaskService().findTaskByName(name);
+        Task task = serviceLocator.getTaskEndpoint().findTaskByName(name);
         try {
             if (task.getUserId().equals(userId)) {
-                System.out.println(serviceLocator.getTaskService().findTaskByName(name));
+                System.out.println(serviceLocator.getTaskEndpoint().findTaskByName(name));
             } else {
                 System.out.println("Этот Task невозможно посмотреть из вашего профиля");
             }

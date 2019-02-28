@@ -1,19 +1,19 @@
 package ru.churkin.api;
 
+import ru.churkin.endpoint.*;
+
 import java.util.Map;
 
 public interface ServiceLocator {
 
-    //    TaskService getTaskService();
-//
-//    ProjectService getProjectService();
-//
-//    TerminalService getTerminalService();
-//
-//    UserServiceImpl getUserService();
+    TaskEndpoint getTaskEndpoint();
+
+    ProjectEndpoint getProjectEndpoint();
+
+    TerminalService getTerminalService();
+
+    UserEndpoint getUserEndpoint();
 
     Map<String, Command> getCommandMap();
-
-//    ConnectionDB connDB();
 
 }

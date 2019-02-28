@@ -1,8 +1,8 @@
 package ru.churkin.ui;
 
-import ru.churkin.entity.Task;
+import ru.churkin.endpoint.Exception_Exception;
+import ru.churkin.endpoint.Task;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class TasksShowAllForUserCommand extends AbstractCommand {
@@ -23,9 +23,9 @@ public class TasksShowAllForUserCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws SQLException {
-        String userId = serviceLocator.getUserService().currentUser.getId();
-        List<Task> tasks = serviceLocator.getTaskService().findTaskByUserId(userId);
+    public void execute() throws Exception_Exception {
+        String userId = serviceLocator.getUserEndpoint().getCurrentUser().getId();
+        List<Task> tasks = serviceLocator.getTaskEndpoint().findTaskByUserId(userId);
         if (tasks != null) {
             for (Task task : tasks) {
                 System.out.println(task.toString());

@@ -1,9 +1,9 @@
 package ru.churkin.ui;
 
-import ru.churkin.entity.Task;
+import ru.churkin.endpoint.Exception_Exception;
+import ru.churkin.endpoint.Task;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class TaskUpdateCommand extends AbstractCommand {
 
@@ -23,12 +23,12 @@ public class TaskUpdateCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws IOException, SQLException {
+    public void execute() throws IOException, Exception_Exception {
         Task newTask = new Task();
-        String userId = serviceLocator.getUserService().currentUser.getId();
+        String userId = serviceLocator.getUserEndpoint().getCurrentUser().getId();
         System.out.println("enter task-name for update Task");
         String name = serviceLocator.getTerminalService().nextLine();
-        boolean isAccess = userId.equals(serviceLocator.getTaskService().findTaskByName(name).getUserId());
+        boolean isAccess = userId.equals(serviceLocator.getTaskEndpoint().findTaskByName(name).getUserId());
         if (isAccess) {
             System.out.println("enter new parameters: description, time start, time finish, project ID");
             newTask.setName(name);
@@ -37,7 +37,7 @@ public class TaskUpdateCommand extends AbstractCommand {
             newTask.setTimeFinish(serviceLocator.getTerminalService().nextLine());
             newTask.setProjectId(serviceLocator.getTerminalService().nextLine());
             newTask.setUserId(userId);
-            boolean isUpdate = serviceLocator.getTaskService().updateTask(name, newTask);
+            boolean isUpdate = serviceLocator.getTaskEndpoint().updateTask(name, newTask);
             if (isUpdate) {
                 System.out.println("task успешно обновлен");
             } else {

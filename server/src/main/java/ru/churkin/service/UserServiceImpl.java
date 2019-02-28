@@ -105,4 +105,7 @@ public class UserServiceImpl {
         }
     }
 
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
 }
