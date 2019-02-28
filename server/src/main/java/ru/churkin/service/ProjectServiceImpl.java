@@ -6,8 +6,8 @@ import ru.churkin.api.ProjectService;
 import ru.churkin.entity.Project;
 import ru.churkin.repository.ProjectMapper;
 
-import java.util.Map;
-import java.util.UUID;
+import java.sql.SQLException;
+import java.util.*;
 
 public class ProjectServiceImpl implements ProjectService {
 
@@ -105,16 +105,22 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Map<String, Project> getProjectAll() {
+    public List<Project> getProjectAll() throws SQLException {
+        List<Project> listProject = new ArrayList<>();
         SqlSession session = sqlSessionFactory.openSession();
         ProjectMapper mapper = session.getMapper(ProjectMapper.class);
+        Map<String, Project> mapProject = mapper.getProjectMap();
         try {
-            if (!mapper.getProjectMap().isEmpty()) {
-                return mapper.getProjectMap();
-            }
-            return null;
-        } finally {
+          if (!mapProject.isEmpty()) {
+              for(Map.Entry<String, Project> entry : mapProject.entrySet()) {
+                  Project project = entry.getValue();
+                  listProject.add(project);
+              }
+          }
+        }
+        finally {
             session.close();
         }
+        return listProject;
     }
 }

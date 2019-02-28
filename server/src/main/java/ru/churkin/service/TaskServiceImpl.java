@@ -6,6 +6,8 @@ import ru.churkin.api.TaskService;
 import ru.churkin.entity.Task;
 import ru.churkin.repository.TaskMapper;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -125,15 +127,22 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Map<String, Task> getTasksAll() {
+    public List<Task> getTasksAll() throws SQLException {
+        List<Task> listTask = new ArrayList<>();
         SqlSession session = sqlSessionFactory.openSession();
         TaskMapper mapper = session.getMapper(TaskMapper.class);
+        Map<String, Task> mapTask = mapper.getTaskMap();
         try {
-            if (!mapper.getTaskMap().isEmpty()) {
-                return mapper.getTaskMap();
-            } else return null;
-        } finally {
+            if (!mapTask.isEmpty()) {
+                for (Map.Entry<String, Task> entry : mapTask.entrySet()) {
+                    Task task = entry.getValue();
+                    listTask.add(task);
+                }
+            }
+        }
+        finally {
             session.close();
         }
+        return listTask;
     }
 }

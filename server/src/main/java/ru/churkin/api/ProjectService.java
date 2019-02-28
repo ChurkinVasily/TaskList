@@ -3,6 +3,7 @@ package ru.churkin.api;
 import ru.churkin.entity.Project;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 public interface ProjectService {
@@ -15,6 +16,8 @@ public interface ProjectService {
 
     boolean deleteProject(String id) throws SQLException;
 
-    Map<String, Project> getProjectAll() throws SQLException;
+//    Map<String, Project> getProjectAll() throws SQLException;
+
+    List<Project> getProjectAll() throws SQLException;
 
 }

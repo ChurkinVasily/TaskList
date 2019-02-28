@@ -6,6 +6,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 @WebService
@@ -24,5 +25,5 @@ public interface IProjectEndpoint {
     boolean deleteProject(@WebParam(name = "id") String id) throws Exception;
 
     @WebMethod
-    Map<String, Project> getAllProjects() throws Exception;
+    List<Project> getAllProjects()throws Exception;
 }

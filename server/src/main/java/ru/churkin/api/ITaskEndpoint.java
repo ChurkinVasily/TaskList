@@ -28,5 +28,5 @@ public interface ITaskEndpoint {
     boolean deleteTask(@WebParam String id) throws Exception;
 
     @WebMethod
-    Map<String, Task> getAllTasks() throws Exception;
+    List<Task> getAllTasks() throws Exception;
 }

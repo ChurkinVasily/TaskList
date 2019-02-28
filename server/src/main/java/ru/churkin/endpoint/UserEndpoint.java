@@ -4,6 +4,7 @@ import ru.churkin.api.IUserEndpoint;
 import ru.churkin.api.ServiceLocator;
 import ru.churkin.entity.User;
 
+import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.sql.SQLException;
 
@@ -17,22 +18,22 @@ public class UserEndpoint implements IUserEndpoint {
     }
 
     @Override
-    public boolean createNewUser(User user) throws Exception {
+    public boolean createNewUser(@WebParam(name = "user") User user) throws Exception {
         return serviceLocator.getUserService().createNewUser(user);
     }
 
     @Override
-    public User findUserById(String id) throws Exception {
+    public User findUserById(@WebParam(name = "id") String id) throws Exception {
         return serviceLocator.getUserService().findUserById(id);
     }
 
     @Override
-    public boolean isExist(String userName) throws Exception {
+    public boolean isExist(@WebParam(name = "userName") String userName) throws Exception {
         return serviceLocator.getUserService().isExist(userName);
     }
 
     @Override
-    public boolean validateUser(User user) throws Exception {
+    public boolean validateUser(@WebParam(name = "user") User user) throws Exception {
         return serviceLocator.getUserService().validateUser(user);
     }
 
@@ -42,7 +43,7 @@ public class UserEndpoint implements IUserEndpoint {
     }
 
     @Override
-    public void getUserByName(String userName) throws Exception {
+    public void getUserByName(@WebParam(name = "userName") String userName) throws Exception {
         serviceLocator.getUserService().getUserByName(userName);
     }
 }

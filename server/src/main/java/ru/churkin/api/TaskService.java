@@ -18,5 +18,5 @@ public interface TaskService {
 
     boolean deleteTask(String id) throws SQLException;
 
-    Map<String, Task> getTasksAll() throws SQLException;
+    List<Task> getTasksAll() throws SQLException;
 }

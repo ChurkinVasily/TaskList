@@ -43,8 +43,8 @@ public class Bootstrap implements ServiceLocator {
     public void init() throws IOException, IllegalAccessException, InstantiationException, SQLException {
 
         Endpoint.publish("http://localhost:8080/TaskList/user?wsdl", userEndpoint);
-        Endpoint.publish("http://localhost:8080/TaskList/task?wsdl", taskEndpoint);
         Endpoint.publish("http://localhost:8080/TaskList/project?wsdl", projectEndpoint);
+        Endpoint.publish("http://localhost:8080/TaskList/task?wsdl", taskEndpoint);
 
 //        this.cls = cls;
 //

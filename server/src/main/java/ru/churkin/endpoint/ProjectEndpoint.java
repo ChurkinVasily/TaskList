@@ -4,8 +4,10 @@ import ru.churkin.api.IProjectEndpoint;
 import ru.churkin.api.ServiceLocator;
 import ru.churkin.entity.Project;
 
+import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 @WebService
@@ -18,27 +20,27 @@ public class ProjectEndpoint implements IProjectEndpoint {
     }
 
     @Override
-    public boolean createProject(Project project) throws SQLException {
+    public boolean createProject(@WebParam(name = "project") Project project) throws SQLException {
         return serviceLocator.getProjectService().createProject(project);
     }
 
     @Override
-    public Project findProjectByName(String name) throws SQLException {
+    public Project findProjectByName(@WebParam(name = "name") String name) throws SQLException {
         return serviceLocator.getProjectService().findProjectByName(name);
     }
 
     @Override
-    public boolean updateProject(String id, Project project) throws SQLException {
+    public boolean updateProject(@WebParam(name = "id") String id, @WebParam(name = "project") Project project) throws SQLException {
         return serviceLocator.getProjectService().updateProject(id, project);
     }
 
     @Override
-    public boolean deleteProject(String id) throws SQLException {
+    public boolean deleteProject(@WebParam(name = "id")String id) throws SQLException {
         return serviceLocator.getProjectService().deleteProject(id);
     }
 
     @Override
-    public Map<String, Project> getAllProjects() throws SQLException {
+    public List<Project> getAllProjects() throws Exception {
         return serviceLocator.getProjectService().getProjectAll();
     }
 }
