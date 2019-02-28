@@ -6,7 +6,12 @@
 
     <groupId>ru.churkin</groupId>
     <artifactId>TaskListCopy</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>server</module>
+        <module>client</module>
+    </modules>
 
     <build>
         <plugins>
@@ -21,6 +26,7 @@
             </plugin>
         </plugins>
     </build>
+
 
     <dependencies>
         <dependency>

@@ -125,7 +125,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Map<String, Task> getAllTasks() {
+    public Map<String, Task> getTasksAll() {
         SqlSession session = sqlSessionFactory.openSession();
         TaskMapper mapper = session.getMapper(TaskMapper.class);
         try {

@@ -105,7 +105,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Map<String, Project> getAllProjects() {
+    public Map<String, Project> getProjectAll() {
         SqlSession session = sqlSessionFactory.openSession();
         ProjectMapper mapper = session.getMapper(ProjectMapper.class);
         try {
