@@ -26,8 +26,14 @@ public class ProjectShowAllCommand extends AbstractCommand {
     public void execute() throws Exception_Exception {
         List<Project> projects = serviceLocator.getProjectEndpoint().getAllProjects();
         if (projects != null) {
-            for (Project project : projects) {
-                System.out.println(project);
+            for (Project currentProject : projects) {
+                System.out.println("Project{" +
+                        "id='" + currentProject.getId() + '\'' +
+                        ", name='" + currentProject.getName() + '\'' +
+                        ", description='" + currentProject.getDescription() + '\'' +
+                        ", timeStart='" + currentProject.getTimeStart() + '\'' +
+                        ", timeFinish='" + currentProject.getTimeFinish() + '\'' +
+                        '}');
             }
         } else {
             System.out.println("список проектов пуст");

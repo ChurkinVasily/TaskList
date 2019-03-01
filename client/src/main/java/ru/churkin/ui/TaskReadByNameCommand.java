@@ -30,7 +30,16 @@ public class TaskReadByNameCommand extends AbstractCommand {
         Task task = serviceLocator.getTaskEndpoint().findTaskByName(name);
         try {
             if (task.getUserId().equals(userId)) {
-                System.out.println(serviceLocator.getTaskEndpoint().findTaskByName(name));
+                Task currentTask = serviceLocator.getTaskEndpoint().findTaskByName(name);
+                System.out.println("Task{" +
+                        "id='" + currentTask.getId() + '\'' +
+                        ", name='" + currentTask.getName() + '\'' +
+                        ", description='" + currentTask.getDescription() + '\'' +
+                        ", timeStart='" + currentTask.getTimeStart() + '\'' +
+                        ", timeFinish='" + currentTask.getTimeFinish() + '\'' +
+                        ", projectId='" + currentTask.getProjectId() + '\'' +
+                        ", userId='" + currentTask.getUserId() + '\'' +
+                        '}');
             } else {
                 System.out.println("Этот Task невозможно посмотреть из вашего профиля");
             }

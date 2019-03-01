@@ -1,6 +1,7 @@
 package ru.churkin.ui;
 
 import ru.churkin.endpoint.Exception_Exception;
+import ru.churkin.endpoint.Project;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -27,7 +28,14 @@ public class ProjectReadByNameCommand extends AbstractCommand {
         System.out.println("для просмотра нужного проекта (project) введите его имя");
         String name = serviceLocator.getTerminalService().nextLine();
         try {
-            System.out.println(serviceLocator.getProjectEndpoint().findProjectByName(name).toString());
+            Project currentProject = serviceLocator.getProjectEndpoint().findProjectByName(name);
+            System.out.println("Project{" +
+                    "id='" + currentProject.getId() + '\'' +
+                    ", name='" + currentProject.getName() + '\'' +
+                    ", description='" + currentProject.getDescription() + '\'' +
+                    ", timeStart='" + currentProject.getTimeStart() + '\'' +
+                    ", timeFinish='" + currentProject.getTimeFinish() + '\'' +
+                    '}');
         } catch (NullPointerException | Exception_Exception e) {
             System.out.println("нет проекта с таким именем");
         }

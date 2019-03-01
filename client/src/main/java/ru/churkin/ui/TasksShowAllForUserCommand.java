@@ -27,8 +27,16 @@ public class TasksShowAllForUserCommand extends AbstractCommand {
         String userId = serviceLocator.getUserEndpoint().getCurrentUser().getId();
         List<Task> tasks = serviceLocator.getTaskEndpoint().findTaskByUserId(userId);
         if (tasks != null) {
-            for (Task task : tasks) {
-                System.out.println(task.toString());
+            for (Task currentTask : tasks) {
+                System.out.println("Task{" +
+                        "id='" + currentTask.getId() + '\'' +
+                        ", name='" + currentTask.getName() + '\'' +
+                        ", description='" + currentTask.getDescription() + '\'' +
+                        ", timeStart='" + currentTask.getTimeStart() + '\'' +
+                        ", timeFinish='" + currentTask.getTimeFinish() + '\'' +
+                        ", projectId='" + currentTask.getProjectId() + '\'' +
+                        ", userId='" + currentTask.getUserId() + '\'' +
+                        '}');
             }
         } else {
             System.out.println("список задач пуст");
