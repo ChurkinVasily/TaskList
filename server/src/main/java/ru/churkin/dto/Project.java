@@ -1,28 +1,15 @@
-package ru.churkin.entity;
+package ru.churkin.dto;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
-import jdk.nashorn.internal.objects.annotations.Setter;
+import org.apache.ibatis.type.Alias;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import java.util.List;
-
-@Entity
-@Table(name = "projects")
+@Alias("project")
 public class Project {
 
-    @Id
     private String id;
     private String name;
     private String description;
     private String timeStart;
     private String timeFinish;
-
-    @OneToMany(mappedBy = "project")
-    private List<Task> tasks;
-
 
     public Project(String id, String name, String description, String timeStart, String timeFinish) {
         this.id = id;

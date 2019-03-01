@@ -4,28 +4,31 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import ru.churkin.api.ProjectService;
 import ru.churkin.api.ServiceLocator;
 import ru.churkin.api.TaskService;
+import ru.churkin.api.UserService;
 import ru.churkin.endpoint.ProjectEndpoint;
 import ru.churkin.endpoint.TaskEndpoint;
 import ru.churkin.endpoint.UserEndpoint;
 import ru.churkin.repository.ConnectionDB;
-import ru.churkin.service.ProjectServiceImpl;
-import ru.churkin.service.TaskServiceImpl;
-import ru.churkin.service.UserServiceImpl;
+import ru.churkin.service.*;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.xml.ws.Endpoint;
-//import java.io.BufferedReader;
-//import java.io.InputStreamReader;
 
 public class Bootstrap implements ServiceLocator {
 
-//    final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     final ServiceLocator serviceLocator = this;
 
-    final ConnectionDB connMyBatis = new ConnectionDB();
-    final SqlSessionFactory sqlSessionFactory = connMyBatis.getSqlSessionFactory();
-    final TaskServiceImpl taskServiceImpl = new TaskServiceImpl(sqlSessionFactory);
-    final ProjectServiceImpl projectServiceImpl = new ProjectServiceImpl(sqlSessionFactory);
-    final UserServiceImpl userServiceImpl = new UserServiceImpl(sqlSessionFactory);
+    final ConnectionDB connDB = new ConnectionDB();
+    final EntityManagerFactory entityManagerFactory = connDB.getEntityManagerFactory();
+//    final SqlSessionFactory sqlSessionFactory = connDB.getSqlSessionFactory();
+//    final TaskServiceImpl taskServiceImpl = new TaskServiceImpl(sqlSessionFactory);
+//    final ProjectServiceImpl projectServiceImpl = new ProjectServiceImpl(sqlSessionFactory);
+//    final UserServiceImpl userServiceImpl = new UserServiceImpl(sqlSessionFactory);
+
+    TaskService taskServiceHib = new TaskServiceHib(entityManagerFactory);
+    ProjectService projectServiceHib = new ProjectServiceHib(entityManagerFactory);
+    UserService userServiceHib = new UserServiceHib(entityManagerFactory);
 
     final UserEndpoint userEndpoint = new UserEndpoint(serviceLocator);
     final TaskEndpoint taskEndpoint = new TaskEndpoint(serviceLocator);
@@ -44,16 +47,21 @@ public class Bootstrap implements ServiceLocator {
 
     @Override
     public TaskService getTaskService() {
-        return taskServiceImpl;
+        return taskServiceHib;
     }
 
     @Override
     public ProjectService getProjectService() {
-        return projectServiceImpl;
+        return projectServiceHib;
     }
 
     @Override
-    public UserServiceImpl getUserService() {
-        return userServiceImpl;
+    public UserService getUserService() {
+        return userServiceHib;
+    }
+
+    @Override
+    public ConnectionDB connDB() {
+        return connDB;
     }
 }

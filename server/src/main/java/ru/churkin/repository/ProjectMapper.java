@@ -2,7 +2,7 @@ package ru.churkin.repository;
 
 import org.apache.ibatis.annotations.*;
 import ru.churkin.api.IProjectRepository;
-import ru.churkin.entity.Project;
+import ru.churkin.dto.Project;
 
 import java.util.Map;
 

@@ -1,13 +1,11 @@
 package ru.churkin.api;
 
-import ru.churkin.entity.Task;
+import ru.churkin.dto.Task;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 @WebService
 public interface ITaskEndpoint {

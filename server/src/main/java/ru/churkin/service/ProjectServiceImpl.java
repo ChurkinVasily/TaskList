@@ -3,7 +3,7 @@ package ru.churkin.service;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import ru.churkin.api.ProjectService;
-import ru.churkin.entity.Project;
+import ru.churkin.dto.Project;
 import ru.churkin.repository.ProjectMapper;
 
 import java.sql.SQLException;

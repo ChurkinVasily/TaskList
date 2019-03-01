@@ -2,13 +2,11 @@ package ru.churkin.endpoint;
 
 import ru.churkin.api.IProjectEndpoint;
 import ru.churkin.api.ServiceLocator;
-import ru.churkin.entity.Project;
+import ru.churkin.dto.Project;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 @WebService
 public class ProjectEndpoint implements IProjectEndpoint {

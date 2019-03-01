@@ -3,7 +3,7 @@ package ru.churkin.service;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import ru.churkin.api.TaskService;
-import ru.churkin.entity.Task;
+import ru.churkin.dto.Task;
 import ru.churkin.repository.TaskMapper;
 
 import java.sql.SQLException;

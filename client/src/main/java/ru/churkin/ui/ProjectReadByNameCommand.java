@@ -4,7 +4,6 @@ import ru.churkin.endpoint.Exception_Exception;
 import ru.churkin.endpoint.Project;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class ProjectReadByNameCommand extends AbstractCommand {
 

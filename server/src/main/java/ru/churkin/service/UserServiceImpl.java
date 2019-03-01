@@ -2,7 +2,7 @@ package ru.churkin.service;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import ru.churkin.entity.User;
+import ru.churkin.dto.User;
 import ru.churkin.repository.UserMapper;
 
 import java.util.Map;

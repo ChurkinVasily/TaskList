@@ -2,13 +2,11 @@ package ru.churkin.endpoint;
 
 import ru.churkin.api.ITaskEndpoint;
 import ru.churkin.api.ServiceLocator;
-import ru.churkin.entity.Task;
+import ru.churkin.dto.Task;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 @WebService
 public class TaskEndpoint implements ITaskEndpoint {

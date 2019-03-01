@@ -1,6 +1,6 @@
 package ru.churkin.api;
 
-import ru.churkin.entity.Project;
+import ru.churkin.dto.Project;
 
 import java.sql.SQLException;
 import java.util.Map;

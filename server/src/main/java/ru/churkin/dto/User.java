@@ -1,24 +1,13 @@
-package ru.churkin.entity;
+package ru.churkin.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import java.util.List;
+import org.apache.ibatis.type.Alias;
 
-@Entity
-@Table(name = "users")
+@Alias("user")
 public class User {
 
-    @Id
     private String id;
-
     private String name;
-
     private String password;
-
-    @OneToMany(mappedBy = "user")
-    private List<Task> tasks;
 
     public User(String name) {
         this.name = name;

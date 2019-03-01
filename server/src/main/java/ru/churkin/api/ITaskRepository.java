@@ -1,6 +1,6 @@
 package ru.churkin.api;
 
-import ru.churkin.entity.Task;
+import ru.churkin.dto.Task;
 
 import java.sql.SQLException;
 import java.util.List;

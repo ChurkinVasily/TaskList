@@ -1,26 +1,17 @@
-package ru.churkin.entity;
+package ru.churkin.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import org.apache.ibatis.type.Alias;
 
-@Entity
-@Table(name = "tasks")
+@Alias("task")
 public class Task {
 
-    @Id
     private String id;
     private String name;
     private String description;
     private String timeStart;
     private String timeFinish;
-
-    @ManyToOne
-    private Project project;
-
-    @ManyToOne
-    private User user;
+    private String projectId;
+    private String userId;
 
     public Task(String name) {
         this.name = name;
@@ -29,14 +20,14 @@ public class Task {
     public Task() {
     }
 
-    public Task(String id, String name, String description, String timeStart, String timeFinish, Project project, User user) {
+    public Task(String id, String name, String description, String timeStart, String timeFinish, String projectId, String userId) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.timeStart = timeStart;
         this.timeFinish = timeFinish;
-        this.project = project;
-        this.user = user;
+        this.projectId = projectId;
+        this.userId = userId;
     }
 
     public String getId() {
@@ -79,21 +70,20 @@ public class Task {
         return timeStart;
     }
 
-
-    public Project getProject() {
-        return project;
+    public String getProjectId() {
+        return projectId;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
     }
 
-    public User getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -104,8 +94,8 @@ public class Task {
                 ", description='" + description + '\'' +
                 ", timeStart='" + timeStart + '\'' +
                 ", timeFinish='" + timeFinish + '\'' +
-                ", project='" + project.getName() + '\'' +
-                ", user='" + user.getName() + '\'' +
+                ", projectId='" + projectId + '\'' +
+                ", userId='" + userId + '\'' +
                 '}';
     }
 }

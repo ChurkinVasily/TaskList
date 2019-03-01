@@ -1,10 +1,9 @@
 package ru.churkin.api;
 
-import ru.churkin.entity.Project;
+import ru.churkin.dto.Project;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 public interface ProjectService {
 
