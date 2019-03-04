@@ -3,7 +3,7 @@ package ru.churkin.service;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import ru.churkin.api.ProjectService;
-import ru.churkin.dto.Project;
+import ru.churkin.entity.Project;
 import ru.churkin.repository.ProjectMapper;
 
 import java.sql.SQLException;
@@ -25,8 +25,8 @@ public class ProjectServiceImpl implements ProjectService {
         project.setId(id);
         String projectName = project.getName();
         boolean isConsist = false;
-        for (Map.Entry<String, Project> map : mapper.getProjectMap().entrySet()) {
-            if (projectName.equals(map.getValue().getName())) {
+        for (Map.Entry<String, Project> entry : mapper.getProjectMap().entrySet()) {
+            if (projectName.equals(entry.getValue().getName())) {
                 isConsist = true;
             }
         }
@@ -105,7 +105,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<Project> getProjectAll() throws SQLException {
+    public List<Project> getProjectAll() {
         List<Project> listProject = new ArrayList<>();
         SqlSession session = sqlSessionFactory.openSession();
         ProjectMapper mapper = session.getMapper(ProjectMapper.class);

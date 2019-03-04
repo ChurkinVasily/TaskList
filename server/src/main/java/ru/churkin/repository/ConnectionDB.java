@@ -6,9 +6,9 @@ import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
-import ru.churkin.dto.Project;
-import ru.churkin.dto.Task;
-import ru.churkin.dto.User;
+import ru.churkin.entity.Project;
+import ru.churkin.entity.Task;
+import ru.churkin.entity.User;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

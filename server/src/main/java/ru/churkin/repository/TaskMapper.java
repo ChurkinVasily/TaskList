@@ -2,7 +2,8 @@ package ru.churkin.repository;
 
 import org.apache.ibatis.annotations.*;
 import ru.churkin.api.ITaskRepository;
-import ru.churkin.dto.Task;
+import ru.churkin.entity.Task;
+//import ru.churkin.dto.Task;
 
 import java.util.List;
 import java.util.Map;

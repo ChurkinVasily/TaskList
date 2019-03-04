@@ -26,12 +26,13 @@ public class ProjectCreateCommand extends AbstractCommand {
     @Override
     public void execute() throws IOException, Exception_Exception {
         Project newProject = new Project();
-        System.out.println("enter new project parameters: name, description, timeStart, timeFinish");
+//        System.out.println("enter new project parameters: name, description, timeStart, timeFinish");
+        System.out.println("enter new project parameters: name");
         newProject.setName(serviceLocator.getTerminalService().nextLine());
-        newProject.setDescription(serviceLocator.getTerminalService().nextLine());
-        newProject.setTimeStart(serviceLocator.getTerminalService().nextLine());
-        newProject.setTimeFinish(serviceLocator.getTerminalService().nextLine());
-        boolean isCreate = serviceLocator.getProjectEndpoint().createProject(newProject);
+//        newProject.setDescription(serviceLocator.getTerminalService().nextLine());
+//        newProject.setTimeStart(serviceLocator.getTerminalService().nextLine());
+//        newProject.setTimeFinish(serviceLocator.getTerminalService().nextLine());
+        boolean isCreate = serviceLocator.getProjectEndpoint().createProject(newProject.getName());
         if (isCreate) {
             System.out.println("проет (Project) успешно создан");
         } else System.out.println("вы задали существующее или пустое имя проекта");

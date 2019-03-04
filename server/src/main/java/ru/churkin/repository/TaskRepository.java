@@ -1,11 +1,9 @@
 package ru.churkin.repository;
 
 import ru.churkin.api.ITaskRepository;
-import ru.churkin.dto.Task;
+import ru.churkin.entity.Task;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -18,32 +16,32 @@ public class TaskRepository implements ITaskRepository {
     }
 
     @Override
-    public void createTask(Task task) throws SQLException {
+    public void createTask(Task task)  {
 
     }
 
     @Override
-    public Task findTaskByName(String name) throws SQLException {
+    public Task findTaskByName(String name)  {
         return null;
     }
 
     @Override
-    public List<Task> findTasksByUserId(String userId) throws SQLException {
+    public List<Task> findTasksByUserId(String userId)  {
         return null;
     }
 
     @Override
-    public void updateTask(Task task) throws SQLException {
+    public void updateTask(Task task)  {
 
     }
 
     @Override
-    public void deleteTask(String id) throws SQLException {
+    public void deleteTask(String id) {
 
     }
 
     @Override
-    public Map<String, Task> getTaskMap() throws SQLException {
+    public Map<String, Task> getTaskMap() {
         return null;
     }
 }

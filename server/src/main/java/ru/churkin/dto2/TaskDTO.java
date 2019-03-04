@@ -1,47 +1,43 @@
-package ru.churkin.entity;
+package ru.churkin.dto2;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import ru.churkin.entity.Task;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+public class TaskDTO {
 
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@Table(name = "tasks")
-public class Task {
-
-    @Id
     private String id;
     private String name;
     private String description;
     private String timeStart;
     private String timeFinish;
+    private String projectId;
+    private String userId;
 
-    @ManyToOne
-    private Project project;
-
-    @ManyToOne
-    private User user;
-
-    public Task(String name) {
+    public TaskDTO(String name) {
         this.name = name;
     }
 
+    public TaskDTO() {
+    }
 
-    public Task(String id, String name, String description, String timeStart, String timeFinish, Project project, User user) {
+    public TaskDTO(final Task task) {
+        if (task == null) return;
+        id = task.getId();
+        name = task.getName();
+        description = task.getDescription();
+        timeStart = task.getTimeStart();
+        timeFinish = task.getTimeFinish();
+        projectId = task.getProject().getId();
+        userId = task.getUser().getId();
+    }
+
+    public TaskDTO(String id, String name, String description, String timeStart, String timeFinish, String projectId, String userId) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.timeStart = timeStart;
         this.timeFinish = timeFinish;
-        this.project = project;
-        this.user = user;
+        this.projectId = projectId;
+        this.userId = userId;
     }
 
     public String getId() {
@@ -84,25 +80,20 @@ public class Task {
         return timeStart;
     }
 
-
-    public Project getProject() {
-        return project;
+    public String getProjectId() {
+        return projectId;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
     }
 
     public String getUserId() {
-        return user.getId();
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -113,8 +104,9 @@ public class Task {
                 ", description='" + description + '\'' +
                 ", timeStart='" + timeStart + '\'' +
                 ", timeFinish='" + timeFinish + '\'' +
-                ", project='" + project.getName() + '\'' +
-                ", user='" + user.getName() + '\'' +
+                ", projectId='" + projectId + '\'' +
+                ", userId='" + userId + '\'' +
                 '}';
     }
+
 }

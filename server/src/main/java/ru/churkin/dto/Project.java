@@ -1,8 +1,5 @@
 package ru.churkin.dto;
 
-import org.apache.ibatis.type.Alias;
-
-@Alias("project")
 public class Project {
 
     private String id;

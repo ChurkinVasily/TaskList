@@ -1,6 +1,5 @@
 package ru.churkin;
 
-import org.apache.ibatis.session.SqlSessionFactory;
 import ru.churkin.api.ProjectService;
 import ru.churkin.api.ServiceLocator;
 import ru.churkin.api.TaskService;
@@ -9,10 +8,11 @@ import ru.churkin.endpoint.ProjectEndpoint;
 import ru.churkin.endpoint.TaskEndpoint;
 import ru.churkin.endpoint.UserEndpoint;
 import ru.churkin.repository.ConnectionDB;
-import ru.churkin.service.*;
+import ru.churkin.service.ProjectServiceHib;
+import ru.churkin.service.TaskServiceHib;
+import ru.churkin.service.UserServiceHib;
 
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.xml.ws.Endpoint;
 
 public class Bootstrap implements ServiceLocator {

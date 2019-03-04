@@ -1,6 +1,7 @@
 package ru.churkin.api;
 
-import ru.churkin.dto.Project;
+
+import ru.churkin.dto2.ProjectDTO;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -11,13 +12,17 @@ import java.util.List;
 public interface IProjectEndpoint {
 
     @WebMethod
-    boolean createProject(@WebParam(name = "project") Project project) throws Exception;
+    boolean createProject(@WebParam(name = "projectName") String projectName) throws Exception;
 
     @WebMethod
-    Project findProjectByName(@WebParam(name = "name") String name) throws Exception;
+    ProjectDTO findProjectByName(@WebParam(name = "name") String name) throws Exception;
 
     @WebMethod
-    boolean updateProject(@WebParam(name = "id") String id, @WebParam(name = "project") Project project) throws Exception;
+    boolean updateProject(@WebParam(name = "name") String name,
+                          @WebParam(name = "description") String description,
+                          @WebParam(name = "timeStart") String timeStart,
+                          @WebParam(name = "timeFinish") String timeFinish);
+//                          @WebParam(name = "project") Project project) throws Exception;
 
     @WebMethod
     boolean deleteProject(@WebParam(name = "id") String id) throws Exception;

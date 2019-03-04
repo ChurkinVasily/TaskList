@@ -1,7 +1,7 @@
 package ru.churkin.repository;
 
 import ru.churkin.api.IUserRepository;
-import ru.churkin.dto.User;
+import ru.churkin.entity.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,32 +17,32 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public void createUser(User user) throws SQLException {
+    public void createUser(User user) {
 
     }
 
     @Override
-    public User findUserByName(String name) throws SQLException {
+    public User findUserByName(String name) {
         return null;
     }
 
     @Override
-    public User findUserById(String id) throws SQLException {
+    public User findUserById(String id) {
         return null;
     }
 
     @Override
-    public void updateUser(String id, User user) throws SQLException {
+    public void updateUser(String id, User user) {
 
     }
 
     @Override
-    public void deleteUser(String id) throws SQLException {
+    public void deleteUser(String id) {
 
     }
 
     @Override
-    public Map<String, User> getUserMap() throws SQLException {
+    public Map<String, User> getUserMap() {
         return null;
     }
 }

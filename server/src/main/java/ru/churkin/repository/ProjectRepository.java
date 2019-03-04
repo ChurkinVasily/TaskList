@@ -1,7 +1,7 @@
 package ru.churkin.repository;
 
 import ru.churkin.api.IProjectRepository;
-import ru.churkin.dto.Project;
+import ru.churkin.entity.Project;
 
 import javax.persistence.EntityManager;
 import java.sql.SQLException;
@@ -16,27 +16,27 @@ public class ProjectRepository implements IProjectRepository {
     }
 
     @Override
-    public void createProject(Project project) throws SQLException {
+    public void createProject(Project project) {
 
     }
 
     @Override
-    public Project findProjectByName(String name) throws SQLException {
+    public Project findProjectByName(String name) {
         return null;
     }
 
     @Override
-    public void updateProject(Project project) throws SQLException {
+    public void updateProject(Project project) {
 
     }
 
     @Override
-    public void deleteProject(String id) throws SQLException {
+    public void deleteProject(String id) {
 
     }
 
     @Override
-    public Map<String, Project> getProjectMap() throws SQLException {
+    public Map<String, Project> getProjectMap() {
         return null;
     }
 }

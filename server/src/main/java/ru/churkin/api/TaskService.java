@@ -1,6 +1,6 @@
 package ru.churkin.api;
 
-import ru.churkin.dto.Task;
+import ru.churkin.entity.Task;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -15,7 +15,7 @@ public interface TaskService {
 
     boolean updateTask(String id, Task task) throws SQLException;
 
-    boolean deleteTask(String id) throws SQLException;
+    boolean deleteTask(String name) throws SQLException;
 
     List<Task> getTasksAll() throws SQLException;
 }

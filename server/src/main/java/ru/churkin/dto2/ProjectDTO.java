@@ -1,35 +1,16 @@
-package ru.churkin.entity;
+package ru.churkin.dto2;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import ru.churkin.entity.Project;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import java.util.List;
+public class ProjectDTO {
 
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@Table(name = "projects")
-public class Project {
-
-    @Id
     private String id;
-
     private String name;
     private String description;
     private String timeStart;
     private String timeFinish;
 
-    @OneToMany(mappedBy = "project")
-    private List<Task> tasks;
-
-
-    public Project(String id, String name, String description, String timeStart, String timeFinish) {
+    public ProjectDTO(String id, String name, String description, String timeStart, String timeFinish) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -37,9 +18,24 @@ public class Project {
         this.timeFinish = timeFinish;
     }
 
-    public Project(String name) {
-        this.name = name;
+    public ProjectDTO() {
     }
+
+    public ProjectDTO(final Project project) {
+        if (project == null) return;
+        id = project.getId();
+        name = project.getName();
+        description = project.getDescription();
+        timeStart = project.getTimeStart();
+        timeFinish = project.getTimeFinish();
+    }
+
+    public static ProjectDTO toDto(final Project project) {
+        if (project == null) return null;
+        return new ProjectDTO(project);
+    }
+
+
 
     public String getId() {
         return id;
@@ -83,7 +79,7 @@ public class Project {
 
     @Override
     public String toString() {
-        return "Project{" +
+        return "ProjectDTO{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
@@ -91,4 +87,5 @@ public class Project {
                 ", timeFinish='" + timeFinish + '\'' +
                 '}';
     }
+
 }

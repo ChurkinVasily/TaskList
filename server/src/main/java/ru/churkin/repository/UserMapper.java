@@ -2,7 +2,8 @@ package ru.churkin.repository;
 
 import org.apache.ibatis.annotations.*;
 import ru.churkin.api.IUserRepository;
-import ru.churkin.dto.User;
+//import ru.churkin.dto.User;
+import ru.churkin.entity.User;
 
 import java.util.Map;
 
