@@ -30,7 +30,7 @@ public class TaskRepository implements ITaskRepository {
 
     @Override
     public List<Task> findTasksByUserId(String userId) {
-        return entityManager.createQuery("select e from Task where e.user.id = :userId", Task.class)
+        return entityManager.createQuery("select e from Task e where e.user.id = :userId", Task.class)
                 .setParameter("userId", userId)
                 .getResultList();
     }

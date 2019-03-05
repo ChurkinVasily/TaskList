@@ -43,7 +43,6 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public List<User> getUserList() {
-        return entityManager.createQuery("select e from User ", User.class)
-                .getResultList();
+        return entityManager.createQuery("from User", User.class).getResultList();
     }
 }

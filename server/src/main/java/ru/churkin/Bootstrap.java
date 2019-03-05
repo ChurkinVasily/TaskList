@@ -35,6 +35,8 @@ public class Bootstrap implements ServiceLocator {
 
     public void init() {
 
+        getUserService().validateUser("user1", "pass1");
+
         Endpoint.publish("http://localhost:8080/TaskList/task?wsdl", taskEndpoint);
         Endpoint.publish("http://localhost:8080/TaskList/project?wsdl", projectEndpoint);
         Endpoint.publish("http://localhost:8080/TaskList/user?wsdl", userEndpoint);

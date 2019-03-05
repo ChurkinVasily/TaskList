@@ -84,15 +84,14 @@ public class UserServiceJPA implements UserService {
         if (user == null) return false;
         String userName = user.getName();
         String userPassword = user.getPassword();
-        boolean isValidate = false;
         for (User cUser : userRepository.getUserList()) {
             if (userName != null && userName.equals(cUser.getName())
                     && userPassword.equals(cUser.getPassword())) {
-                isValidate = true;
+                return true;
             }
         }
         entityManager.close();
-        return isValidate;
+        return false;
     }
 
     @Override
