@@ -1,6 +1,7 @@
 package ru.churkin.service;
 
 import ru.churkin.api.TaskService;
+import ru.churkin.entity.Project;
 import ru.churkin.entity.Task;
 import ru.churkin.repository.TaskRepository;
 
@@ -17,6 +18,12 @@ public class TaskServiceHib implements TaskService {
 
     public TaskServiceHib(EntityManagerFactory emf) {
         this.entityManagerFactory = emf;
+    }
+
+    @Override
+    public boolean createTask(String taskName) {
+        Task task = new Task(taskName);
+        return createTask(task);
     }
 
     @Override

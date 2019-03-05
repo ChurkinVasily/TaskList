@@ -14,6 +14,8 @@ public interface ProjectService {
 
     Project findProjectByName(String name) throws SQLException;
 
+    Project findProjectById(String id) throws SQLException;
+
     boolean updateProject(String name, Project project) throws SQLException;
 
     boolean deleteProject(String name) throws SQLException;

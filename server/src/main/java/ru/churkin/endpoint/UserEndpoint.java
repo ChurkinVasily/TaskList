@@ -2,7 +2,8 @@ package ru.churkin.endpoint;
 
 import ru.churkin.api.IUserEndpoint;
 import ru.churkin.api.ServiceLocator;
-import ru.churkin.dto.User;
+import ru.churkin.entity.User;
+import ru.churkin.dto2.UserDTO;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -17,13 +18,15 @@ public class UserEndpoint implements IUserEndpoint {
     }
 
     @Override
-    public boolean createNewUser(@WebParam(name = "user") User user) throws Exception {
-        return serviceLocator.getUserService().createNewUser(user);
+    public boolean createNewUser(@WebParam(name = "userName") String userName,
+                                 @WebParam(name = "pass") String pass) throws Exception {
+        return serviceLocator.getUserService().createNewUser(userName, pass);
     }
 
     @Override
-    public User findUserById(@WebParam(name = "id") String id) throws Exception {
-        return serviceLocator.getUserService().findUserById(id);
+    public UserDTO findUserById(@WebParam(name = "id") String id) throws Exception {
+        User user = serviceLocator.getUserService().findUserById(id);
+        return UserDTO.toDTO(user);
     }
 
     @Override
@@ -32,19 +35,21 @@ public class UserEndpoint implements IUserEndpoint {
     }
 
     @Override
-    public boolean validateUser(@WebParam(name = "user") User user) throws Exception {
-        return serviceLocator.getUserService().validateUser(user);
+    public boolean validateUser(@WebParam(name = "userName") String userName,
+                                @WebParam(name = "pass") String pass) throws Exception {
+        return serviceLocator.getUserService().validateUser(userName, pass);
     }
 
     @Override
-    public User getCurrentUser() {
-        return serviceLocator.getUserService().getCurrentUser();
+    public UserDTO getCurrentUser() {
+        User user = serviceLocator.getUserService().getCurrentUser();
+        return UserDTO.toDTO(user);
     }
 
-    @Override
-    public void setCurrentUser(User user) throws Exception {
-        serviceLocator.getUserService().setCurrentUser(user);
-    }
+//    @Override
+//    public void setCurrentUser(User user) throws Exception {
+//        serviceLocator.getUserService().setCurrentUser(user);
+//    }
 
     @Override
     public void getUserByName(@WebParam(name = "userName") String userName) throws Exception {

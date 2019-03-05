@@ -1,6 +1,6 @@
 package ru.churkin.api;
 
-import ru.churkin.dto.Task;
+import ru.churkin.dto2.TaskDTO;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -11,20 +11,29 @@ import java.util.List;
 public interface ITaskEndpoint {
 
     @WebMethod
-    boolean createTask(@WebParam(name = "task") Task task) throws Exception;
+    boolean createTask(@WebParam(name = "name") String name) throws Exception;
 
     @WebMethod
-    Task findTaskByName(@WebParam(name = "name") String name) throws Exception;
+    TaskDTO findTaskByName(@WebParam(name = "name") String name) throws Exception;
 
     @WebMethod
-    List<Task> findTaskByUserId(@WebParam(name = "id") String id) throws Exception;
+    List<TaskDTO> findTaskByUserId(@WebParam(name = "id") String id) throws Exception;
+
+
+//    boolean updateTask(@WebParam(name = "id") String id, @WebParam(name = "task") Task task) throws Exception;
 
     @WebMethod
-    boolean updateTask(@WebParam(name = "id") String id, @WebParam(name = "task") Task task) throws Exception;
+    boolean updateTask(@WebParam(name = "name") String name,
+                       @WebParam(name = "newName") String newName,
+                       @WebParam(name = "description") String description,
+                       @WebParam(name = "timeStart") String timeStart,
+                       @WebParam(name = "tineFinish") String timeFinish,
+                       @WebParam(name = "projectID") String projectId,
+                       @WebParam(name = "userID") String userId) throws Exception;
 
     @WebMethod
     boolean deleteTask(@WebParam String id) throws Exception;
 
     @WebMethod
-    List<Task> getAllTasks() throws Exception;
+    List<TaskDTO> getAllTasks() throws Exception;
 }

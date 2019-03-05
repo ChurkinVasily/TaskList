@@ -19,14 +19,14 @@ public interface IProjectEndpoint {
 
     @WebMethod
     boolean updateProject(@WebParam(name = "name") String name,
+                          @WebParam(name = "newName") String newName,
                           @WebParam(name = "description") String description,
                           @WebParam(name = "timeStart") String timeStart,
-                          @WebParam(name = "timeFinish") String timeFinish);
-//                          @WebParam(name = "project") Project project) throws Exception;
+                          @WebParam(name = "timeFinish") String timeFinish) throws Exception;
 
     @WebMethod
     boolean deleteProject(@WebParam(name = "id") String id) throws Exception;
 
     @WebMethod
-    List<Project> getAllProjects()throws Exception;
+    List<ProjectDTO> getAllProjects()throws Exception;
 }

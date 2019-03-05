@@ -6,7 +6,6 @@ import ru.churkin.repository.UserRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import java.sql.SQLException;
 import java.util.Map;
 import java.util.UUID;
 
@@ -17,6 +16,12 @@ public class UserServiceHib implements UserService {
 
     public UserServiceHib(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
+    }
+
+    @Override
+    public boolean createNewUser(String name, String pass){
+        User user = new User(name, pass);
+        return createNewUser(user);
     }
 
     @Override
@@ -39,7 +44,6 @@ public class UserServiceHib implements UserService {
             }
         }
         if (isConsist) {
-            entityManager.getTransaction().rollback();
             return false;
         } else {
             userRepository.createUser(user);
@@ -74,6 +78,8 @@ public class UserServiceHib implements UserService {
         return isTrue;
     }
 
+
+
     @Override
     public boolean validateUser(User user) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -94,6 +100,12 @@ public class UserServiceHib implements UserService {
         } else return false;
     }
 
+    @Override
+    public boolean validateUser(String name, String pass) {
+        User user = new User(name, pass);
+        return validateUser(user);
+
+    }
 
     @Override
     public User getCurrentUser() {

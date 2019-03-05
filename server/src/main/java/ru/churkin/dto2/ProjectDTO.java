@@ -1,6 +1,12 @@
 package ru.churkin.dto2;
 
 import ru.churkin.entity.Project;
+import ru.churkin.entity.Task;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class ProjectDTO {
 
@@ -35,7 +41,14 @@ public class ProjectDTO {
         return new ProjectDTO(project);
     }
 
-
+    public static List<ProjectDTO> toDTO(final Collection<Project> projects) {
+        if (projects == null || projects.isEmpty()) return Collections.emptyList();
+        List<ProjectDTO> list = new ArrayList<>();
+        for (Project project : projects) {
+            list.add(new ProjectDTO(project));
+        }
+        return list;
+    }
 
     public String getId() {
         return id;

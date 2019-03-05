@@ -9,6 +9,8 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.List;
 
+import static ru.churkin.dto2.ProjectDTO.toDTO;
+
 @WebService
 public class ProjectEndpoint implements IProjectEndpoint {
 
@@ -36,11 +38,17 @@ public class ProjectEndpoint implements IProjectEndpoint {
     }
 
     @Override
-    public boolean updateProject(String name, String description, String timeStart, String timeFinish) {
-        Project project = new Project();
-        String projectId = serviceLocator.getProjectService().
-        return serviceLocator.getProjectService().updateProject()
-        return false;
+    public boolean updateProject(@WebParam(name = "name") String name,
+                                 @WebParam(name = "newName") String newName,
+                                 @WebParam(name = "newName") String description,
+                                 @WebParam(name = "timeStart") String timeStart,
+                                 @WebParam(name = "tineFinish") String timeFinish) throws Exception {
+        Project project = serviceLocator.getProjectService().findProjectByName(name);
+        project.setName(newName);
+        project.setDescription(description);
+        project.setTimeStart(timeStart);
+        project.setTimeFinish(timeFinish);
+        return serviceLocator.getProjectService().updateProject(name, project);
     }
 
     //    @Override
@@ -52,13 +60,12 @@ public class ProjectEndpoint implements IProjectEndpoint {
 
     @Override
     public boolean deleteProject(@WebParam(name = "id")String id) throws Exception {
-        //DTO
-//        return serviceLocator.getProjectService().deleteProject(id);
+        return serviceLocator.getProjectService().deleteProject(id);
     }
 
     @Override
-    public List<Project> getAllProjects() throws Exception {
-        //DTO
-//        return serviceLocator.getProjectService().getProjectAll();
+    public List<ProjectDTO> getAllProjects() throws Exception {
+        List<Project> list = serviceLocator.getProjectService().getProjectAll();
+        return toDTO(list);
     }
 }

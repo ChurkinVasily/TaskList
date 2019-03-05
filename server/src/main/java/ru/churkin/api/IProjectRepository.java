@@ -11,6 +11,8 @@ public interface IProjectRepository {
 
     Project findProjectByName(String name) throws SQLException;
 
+    Project findProjectById(String id);
+
     void updateProject(Project project) throws SQLException;
 
     void deleteProject(String id) throws SQLException;

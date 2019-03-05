@@ -33,7 +33,6 @@ public class Task {
         this.name = name;
     }
 
-
     public Task(String id, String name, String description, String timeStart, String timeFinish, Project project, User user) {
         this.id = id;
         this.name = name;

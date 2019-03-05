@@ -1,6 +1,12 @@
 package ru.churkin.dto2;
 
+import ru.churkin.entity.Project;
 import ru.churkin.entity.Task;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class TaskDTO {
 
@@ -38,6 +44,20 @@ public class TaskDTO {
         this.timeFinish = timeFinish;
         this.projectId = projectId;
         this.userId = userId;
+    }
+
+    public static TaskDTO toDTO(Task task) {
+        if (task == null) return null;
+        return new TaskDTO(task);
+    }
+
+    public static List<TaskDTO> toDTO(Collection<Task> tasks) {
+        if (tasks == null || tasks.isEmpty()) return Collections.emptyList();
+        List<TaskDTO> list = new ArrayList<>();
+        for (Task task : tasks) {
+            list.add(new TaskDTO(task));
+        }
+        return list;
     }
 
     public String getId() {

@@ -9,6 +9,8 @@ public interface TaskService {
 
     boolean createTask(Task task) throws SQLException;
 
+    boolean createTask(String name) throws SQLException;
+
     Task findTaskByName(String name) throws SQLException;
 
     List<Task> findTaskByUserId(String id) throws SQLException;
