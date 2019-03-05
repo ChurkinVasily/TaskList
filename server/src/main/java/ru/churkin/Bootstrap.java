@@ -8,9 +8,9 @@ import ru.churkin.endpoint.ProjectEndpoint;
 import ru.churkin.endpoint.TaskEndpoint;
 import ru.churkin.endpoint.UserEndpoint;
 import ru.churkin.repository.ConnectionDB;
-import ru.churkin.service.ProjectServiceHib;
-import ru.churkin.service.TaskServiceHib;
-import ru.churkin.service.UserServiceHib;
+import ru.churkin.service.ProjectServiceJPA;
+import ru.churkin.service.TaskServiceJPA;
+import ru.churkin.service.UserServiceJPA;
 
 import javax.persistence.EntityManagerFactory;
 import javax.xml.ws.Endpoint;
@@ -21,14 +21,10 @@ public class Bootstrap implements ServiceLocator {
 
     final ConnectionDB connDB = new ConnectionDB();
     final EntityManagerFactory entityManagerFactory = connDB.getEntityManagerFactory();
-//    final SqlSessionFactory sqlSessionFactory = connDB.getSqlSessionFactory();
-//    final TaskServiceImpl taskServiceImpl = new TaskServiceImpl(sqlSessionFactory);
-//    final ProjectServiceImpl projectServiceImpl = new ProjectServiceImpl(sqlSessionFactory);
-//    final UserServiceImpl userServiceImpl = new UserServiceImpl(sqlSessionFactory);
 
-    TaskService taskServiceHib = new TaskServiceHib(entityManagerFactory);
-    ProjectService projectServiceHib = new ProjectServiceHib(entityManagerFactory);
-    UserService userServiceHib = new UserServiceHib(entityManagerFactory);
+    TaskService taskServiceHib = new TaskServiceJPA(entityManagerFactory);
+    ProjectService projectServiceHib = new ProjectServiceJPA(entityManagerFactory);
+    UserService userServiceHib = new UserServiceJPA(entityManagerFactory);
 
     final UserEndpoint userEndpoint = new UserEndpoint(serviceLocator);
     final TaskEndpoint taskEndpoint = new TaskEndpoint(serviceLocator);

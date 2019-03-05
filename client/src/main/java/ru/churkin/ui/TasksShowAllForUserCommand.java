@@ -1,7 +1,7 @@
 package ru.churkin.ui;
 
 import ru.churkin.endpoint.Exception_Exception;
-import ru.churkin.endpoint.Task;
+import ru.churkin.endpoint.TaskDTO;
 
 import java.util.List;
 
@@ -25,9 +25,9 @@ public class TasksShowAllForUserCommand extends AbstractCommand {
     @Override
     public void execute() throws Exception_Exception {
         String userId = serviceLocator.getUserEndpoint().getCurrentUser().getId();
-        List<Task> tasks = serviceLocator.getTaskEndpoint().findTaskByUserId(userId);
+        List<TaskDTO> tasks = serviceLocator.getTaskEndpoint().findTaskByUserId(userId);
         if (tasks != null) {
-            for (Task currentTask : tasks) {
+            for (TaskDTO currentTask : tasks) {
                 System.out.println("Task{" +
                         "id='" + currentTask.getId() + '\'' +
                         ", name='" + currentTask.getName() + '\'' +

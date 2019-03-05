@@ -1,7 +1,7 @@
 package ru.churkin.ui;
 
 import ru.churkin.endpoint.Exception_Exception;
-import ru.churkin.endpoint.User;
+import ru.churkin.endpoint.UserDTO;
 
 import java.io.IOException;
 
@@ -24,7 +24,7 @@ public class UserLoginCommand extends AbstractCommand {
 
     @Override
     public void execute() throws IOException, Exception_Exception {
-        User user = new User();
+        UserDTO user = new UserDTO();
         System.out.println("введите ваше Имя пользователя (userName)");
         String userName = serviceLocator.getTerminalService().nextLine();
         if (serviceLocator.getUserEndpoint().isExist(userName)) {
@@ -32,7 +32,7 @@ public class UserLoginCommand extends AbstractCommand {
             String userPassword = serviceLocator.getTerminalService().nextLine();
             user.setName(userName);
             user.setPassword(userPassword);
-            if (serviceLocator.getUserEndpoint().validateUser(user)) {
+            if (serviceLocator.getUserEndpoint().validateUser(user.getName(), user.getPassword())) {
                 System.out.println("успешный вход под именем " + userName);
                 serviceLocator.getUserEndpoint().getUserByName(userName);
             } else System.out.println("неверный пароль");

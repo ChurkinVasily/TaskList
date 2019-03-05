@@ -46,10 +46,10 @@ public class UserEndpoint implements IUserEndpoint {
         return UserDTO.toDTO(user);
     }
 
-//    @Override
-//    public void setCurrentUser(User user) throws Exception {
-//        serviceLocator.getUserService().setCurrentUser(user);
-//    }
+    @Override
+    public void setCurrentUser(@WebParam(name = "userDto") User user) throws Exception {
+        serviceLocator.getUserService().setCurrentUser(user);
+    }
 
     @Override
     public void getUserByName(@WebParam(name = "userName") String userName) throws Exception {

@@ -2,7 +2,7 @@ package ru.churkin.ui;
 
 
 import ru.churkin.endpoint.Exception_Exception;
-import ru.churkin.endpoint.Task;
+import ru.churkin.endpoint.TaskDTO;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -27,17 +27,18 @@ public class TaskCreateCommand extends AbstractCommand {
 
     @Override
     public void execute() throws IOException {
-        Task newTask = new Task();
+        TaskDTO newTask = new TaskDTO();
         newTask.setUserId(serviceLocator.getUserEndpoint().getCurrentUser().getId());
-        System.out.println("enter new task parameters: name, description, timeStart, timeFinish, project id");
+        System.out.println("enter new task parameters: name");
+//        System.out.println("enter new task parameters: name, description, timeStart, timeFinish, project id");
         newTask.setName(serviceLocator.getTerminalService().nextLine());
-        newTask.setDescription(serviceLocator.getTerminalService().nextLine());
-        newTask.setTimeStart(serviceLocator.getTerminalService().nextLine());
-        newTask.setTimeFinish(serviceLocator.getTerminalService().nextLine());
-        newTask.setProjectId(serviceLocator.getTerminalService().nextLine());
+//        newTask.setDescription(serviceLocator.getTerminalService().nextLine());
+//        newTask.setTimeStart(serviceLocator.getTerminalService().nextLine());
+//        newTask.setTimeFinish(serviceLocator.getTerminalService().nextLine());
+//        newTask.setProjectId(serviceLocator.getTerminalService().nextLine());
         boolean isCreate = false;
         try {
-            isCreate = serviceLocator.getTaskEndpoint().createTask(newTask);
+            isCreate = serviceLocator.getTaskEndpoint().createTask(newTask.getName());
         } catch (Exception_Exception e) {
             e.printStackTrace();
         }

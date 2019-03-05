@@ -1,22 +1,19 @@
 package ru.churkin.service;
 
 import ru.churkin.api.TaskService;
-import ru.churkin.entity.Project;
 import ru.churkin.entity.Task;
 import ru.churkin.repository.TaskRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
-public class TaskServiceHib implements TaskService {
+public class TaskServiceJPA implements TaskService {
 
     private EntityManagerFactory entityManagerFactory;
 
-    public TaskServiceHib(EntityManagerFactory emf) {
+    public TaskServiceJPA(EntityManagerFactory emf) {
         this.entityManagerFactory = emf;
     }
 
@@ -34,20 +31,15 @@ public class TaskServiceHib implements TaskService {
         String id = UUID.randomUUID().toString();
         task.setId(id);
         String taskName = task.getName();
-        boolean isConsist = false;
-        for (Map.Entry<String, Task> entry : taskRepository.getTaskMap().entrySet()) {
-            if (taskName.equals(entry.getValue().getName())) {
-                isConsist = true;
-            }
-        }
-        if (isConsist || task.getName().equals("")) {
+        boolean isConsist = taskRepository.getTaskList().contains(task);
+        if (isConsist || task.getName().isEmpty()) {
             return false;
-        } else {
-            taskRepository.createTask(task);
-            entityManager.getTransaction().commit();
-            entityManager.close();
-            return true;
         }
+        taskRepository.createTask(task);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return true;
+
     }
 
     @Override
@@ -55,18 +47,15 @@ public class TaskServiceHib implements TaskService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         TaskRepository taskRepository = new TaskRepository(entityManager);
         entityManager.getTransaction().begin();
-//        String currentId = null;
         Task task;
         boolean isConsist = false;
-        for (Map.Entry<String, Task> entry : taskRepository.getTaskMap().entrySet()) {
-            if (name.equals(entry.getValue().getName())) {
+        for (Task cTask : taskRepository.getTaskList()) {
+            if (name.equals(cTask.getName())) {
                 isConsist = true;
-//                currentId = nTask.getId();
             }
         }
         if (isConsist) {
             task = taskRepository.findTaskByName(name);
-//            task = entityManager.find(Task.class, currentId);
             entityManager.close();
             return task;
         } else return null;
@@ -79,8 +68,8 @@ public class TaskServiceHib implements TaskService {
         entityManager.getTransaction().begin();
         List<Task> tasks;
         boolean isConsist = false;
-        for (Map.Entry<String, Task> entry : taskRepository.getTaskMap().entrySet()) {
-            if (userId.equals(entry.getValue().getUserId())) {
+        for (Task cTask : taskRepository.getTaskList()) {
+            if (userId.equals(cTask.getUser().getId())) {
                 isConsist = true;
             }
         }
@@ -98,9 +87,9 @@ public class TaskServiceHib implements TaskService {
         entityManager.getTransaction().begin();
         boolean isConsist = false;
         String id = "";
-        for (Map.Entry<String, Task> entry : taskRepository.getTaskMap().entrySet()) {
-            if (name.equals(entry.getValue().getName())) {
-                id = entry.getValue().getId();
+        for (Task cTask : taskRepository.getTaskList()) {
+            if (name.equals(cTask.getName())) {
+                id = cTask.getId();
                 task.setId(id);
                 isConsist = true;
             }
@@ -122,20 +111,19 @@ public class TaskServiceHib implements TaskService {
         entityManager.getTransaction().begin();
         boolean isConsist = false;
         String idForRemove = "";
-        for (Map.Entry<String, Task> entry : taskRepository.getTaskMap().entrySet()) {
-            if (name.equals(entry.getValue().getName())) {
-                idForRemove = entry.getValue().getId();
+        for (Task ctask : taskRepository.getTaskList()) {
+            if (name.equals(ctask.getName())) {
+                idForRemove = ctask.getId();
                 isConsist = true;
             }
         }
         if (!isConsist || name.equals("")) {
             return false;
-        } else {
-            taskRepository.deleteTask(idForRemove);
-            entityManager.getTransaction().commit();
-            entityManager.close();
-            return true;
         }
+        taskRepository.deleteTask(idForRemove);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return true;
     }
 
     @Override
@@ -143,14 +131,7 @@ public class TaskServiceHib implements TaskService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         TaskRepository taskRepository = new TaskRepository(entityManager);
         entityManager.getTransaction().begin();
-        List<Task> listTask = new ArrayList<>();
-        Map<String, Task> mapTask = taskRepository.getTaskMap();
-        if (!mapTask.isEmpty()) {
-            for (Map.Entry<String, Task> entry : mapTask.entrySet()) {
-                Task task = entry.getValue();
-                listTask.add(task);
-            }
-        }
+        List<Task> listTask = taskRepository.getTaskList();
         entityManager.close();
         return listTask;
     }

@@ -40,9 +40,9 @@ public class ProjectEndpoint implements IProjectEndpoint {
     @Override
     public boolean updateProject(@WebParam(name = "name") String name,
                                  @WebParam(name = "newName") String newName,
-                                 @WebParam(name = "newName") String description,
+                                 @WebParam(name = "description") String description,
                                  @WebParam(name = "timeStart") String timeStart,
-                                 @WebParam(name = "tineFinish") String timeFinish) throws Exception {
+                                 @WebParam(name = "timeFinish") String timeFinish) throws Exception {
         Project project = serviceLocator.getProjectService().findProjectByName(name);
         project.setName(newName);
         project.setDescription(description);
@@ -51,11 +51,11 @@ public class ProjectEndpoint implements IProjectEndpoint {
         return serviceLocator.getProjectService().updateProject(name, project);
     }
 
-    //    @Override
+//        @Override
 //    public boolean updateProject(@WebParam(name = "name") String name,
-////                                 @WebParam(name = "project") Project project) throws Exception {
-//        //DTO
-////        return serviceLocator.getProjectService().updateProject(id, project);
+//                                 @WebParam(name = "project") Project project) throws Exception {
+//        DTO
+//        return serviceLocator.getProjectService().updateProject(id, project);
 //    }
 
     @Override

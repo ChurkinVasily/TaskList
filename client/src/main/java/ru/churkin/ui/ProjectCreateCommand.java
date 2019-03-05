@@ -2,7 +2,7 @@ package ru.churkin.ui;
 
 
 import ru.churkin.endpoint.Exception_Exception;
-import ru.churkin.endpoint.Project;
+import ru.churkin.endpoint.ProjectDTO;
 
 import java.io.IOException;
 
@@ -25,7 +25,7 @@ public class ProjectCreateCommand extends AbstractCommand {
 
     @Override
     public void execute() throws IOException, Exception_Exception {
-        Project newProject = new Project();
+        ProjectDTO newProject = new ProjectDTO();
 //        System.out.println("enter new project parameters: name, description, timeStart, timeFinish");
         System.out.println("enter new project parameters: name");
         newProject.setName(serviceLocator.getTerminalService().nextLine());

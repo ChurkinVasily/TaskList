@@ -1,7 +1,7 @@
 package ru.churkin.ui;
 
 import ru.churkin.endpoint.Exception_Exception;
-import ru.churkin.endpoint.Task;
+import ru.churkin.endpoint.TaskDTO;
 
 import java.io.IOException;
 
@@ -27,10 +27,10 @@ public class TaskReadByNameCommand extends AbstractCommand {
         String userId = serviceLocator.getUserEndpoint().getCurrentUser().getId();
         System.out.println("для просмотра нужной задачи (task) введите ее имя");
         String name = serviceLocator.getTerminalService().nextLine();
-        Task task = serviceLocator.getTaskEndpoint().findTaskByName(name);
+        TaskDTO task = serviceLocator.getTaskEndpoint().findTaskByName(name);
         try {
             if (task.getUserId().equals(userId)) {
-                Task currentTask = serviceLocator.getTaskEndpoint().findTaskByName(name);
+                TaskDTO currentTask = serviceLocator.getTaskEndpoint().findTaskByName(name);
                 System.out.println("Task{" +
                         "id='" + currentTask.getId() + '\'' +
                         ", name='" + currentTask.getName() + '\'' +

@@ -4,9 +4,7 @@ import ru.churkin.api.IUserRepository;
 import ru.churkin.entity.User;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import java.sql.SQLException;
-import java.util.Map;
+import java.util.List;
 
 public class UserRepository implements IUserRepository {
 
@@ -17,32 +15,35 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public void createUser(User user) {
-
+    public User createUser(User user) {
+        return entityManager.merge(user);
     }
 
     @Override
     public User findUserByName(String name) {
-        return null;
+        return entityManager.createQuery("select e from User e where e.name = :userName", User.class)
+                .setParameter("userName", name)
+                .getSingleResult();
     }
 
     @Override
     public User findUserById(String id) {
-        return null;
+        return entityManager.find(User.class, id);
     }
 
     @Override
     public void updateUser(String id, User user) {
-
+        entityManager.refresh(user);
     }
 
     @Override
     public void deleteUser(String id) {
-
+        entityManager.remove(id);
     }
 
     @Override
-    public Map<String, User> getUserMap() {
-        return null;
+    public List<User> getUserList() {
+        return entityManager.createQuery("select e from User ", User.class)
+                .getResultList();
     }
 }

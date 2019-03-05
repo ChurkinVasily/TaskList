@@ -6,20 +6,19 @@ import ru.churkin.repository.UserRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import java.util.Map;
 import java.util.UUID;
 
-public class UserServiceHib implements UserService {
+public class UserServiceJPA implements UserService {
 
     private EntityManagerFactory entityManagerFactory;
     private User currentUser;
 
-    public UserServiceHib(EntityManagerFactory entityManagerFactory) {
+    public UserServiceJPA(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
     }
 
     @Override
-    public boolean createNewUser(String name, String pass){
+    public boolean createNewUser(String name, String pass) {
         User user = new User(name, pass);
         return createNewUser(user);
     }
@@ -28,29 +27,27 @@ public class UserServiceHib implements UserService {
     public boolean createNewUser(User user) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         UserRepository userRepository = new UserRepository(entityManager);
-        entityManager.getTransaction().begin();
         String userId = UUID.randomUUID().toString();
         user.setId(userId);
         String userName = user.getName();
         String userPassword = user.getPassword();
         boolean isConsist = false;
-        if (userName.equals("") || userPassword.equals("")) {
+        if (userName.isEmpty() || userPassword.isEmpty()) {
             return false;
-        } else {
-            for (Map.Entry<String, User> entry : userRepository.getUserMap().entrySet()) {
-                if (!isConsist && userName.equals(entry.getValue().getName())) {
-                    isConsist = true;
-                }
+        }
+        for (User cUser : userRepository.getUserList()) {
+            if (!isConsist && userName.equals(cUser.getName())) {
+                isConsist = true;
             }
         }
         if (isConsist) {
             return false;
-        } else {
-            userRepository.createUser(user);
-            entityManager.getTransaction().commit();
-            entityManager.close();
-            return true;
         }
+        entityManager.getTransaction().begin();
+        userRepository.createUser(user);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return true;
     }
 
     @Override
@@ -69,8 +66,8 @@ public class UserServiceHib implements UserService {
         UserRepository userRepository = new UserRepository(entityManager);
         entityManager.getTransaction().begin();
         boolean isTrue = false;
-        for (Map.Entry<String, User> entry : userRepository.getUserMap().entrySet()) {
-            if (userName.equals(entry.getValue().getName())) {
+        for (User cUser : userRepository.getUserList()) {
+            if (userName.equals(cUser.getName())) {
                 isTrue = true;
             }
         }
@@ -79,25 +76,23 @@ public class UserServiceHib implements UserService {
     }
 
 
-
     @Override
     public boolean validateUser(User user) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         UserRepository userRepository = new UserRepository(entityManager);
         entityManager.getTransaction().begin();
-        if (user != null) {
-            String userName = user.getName();
-            String userPassword = user.getPassword();
-            boolean isValidate = false;
-            for (Map.Entry<String, User> entry : userRepository.getUserMap().entrySet()) {
-                if (userName != null && userName.equals(entry.getValue().getName())
-                        && userPassword.equals(entry.getValue().getPassword())) {
-                    isValidate = true;
-                }
+        if (user == null) return false;
+        String userName = user.getName();
+        String userPassword = user.getPassword();
+        boolean isValidate = false;
+        for (User cUser : userRepository.getUserList()) {
+            if (userName != null && userName.equals(cUser.getName())
+                    && userPassword.equals(cUser.getPassword())) {
+                isValidate = true;
             }
-            entityManager.close();
-            return isValidate;
-        } else return false;
+        }
+        entityManager.close();
+        return isValidate;
     }
 
     @Override
@@ -110,6 +105,11 @@ public class UserServiceHib implements UserService {
     @Override
     public User getCurrentUser() {
         return currentUser;
+    }
+
+    @Override
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
     }
 
     @Override

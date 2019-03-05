@@ -44,20 +44,6 @@ public class ConnectionDB {
 //        connection.close();
 //    }
 
-//    public SqlSessionFactory getSqlSessionFactory() {
-//        DataSource dataSource = new PooledDataSource(DRIVER, URL, DB_USER_NAME, DB_PASSWORD);
-//        Environment environment = new Environment("development", new JdbcTransactionFactory(), dataSource);
-//        Configuration configuration = new Configuration(environment);
-//        configuration.getTypeAliasRegistry().registerAlias("task", Task.class);
-//        configuration.getTypeAliasRegistry().registerAlias("project", Project.class);
-//        configuration.getTypeAliasRegistry().registerAlias("user", User.class);
-//        configuration.addMapper(TaskMapper.class);
-//        configuration.addMapper(ProjectMapper.class);
-//        configuration.addMapper(UserMapper.class);
-//        SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-//        SqlSessionFactory sqlSessionFactory = builder.build(configuration);
-//        return sqlSessionFactory;
-//    }
 
 
 }

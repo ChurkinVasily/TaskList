@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="project" type="{http://endpoint.churkin.ru/}project" minOccurs="0"/&gt;
+ *         &lt;element name="projectName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -27,34 +27,34 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "createProject", propOrder = {
-    "project"
+    "projectName"
 })
 public class CreateProject {
 
-    protected Project project;
+    protected String projectName;
 
     /**
-     * Gets the value of the project property.
+     * Gets the value of the projectName property.
      * 
      * @return
      *     possible object is
-     *     {@link Project }
+     *     {@link String }
      *     
      */
-    public Project getProject() {
-        return project;
+    public String getProjectName() {
+        return projectName;
     }
 
     /**
-     * Sets the value of the project property.
+     * Sets the value of the projectName property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Project }
+     *     {@link String }
      *     
      */
-    public void setProject(Project value) {
-        this.project = value;
+    public void setProjectName(String value) {
+        this.projectName = value;
     }
 
 }

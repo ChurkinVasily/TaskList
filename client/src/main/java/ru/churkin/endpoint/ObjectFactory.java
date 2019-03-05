@@ -132,11 +132,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Project }
+     * Create an instance of {@link ProjectDTO }
      * 
      */
-    public Project createProject() {
-        return new Project();
+    public ProjectDTO createProjectDTO() {
+        return new ProjectDTO();
     }
 
     /**

@@ -2,7 +2,7 @@ package ru.churkin.ui;
 
 
 import ru.churkin.endpoint.Exception_Exception;
-import ru.churkin.endpoint.Project;
+import ru.churkin.endpoint.ProjectDTO;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -26,7 +26,7 @@ public class ProjectUpdateCommand extends AbstractCommand {
 
     @Override
     public void execute() throws IOException, Exception_Exception {
-        Project newProject = new Project();
+        ProjectDTO newProject = new ProjectDTO();
         System.out.println("enter project-name for update Project");
         String name = serviceLocator.getTerminalService().nextLine();
         System.out.println("enter new parameters: name, description, time start, time finish");
@@ -34,7 +34,11 @@ public class ProjectUpdateCommand extends AbstractCommand {
         newProject.setDescription(serviceLocator.getTerminalService().nextLine());
         newProject.setTimeStart(serviceLocator.getTerminalService().nextLine());
         newProject.setTimeFinish(serviceLocator.getTerminalService().nextLine());
-        boolean isUpdate = serviceLocator.getProjectEndpoint().updateProject(name, newProject);
+        boolean isUpdate = serviceLocator.getProjectEndpoint().updateProject(name,
+                newProject.getName(),
+                newProject.getDescription(),
+                newProject.getTimeStart(),
+                newProject.getTimeFinish());
         if (isUpdate) {
             System.out.println("project успешно обновлен");
         } else {

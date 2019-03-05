@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="task" type="{http://endpoint.churkin.ru/}task" minOccurs="0"/&gt;
+ *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -27,34 +27,34 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "createTask", propOrder = {
-    "task"
+    "name"
 })
 public class CreateTask {
 
-    protected Task task;
+    protected String name;
 
     /**
-     * Gets the value of the task property.
+     * Gets the value of the name property.
      * 
      * @return
      *     possible object is
-     *     {@link Task }
+     *     {@link String }
      *     
      */
-    public Task getTask() {
-        return task;
+    public String getName() {
+        return name;
     }
 
     /**
-     * Sets the value of the task property.
+     * Sets the value of the name property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Task }
+     *     {@link String }
      *     
      */
-    public void setTask(Task value) {
-        this.task = value;
+    public void setName(String value) {
+        this.name = value;
     }
 
 }

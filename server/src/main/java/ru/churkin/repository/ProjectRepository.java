@@ -4,6 +4,7 @@ import ru.churkin.api.IProjectRepository;
 import ru.churkin.entity.Project;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.Map;
 
 public class ProjectRepository implements IProjectRepository {
@@ -15,13 +16,15 @@ public class ProjectRepository implements IProjectRepository {
     }
 
     @Override
-    public void createProject(Project project) {
-        entityManager.merge(project);
+    public Project createProject(Project project) {
+        return entityManager.merge(project);
     }
 
     @Override
     public Project findProjectByName(String name) {
-        return null;
+        return entityManager.createQuery("select e from Project e where e.name = :projectName", Project.class)
+                .setParameter("projectName", name)
+                .getSingleResult();
     }
 
     @Override
@@ -40,9 +43,8 @@ public class ProjectRepository implements IProjectRepository {
     }
 
     @Override
-    public Map<String, Project> getProjectMap() {
-
-        Map<String, Project> projects = entityManager.createQuery();
-        return null;
+    public List<Project> getProjectList() {
+    return entityManager.createQuery("select e from Project e", Project.class)
+                .getResultList();
     }
 }

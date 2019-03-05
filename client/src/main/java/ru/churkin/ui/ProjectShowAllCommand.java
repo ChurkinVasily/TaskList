@@ -1,7 +1,7 @@
 package ru.churkin.ui;
 
 import ru.churkin.endpoint.Exception_Exception;
-import ru.churkin.endpoint.Project;
+import ru.churkin.endpoint.ProjectDTO;
 
 import java.util.List;
 
@@ -24,9 +24,9 @@ public class ProjectShowAllCommand extends AbstractCommand {
 
     @Override
     public void execute() throws Exception_Exception {
-        List<Project> projects = serviceLocator.getProjectEndpoint().getAllProjects();
+        List<ProjectDTO> projects = serviceLocator.getProjectEndpoint().getAllProjects();
         if (projects != null) {
-            for (Project currentProject : projects) {
+            for (ProjectDTO currentProject : projects) {
                 System.out.println("Project{" +
                         "id='" + currentProject.getId() + '\'' +
                         ", name='" + currentProject.getName() + '\'' +

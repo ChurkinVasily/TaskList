@@ -20,6 +20,8 @@ public interface UserService {
 
     User getCurrentUser();
 
+    void setCurrentUser(User user);
+
     void getUserByName(String userName) throws SQLException;
 
 

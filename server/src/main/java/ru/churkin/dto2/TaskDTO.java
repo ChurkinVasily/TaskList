@@ -1,6 +1,5 @@
 package ru.churkin.dto2;
 
-import ru.churkin.entity.Project;
 import ru.churkin.entity.Task;
 
 import java.util.ArrayList;
@@ -118,7 +117,7 @@ public class TaskDTO {
 
     @Override
     public String toString() {
-        return "Task{" +
+        return "Tassk{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +

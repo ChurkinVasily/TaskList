@@ -3,11 +3,12 @@ package ru.churkin.api;
 import ru.churkin.entity.Project;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 public interface IProjectRepository {
 
-    void createProject(Project project) throws SQLException;
+    Project createProject(Project project) throws SQLException;
 
     Project findProjectByName(String name) throws SQLException;
 
@@ -17,6 +18,6 @@ public interface IProjectRepository {
 
     void deleteProject(String id) throws SQLException;
 
-    Map<String, Project> getProjectMap() throws SQLException;
+    List<Project> getProjectList() throws SQLException;
 
 }

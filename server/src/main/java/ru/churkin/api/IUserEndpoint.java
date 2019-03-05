@@ -1,6 +1,7 @@
 package ru.churkin.api;
 
 import ru.churkin.dto2.UserDTO;
+import ru.churkin.entity.User;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -29,7 +30,7 @@ public interface IUserEndpoint {
     @WebMethod
     void getUserByName(@WebParam(name = "userName") String userName) throws Exception;
 
-//    @WebMethod
-//    void setCurrentUser(@WebParam(name = "user") User user) throws Exception;
+    @WebMethod
+    void setCurrentUser(@WebParam(name = "user") User user) throws Exception;
 
 }

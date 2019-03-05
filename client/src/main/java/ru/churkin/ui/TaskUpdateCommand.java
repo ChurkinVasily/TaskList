@@ -1,7 +1,7 @@
 package ru.churkin.ui;
 
 import ru.churkin.endpoint.Exception_Exception;
-import ru.churkin.endpoint.Task;
+import ru.churkin.endpoint.TaskDTO;
 
 import java.io.IOException;
 
@@ -24,7 +24,7 @@ public class TaskUpdateCommand extends AbstractCommand {
 
     @Override
     public void execute() throws IOException, Exception_Exception {
-        Task newTask = new Task();
+        TaskDTO newTask = new TaskDTO();
         String userId = serviceLocator.getUserEndpoint().getCurrentUser().getId();
         System.out.println("enter task-name for update Task");
         String name = serviceLocator.getTerminalService().nextLine();
@@ -37,7 +37,13 @@ public class TaskUpdateCommand extends AbstractCommand {
             newTask.setTimeFinish(serviceLocator.getTerminalService().nextLine());
             newTask.setProjectId(serviceLocator.getTerminalService().nextLine());
             newTask.setUserId(userId);
-            boolean isUpdate = serviceLocator.getTaskEndpoint().updateTask(name, newTask);
+            boolean isUpdate = serviceLocator.getTaskEndpoint().updateTask(name,
+                    newTask.getName(),
+                    newTask.getDescription(),
+                    newTask.getTimeStart(),
+                    newTask.getTimeFinish(),
+                    newTask.getProjectId(),
+                    userId);
             if (isUpdate) {
                 System.out.println("task успешно обновлен");
             } else {
