@@ -34,7 +34,7 @@ public class ProjectRepository implements IProjectRepository {
 
     @Override
     public void updateProject(Project project) {
-        entityManager.refresh(project);
+        entityManager.merge(project);
     }
 
     @Override

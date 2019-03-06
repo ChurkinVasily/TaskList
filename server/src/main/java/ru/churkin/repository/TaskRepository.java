@@ -37,7 +37,7 @@ public class TaskRepository implements ITaskRepository {
 
     @Override
     public void updateTask(Task task) {
-        entityManager.refresh(task);
+        entityManager.merge(task);
     }
 
     @Override
