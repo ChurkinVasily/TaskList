@@ -34,8 +34,8 @@ public class TasksShowAllForUserCommand extends AbstractCommand {
                         ", description='" + currentTask.getDescription() + '\'' +
                         ", timeStart='" + currentTask.getTimeStart() + '\'' +
                         ", timeFinish='" + currentTask.getTimeFinish() + '\'' +
-                        ", projectId='" + currentTask.getProjectId() + '\'' +
-                        ", userId='" + currentTask.getUserId() + '\'' +
+                        ", project='" + serviceLocator.getProjectEndpoint().findProjectById(currentTask.getProjectId()).getName() + '\'' +
+                        ", userName='" + serviceLocator.getUserEndpoint().findUserById(currentTask.getUserId()).getName() +
                         '}');
             }
         } else {

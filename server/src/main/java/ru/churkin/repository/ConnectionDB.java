@@ -16,34 +16,9 @@ import javax.sql.DataSource;
 
 public class ConnectionDB {
 
-    public EntityManagerFactory getEntityManagerFactory() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("TASKList");
+    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("TASKList");
+
+    public static EntityManagerFactory getEntityManagerFactory() {
         return entityManagerFactory;
     }
-
-//
-//    public static final String DRIVER = "com.mysql.jdbc.Driver";
-//    public static final String URL = "jdbc:mysql://localhost:3306/tasklistdb";
-//    public static final String DB_USER_NAME = "root";
-//    public static final String DB_PASSWORD = "root";
-//
-
-//    private Connection connection = null;
-//
-//    public Connection getConnection() throws SQLException {
-//        try {
-//            Class.forName(DRIVER);
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        connection = DriverManager.getConnection(URL, DB_USER_NAME, DB_PASSWORD);
-//        return connection;
-//    }
-//
-//    public void closeConnection() throws SQLException {
-//        connection.close();
-//    }
-
-
-
 }

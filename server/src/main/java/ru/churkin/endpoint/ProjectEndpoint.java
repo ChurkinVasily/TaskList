@@ -7,6 +7,7 @@ import ru.churkin.entity.Project;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import java.sql.SQLException;
 import java.util.List;
 
 import static ru.churkin.dto2.ProjectDTO.toDTO;
@@ -34,6 +35,12 @@ public class ProjectEndpoint implements IProjectEndpoint {
     @Override
     public ProjectDTO findProjectByName(@WebParam(name = "name") String name) throws Exception {
         ProjectDTO projectDTO = ProjectDTO.toDto(serviceLocator.getProjectService().findProjectByName(name));
+        return projectDTO;
+    }
+
+    @Override
+    public ProjectDTO findProjectById(String projectId) throws Exception {
+        ProjectDTO projectDTO = ProjectDTO.toDto(serviceLocator.getProjectService().findProjectById(projectId));
         return projectDTO;
     }
 

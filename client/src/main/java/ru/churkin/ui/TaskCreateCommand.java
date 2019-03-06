@@ -30,11 +30,7 @@ public class TaskCreateCommand extends AbstractCommand {
         TaskDTO newTask = new TaskDTO();
         newTask.setUserId(serviceLocator.getUserEndpoint().getCurrentUser().getId());
         System.out.println("enter new task parameters: name");
-//        System.out.println("enter new task parameters: name, description, timeStart, timeFinish, project id");
         newTask.setName(serviceLocator.getTerminalService().nextLine());
-//        newTask.setDescription(serviceLocator.getTerminalService().nextLine());
-//        newTask.setTimeStart(serviceLocator.getTerminalService().nextLine());
-//        newTask.setTimeFinish(serviceLocator.getTerminalService().nextLine());
         System.out.println("enter new task parameters: project name");
         String projectName = serviceLocator.getTerminalService().nextLine();
         String projectId = serviceLocator.getProjectEndpoint().findProjectByName(projectName).getId();

@@ -29,6 +29,8 @@ public class ObjectFactory {
     private final static QName _CreateProjectResponse_QNAME = new QName("http://endpoint.churkin.ru/", "createProjectResponse");
     private final static QName _DeleteProject_QNAME = new QName("http://endpoint.churkin.ru/", "deleteProject");
     private final static QName _DeleteProjectResponse_QNAME = new QName("http://endpoint.churkin.ru/", "deleteProjectResponse");
+    private final static QName _FindProjectById_QNAME = new QName("http://endpoint.churkin.ru/", "findProjectById");
+    private final static QName _FindProjectByIdResponse_QNAME = new QName("http://endpoint.churkin.ru/", "findProjectByIdResponse");
     private final static QName _FindProjectByName_QNAME = new QName("http://endpoint.churkin.ru/", "findProjectByName");
     private final static QName _FindProjectByNameResponse_QNAME = new QName("http://endpoint.churkin.ru/", "findProjectByNameResponse");
     private final static QName _GetAllProjects_QNAME = new QName("http://endpoint.churkin.ru/", "getAllProjects");
@@ -81,6 +83,22 @@ public class ObjectFactory {
      */
     public DeleteProjectResponse createDeleteProjectResponse() {
         return new DeleteProjectResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindProjectById }
+     * 
+     */
+    public FindProjectById createFindProjectById() {
+        return new FindProjectById();
+    }
+
+    /**
+     * Create an instance of {@link FindProjectByIdResponse }
+     * 
+     */
+    public FindProjectByIdResponse createFindProjectByIdResponse() {
+        return new FindProjectByIdResponse();
     }
 
     /**
@@ -182,6 +200,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://endpoint.churkin.ru/", name = "deleteProjectResponse")
     public JAXBElement<DeleteProjectResponse> createDeleteProjectResponse(DeleteProjectResponse value) {
         return new JAXBElement<DeleteProjectResponse>(_DeleteProjectResponse_QNAME, DeleteProjectResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link FindProjectById }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://endpoint.churkin.ru/", name = "findProjectById")
+    public JAXBElement<FindProjectById> createFindProjectById(FindProjectById value) {
+        return new JAXBElement<FindProjectById>(_FindProjectById_QNAME, FindProjectById.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link FindProjectByIdResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://endpoint.churkin.ru/", name = "findProjectByIdResponse")
+    public JAXBElement<FindProjectByIdResponse> createFindProjectByIdResponse(FindProjectByIdResponse value) {
+        return new JAXBElement<FindProjectByIdResponse>(_FindProjectByIdResponse_QNAME, FindProjectByIdResponse.class, null, value);
     }
 
     /**

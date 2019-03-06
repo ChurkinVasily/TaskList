@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface IProjectRepository {
 
-    Project createProject(Project project) throws SQLException;
+    void createProject(Project project) throws SQLException;
 
     Project findProjectByName(String name) throws SQLException;
 

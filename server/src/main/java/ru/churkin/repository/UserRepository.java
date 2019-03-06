@@ -15,8 +15,8 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public User createUser(User user) {
-        return entityManager.merge(user);
+    public void createUser(User user) {
+        entityManager.persist(user);
     }
 
     @Override

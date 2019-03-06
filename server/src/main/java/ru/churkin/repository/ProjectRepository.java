@@ -16,8 +16,8 @@ public class ProjectRepository implements IProjectRepository {
     }
 
     @Override
-    public Project createProject(Project project) {
-        return entityManager.merge(project);
+    public void createProject(Project project) {
+        entityManager.persist(project);
     }
 
     @Override

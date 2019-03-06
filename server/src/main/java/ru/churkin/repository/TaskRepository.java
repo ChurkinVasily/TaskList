@@ -17,8 +17,8 @@ public class TaskRepository implements ITaskRepository {
     }
 
     @Override
-    public Task createTask(Task task) {
-        return entityManager.merge(task);
+    public void createTask(Task task) {
+        entityManager.persist(task);
     }
 
     @Override

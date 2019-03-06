@@ -19,12 +19,12 @@ public class Bootstrap implements ServiceLocator {
 
     final ServiceLocator serviceLocator = this;
 
-    final ConnectionDB connDB = new ConnectionDB();
-    final EntityManagerFactory entityManagerFactory = connDB.getEntityManagerFactory();
+    final static ConnectionDB connDB = new ConnectionDB();
+    final static EntityManagerFactory entityManagerFactory = connDB.getEntityManagerFactory();
 
-    TaskService taskServiceHib = new TaskServiceJPA(entityManagerFactory);
-    ProjectService projectServiceHib = new ProjectServiceJPA(entityManagerFactory);
-    UserService userServiceHib = new UserServiceJPA(entityManagerFactory);
+    final TaskService taskServiceHib = new TaskServiceJPA(entityManagerFactory);
+    final ProjectService projectServiceHib = new ProjectServiceJPA(entityManagerFactory);
+    final UserService userServiceHib = new UserServiceJPA(entityManagerFactory);
 
     final UserEndpoint userEndpoint = new UserEndpoint(serviceLocator);
     final TaskEndpoint taskEndpoint = new TaskEndpoint(serviceLocator);
@@ -34,8 +34,6 @@ public class Bootstrap implements ServiceLocator {
     }
 
     public void init() {
-
-        getUserService().validateUser("user1", "pass1");
 
         Endpoint.publish("http://localhost:8080/TaskList/task?wsdl", taskEndpoint);
         Endpoint.publish("http://localhost:8080/TaskList/project?wsdl", projectEndpoint);

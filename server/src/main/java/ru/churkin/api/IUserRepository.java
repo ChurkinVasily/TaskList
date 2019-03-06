@@ -8,16 +8,16 @@ import java.util.Map;
 
 public interface IUserRepository {
 
-    public User createUser(User user) throws SQLException;
+    void createUser(User user) throws SQLException;
 
-    public User findUserByName(String name) throws SQLException;
+    User findUserByName(String name) throws SQLException;
 
-    public User findUserById(String id) throws SQLException;
+    User findUserById(String id) throws SQLException;
 
-    public void updateUser(String id, User user) throws SQLException;
+    void updateUser(String id, User user) throws SQLException;
 
-    public void deleteUser(String id) throws SQLException;
+    void deleteUser(String id) throws SQLException;
 
-    public List<User> getUserList() throws SQLException;
+    List<User> getUserList() throws SQLException;
 
 }

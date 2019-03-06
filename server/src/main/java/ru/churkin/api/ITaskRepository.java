@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface ITaskRepository {
 
-    Task createTask(Task task) throws SQLException;
+    void createTask(Task task) throws SQLException;
 
     Task findTaskByName(String name) throws SQLException;
 
