@@ -23,14 +23,14 @@ public class TaskRepository implements ITaskRepository {
 
     @Override
     public Task findTaskByName(String name) {
-        return entityManager.createQuery("select e from Task e where t.name = :taskName", Task.class)
+        return entityManager.createQuery("select t from Task t where t.name = :taskName", Task.class)
                 .setParameter("taskName", name)
                 .getSingleResult();
     }
 
     @Override
     public List<Task> findTasksByUserId(String userId) {
-        return entityManager.createQuery("select e from Task e where e.user.id = :userId", Task.class)
+        return entityManager.createQuery("select t from Task t where t.user.id = :userId", Task.class)
                 .setParameter("userId", userId)
                 .getResultList();
     }
@@ -41,12 +41,12 @@ public class TaskRepository implements ITaskRepository {
     }
 
     @Override
-    public void deleteTask(String id) {
-        entityManager.remove(id);
+    public void deleteTask(Task task) {
+        entityManager.remove(task);
     }
 
     @Override
     public List<Task> getTaskList() {
-        return entityManager.createQuery("select e from Task", Task.class).getResultList();
+        return entityManager.createQuery("select e from Task e", Task.class).getResultList();
     }
 }

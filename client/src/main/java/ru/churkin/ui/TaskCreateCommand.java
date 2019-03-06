@@ -26,7 +26,7 @@ public class TaskCreateCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws IOException {
+    public void execute() throws IOException, Exception_Exception {
         TaskDTO newTask = new TaskDTO();
         newTask.setUserId(serviceLocator.getUserEndpoint().getCurrentUser().getId());
         System.out.println("enter new task parameters: name");
@@ -35,10 +35,15 @@ public class TaskCreateCommand extends AbstractCommand {
 //        newTask.setDescription(serviceLocator.getTerminalService().nextLine());
 //        newTask.setTimeStart(serviceLocator.getTerminalService().nextLine());
 //        newTask.setTimeFinish(serviceLocator.getTerminalService().nextLine());
-//        newTask.setProjectId(serviceLocator.getTerminalService().nextLine());
+        System.out.println("enter new task parameters: project name");
+        String projectName = serviceLocator.getTerminalService().nextLine();
+        String projectId = serviceLocator.getProjectEndpoint().findProjectByName(projectName).getId();
+        newTask.setProjectId(projectId);
+        System.out.println(newTask.getProjectId());
+
         boolean isCreate = false;
         try {
-            isCreate = serviceLocator.getTaskEndpoint().createTask(newTask.getName());
+            isCreate = serviceLocator.getTaskEndpoint().createTask(newTask.getName(), newTask.getProjectId());
         } catch (Exception_Exception e) {
             e.printStackTrace();
         }

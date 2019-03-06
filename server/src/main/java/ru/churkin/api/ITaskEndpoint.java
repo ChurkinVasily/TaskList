@@ -11,7 +11,8 @@ import java.util.List;
 public interface ITaskEndpoint {
 
     @WebMethod
-    boolean createTask(@WebParam(name = "name") String name) throws Exception;
+    boolean createTask(@WebParam(name = "name") String name,
+                       @WebParam(name = "projectId") String projectId) throws Exception;
 
     @WebMethod
     TaskDTO findTaskByName(@WebParam(name = "name") String name) throws Exception;
@@ -28,8 +29,9 @@ public interface ITaskEndpoint {
                        @WebParam(name = "description") String description,
                        @WebParam(name = "timeStart") String timeStart,
                        @WebParam(name = "tineFinish") String timeFinish,
-                       @WebParam(name = "projectID") String projectId,
-                       @WebParam(name = "userID") String userId) throws Exception;
+                       @WebParam(name = "projectID") String projectId
+//                       @WebParam(name = "userID") String userId
+    ) throws Exception;
 
     @WebMethod
     boolean deleteTask(@WebParam String id) throws Exception;

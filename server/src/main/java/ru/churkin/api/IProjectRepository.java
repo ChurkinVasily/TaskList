@@ -16,7 +16,7 @@ public interface IProjectRepository {
 
     void updateProject(Project project) throws SQLException;
 
-    void deleteProject(String id) throws SQLException;
+    void deleteProject(Project project) throws SQLException;
 
     List<Project> getProjectList() throws SQLException;
 

@@ -38,7 +38,7 @@ public class TaskReadByNameCommand extends AbstractCommand {
                         ", timeStart='" + currentTask.getTimeStart() + '\'' +
                         ", timeFinish='" + currentTask.getTimeFinish() + '\'' +
                         ", projectId='" + currentTask.getProjectId() + '\'' +
-                        ", userId='" + currentTask.getUserId() + '\'' +
+                        ", userName='" + serviceLocator.getUserEndpoint().findUserById(currentTask.getUserId()).getName() + '\'' +
                         '}');
             } else {
                 System.out.println("Этот Task невозможно посмотреть из вашего профиля");

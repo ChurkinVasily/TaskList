@@ -1,7 +1,9 @@
 package ru.churkin.service;
 
 import ru.churkin.api.TaskService;
+import ru.churkin.entity.Project;
 import ru.churkin.entity.Task;
+import ru.churkin.entity.User;
 import ru.churkin.repository.TaskRepository;
 
 import javax.persistence.EntityManager;
@@ -18,8 +20,8 @@ public class TaskServiceJPA implements TaskService {
     }
 
     @Override
-    public boolean createTask(String taskName) {
-        Task task = new Task(taskName);
+    public boolean createTask(String taskName, User user, Project project) {
+        Task task = new Task(taskName, user, project);
         return createTask(task);
     }
 
@@ -30,8 +32,12 @@ public class TaskServiceJPA implements TaskService {
         entityManager.getTransaction().begin();
         String id = UUID.randomUUID().toString();
         task.setId(id);
-        String taskName = task.getName();
-        boolean isConsist = taskRepository.getTaskList().contains(task);
+        boolean isConsist = false;
+        for (Task cTask : taskRepository.getTaskList()) {
+            if (task.getName().equals(cTask.getName())) {
+                isConsist = true;
+            }
+        }
         if (isConsist || task.getName().isEmpty()) {
             return false;
         }
@@ -96,13 +102,13 @@ public class TaskServiceJPA implements TaskService {
         }
         if (!isConsist || name.equals("")) {
             return false;
-        } else {
-            taskRepository.updateTask(task);
-            entityManager.getTransaction().commit();
-            entityManager.close();
-            return true;
         }
+        taskRepository.updateTask(task);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return true;
     }
+
 
     @Override
     public boolean deleteTask(String name) {
@@ -117,10 +123,10 @@ public class TaskServiceJPA implements TaskService {
                 isConsist = true;
             }
         }
-        if (!isConsist || name.equals("")) {
+        if (!isConsist || name.isEmpty()) {
             return false;
         }
-        taskRepository.deleteTask(idForRemove);
+        taskRepository.deleteTask(taskRepository.findTaskByName(name));
         entityManager.getTransaction().commit();
         entityManager.close();
         return true;

@@ -38,8 +38,8 @@ public class ProjectRepository implements IProjectRepository {
     }
 
     @Override
-    public void deleteProject(String id) {
-        entityManager.remove(id);
+    public void deleteProject(Project project) {
+        entityManager.remove(project);
     }
 
     @Override

@@ -28,8 +28,15 @@ public class Task {
     @JoinColumn(name = "userID")
     private User user;
 
-    public Task(String name) {
+    public Task(String name, User user, Project project) {
         this.name = name;
+        this.user = user;
+        this.project = project;
+    }
+
+    public Task(String name, User user) {
+        this.name = name;
+        this.user = user;
     }
 
     public Task(String id, String name, String description, String timeStart, String timeFinish, Project project, User user) {

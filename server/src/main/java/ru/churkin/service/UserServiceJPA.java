@@ -27,6 +27,7 @@ public class UserServiceJPA implements UserService {
     public boolean createNewUser(User user) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         UserRepository userRepository = new UserRepository(entityManager);
+        entityManager.getTransaction().begin();
         String userId = UUID.randomUUID().toString();
         user.setId(userId);
         String userName = user.getName();
@@ -43,7 +44,6 @@ public class UserServiceJPA implements UserService {
         if (isConsist) {
             return false;
         }
-        entityManager.getTransaction().begin();
         userRepository.createUser(user);
         entityManager.getTransaction().commit();
         entityManager.close();

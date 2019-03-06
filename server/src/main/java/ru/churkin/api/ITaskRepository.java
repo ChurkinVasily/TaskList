@@ -16,7 +16,7 @@ public interface ITaskRepository {
 
     void updateTask(Task task) throws SQLException;
 
-    void deleteTask(String id) throws SQLException;
+    void deleteTask(Task task) throws SQLException;
 
     List<Task> getTaskList() throws SQLException;
 }

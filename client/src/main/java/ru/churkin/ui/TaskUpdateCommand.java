@@ -42,8 +42,7 @@ public class TaskUpdateCommand extends AbstractCommand {
                     newTask.getDescription(),
                     newTask.getTimeStart(),
                     newTask.getTimeFinish(),
-                    newTask.getProjectId(),
-                    userId);
+                    newTask.getProjectId());
             if (isUpdate) {
                 System.out.println("task успешно обновлен");
             } else {

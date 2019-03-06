@@ -2,8 +2,10 @@ package ru.churkin.endpoint;
 
 import ru.churkin.api.ITaskEndpoint;
 import ru.churkin.api.ServiceLocator;
+import ru.churkin.entity.Project;
 import ru.churkin.entity.Task;
 import ru.churkin.dto2.TaskDTO;
+import ru.churkin.entity.User;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -19,8 +21,11 @@ public class TaskEndpoint implements ITaskEndpoint {
     }
 
     @Override
-    public boolean createTask(@WebParam(name = "name") String name) throws Exception {
-        return serviceLocator.getTaskService().createTask(name);
+    public boolean createTask(@WebParam(name = "name") String name,
+                              @WebParam(name = "projectId") String projectId) throws Exception {
+        Project project = serviceLocator.getProjectService().findProjectById(projectId);
+        User user = serviceLocator.getUserService().getCurrentUser();
+        return serviceLocator.getTaskService().createTask(name, user, project);
     }
 
     @Override
@@ -41,8 +46,8 @@ public class TaskEndpoint implements ITaskEndpoint {
                               @WebParam(name = "description") String description,
                               @WebParam(name = "timeStart") String timeStart,
                               @WebParam(name = "tineFinish") String timeFinish,
-                              @WebParam(name = "projectID") String projectId,
-                              @WebParam(name = "userID") String userId
+                              @WebParam(name = "projectID") String projectId
+//                              @WebParam(name = "userID") String userId
                               ) throws Exception {
         Task task = serviceLocator.getTaskService().findTaskByName(name);
         task.setName(newName);
@@ -50,13 +55,14 @@ public class TaskEndpoint implements ITaskEndpoint {
         task.setTimeStart(timeStart);
         task.setTimeFinish(timeFinish);
         task.setProject(serviceLocator.getProjectService().findProjectById(projectId));
-        task.setUser(serviceLocator.getUserService().findUserById(userId));
+        task.setUser(serviceLocator.getUserService().getCurrentUser());
+//        task.setUser(serviceLocator.getUserService().findUserById(userId));
         return serviceLocator.getTaskService().updateTask(name, task);
     }
 
     @Override
-    public boolean deleteTask(@WebParam(name = "id") String id) throws Exception {
-        return serviceLocator.getTaskService().deleteTask(id);
+    public boolean deleteTask(@WebParam(name = "name") String name) throws Exception {
+        return serviceLocator.getTaskService().deleteTask(name);
     }
 
     @Override

@@ -115,12 +115,11 @@ public class ProjectServiceJPA implements ProjectService {
         }
         if (!isConsist || name.equals("")) {
             return false;
-        } else {
-            projectRepository.deleteProject(idForRemove);
+        }
+            projectRepository.deleteProject(projectRepository.findProjectById(idForRemove));
             entityManager.getTransaction().commit();
             entityManager.close();
             return true;
-        }
     }
 
     @Override
