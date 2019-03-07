@@ -1,6 +1,6 @@
 package ru.churkin.api;
 
-import ru.churkin.dto2.TaskDTO;
+import ru.churkin.dto.TaskDTO;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;

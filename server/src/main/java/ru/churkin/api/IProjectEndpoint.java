@@ -1,12 +1,11 @@
 package ru.churkin.api;
 
 
-import ru.churkin.dto2.ProjectDTO;
+import ru.churkin.dto.ProjectDTO;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import java.sql.SQLException;
 import java.util.List;
 
 @WebService

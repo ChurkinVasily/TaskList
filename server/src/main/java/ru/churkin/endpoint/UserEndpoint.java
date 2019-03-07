@@ -3,7 +3,7 @@ package ru.churkin.endpoint;
 import ru.churkin.api.IUserEndpoint;
 import ru.churkin.api.ServiceLocator;
 import ru.churkin.entity.User;
-import ru.churkin.dto2.UserDTO;
+import ru.churkin.dto.UserDTO;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;

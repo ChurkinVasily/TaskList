@@ -1,6 +1,6 @@
 package ru.churkin.api;
 
-import ru.churkin.dto2.UserDTO;
+import ru.churkin.dto.UserDTO;
 import ru.churkin.entity.User;
 
 import javax.jws.WebMethod;

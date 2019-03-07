@@ -1,4 +1,4 @@
-package ru.churkin.dto2;
+package ru.churkin.dto;
 
 import ru.churkin.entity.Task;
 

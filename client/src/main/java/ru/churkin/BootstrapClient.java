@@ -14,19 +14,19 @@ import java.util.Map;
 
 public class BootstrapClient implements ServiceLocator {
 
-    final ServiceLocator serviceLocator = this;
-    final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private final ServiceLocator serviceLocator = this;
+    private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-    final ProjectEndpointService projectEndpointService = new ProjectEndpointService();
-    final ProjectEndpoint projectEndpoint = projectEndpointService.getProjectEndpointPort();
+    private final ProjectEndpointService projectEndpointService = new ProjectEndpointService();
+    private final ProjectEndpoint projectEndpoint = projectEndpointService.getProjectEndpointPort();
 
-    final TaskEndpointService taskEndpointService = new TaskEndpointService();
-    final TaskEndpoint taskEndpoint = taskEndpointService.getTaskEndpointPort();
+    private final TaskEndpointService taskEndpointService = new TaskEndpointService();
+    private final TaskEndpoint taskEndpoint = taskEndpointService.getTaskEndpointPort();
 
-    final UserEndpointService userEndpointService = new UserEndpointService();
-    final UserEndpoint userEndpoint = userEndpointService.getUserEndpointPort();
+    final private UserEndpointService userEndpointService = new UserEndpointService();
+    private final UserEndpoint userEndpoint = userEndpointService.getUserEndpointPort();
 
-    final TerminalService terminalService = new TerminalService(reader);
+    private final TerminalService terminalService = new TerminalService(reader);
 
     public String nextLine() throws IOException {
         return reader.readLine().trim().toLowerCase();

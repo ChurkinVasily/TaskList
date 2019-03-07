@@ -1,6 +1,5 @@
-package ru.churkin.dto2;
+package ru.churkin.dto;
 
-import ru.churkin.entity.Project;
 import ru.churkin.entity.User;
 
 import java.util.ArrayList;

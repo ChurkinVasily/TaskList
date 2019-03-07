@@ -38,6 +38,14 @@
             <version>1.16.20</version>
             <scope>provided</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jboss.weld.se/weld-se-core -->
+        <dependency>
+            <groupId>org.jboss.weld.se</groupId>
+            <artifactId>weld-se-core</artifactId>
+            <version>3.0.3.Final</version>
+        </dependency>
+
+
 
     </dependencies>
 

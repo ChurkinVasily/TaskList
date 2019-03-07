@@ -4,7 +4,7 @@ import ru.churkin.api.ITaskEndpoint;
 import ru.churkin.api.ServiceLocator;
 import ru.churkin.entity.Project;
 import ru.churkin.entity.Task;
-import ru.churkin.dto2.TaskDTO;
+import ru.churkin.dto.TaskDTO;
 import ru.churkin.entity.User;
 
 import javax.jws.WebParam;
