@@ -15,8 +15,11 @@ import java.util.UUID;
 @ApplicationScoped
 public class ProjectServiceJPA implements ProjectService {
 
+//   @Inject
+//   private ConnectionInitializer connectionInitializer;
+
     @Inject
-    private ConnectionInitializer connectionInitializer;
+    private EntityManagerFactory entityManagerFactory;
 
     @Inject
     private ProjectRepository projectRepository;
@@ -25,7 +28,7 @@ public class ProjectServiceJPA implements ProjectService {
 //        this.entityManagerFactory = entityManagerFactory;
 //    }
 
-    private EntityManagerFactory entityManagerFactory = connectionInitializer.getEntityManagerFactory();
+// ///////   private EntityManagerFactory entityManagerFactory = connectionInitializer.getEntityManagerFactory();
 
     public boolean createProject(String projectName) {
         Project project = new Project(projectName);

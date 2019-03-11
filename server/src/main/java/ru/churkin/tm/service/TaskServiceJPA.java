@@ -17,13 +17,16 @@ import java.util.UUID;
 @ApplicationScoped
 public class TaskServiceJPA implements TaskService {
 
-    @Inject
-    private ConnectionInitializer connectionInitializer;
+///////    @Inject
+// /////   private ConnectionInitializer connectionInitializer;
 
     @Inject
     private TaskRepository taskRepository;
 
-    EntityManagerFactory entityManagerFactory = connectionInitializer.getEntityManagerFactory();
+    @Inject
+    private EntityManagerFactory entityManagerFactory;
+
+// ///////   EntityManagerFactory entityManagerFactory = connectionInitializer.getEntityManagerFactory();
 
 //    public TaskServiceJPA(EntityManagerFactory emf) {
 //        this.entityManagerFactory = emf;

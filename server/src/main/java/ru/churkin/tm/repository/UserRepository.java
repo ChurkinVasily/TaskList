@@ -4,14 +4,17 @@ import ru.churkin.tm.api.IUserRepository;
 import ru.churkin.tm.entity.User;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 @ApplicationScoped
 public class UserRepository implements IUserRepository {
 
-    private EntityManager entityManager;
+    EntityManager entityManager;
 
+//    private EntityManager entityManager;
 //    public UserRepository(EntityManager entityManager) {
 //        this.entityManager = entityManager;
 //    }
@@ -31,6 +34,7 @@ public class UserRepository implements IUserRepository {
         return entityManager.createQuery("select e from User e where e.name = :userName", User.class)
                 .setParameter("userName", name)
                 .getSingleResult();
+
     }
 
     @Override

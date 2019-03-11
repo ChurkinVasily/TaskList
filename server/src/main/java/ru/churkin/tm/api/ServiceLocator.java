@@ -15,6 +15,6 @@ public interface ServiceLocator {
 
 //    Map<String, Command> getCommandMap();
 
-    ConnectionInitializer connDB();
+//    ConnectionInitializer connDB();
 
 }

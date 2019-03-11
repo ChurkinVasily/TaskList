@@ -4,6 +4,7 @@ import ru.churkin.tm.api.IProjectRepository;
 import ru.churkin.tm.entity.Project;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.List;
 

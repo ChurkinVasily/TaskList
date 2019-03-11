@@ -15,12 +15,11 @@ import java.util.UUID;
 public class UserServiceJPA implements UserService {
 
     @Inject
-    private ConnectionInitializer connectionInitializer;
+    private EntityManagerFactory entityManagerFactory;
 
     @Inject
     private UserRepository userRepository;
 
-    private EntityManagerFactory entityManagerFactory = connectionInitializer.getEntityManagerFactory();
 
 //    private EntityManagerFactory entityManagerFactory;
 
@@ -86,9 +85,10 @@ public class UserServiceJPA implements UserService {
         for (User cUser : userRepository.getUserList()) {
             if (userName.equals(cUser.getName())) {
                 isTrue = true;
+                break;
             }
         }
-        entityManager.close();
+//        entityManager.close();
         return isTrue;
     }
 
@@ -132,9 +132,8 @@ public class UserServiceJPA implements UserService {
     @Override
     public void getUserByName(String userName) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        UserRepository userRepository = new UserRepository(entityManager);
-        userRepository.setEntityManager(entityManager);
         entityManager.getTransaction().begin();
+        userRepository.setEntityManager(entityManager);
         if (isExist(userName)) {
             currentUser = userRepository.findUserByName(userName);
         }

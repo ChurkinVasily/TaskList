@@ -10,7 +10,7 @@ import java.util.List;
 @ApplicationScoped
 public class TaskRepository implements ITaskRepository {
 
-    private EntityManager entityManager;
+    EntityManager entityManager;
 
 //    public TaskRepository(EntityManager entityManager) {
 //        this.entityManager = entityManager;

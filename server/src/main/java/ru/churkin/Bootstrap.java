@@ -21,9 +21,10 @@ public class Bootstrap implements ServiceLocator {
 
     final ServiceLocator serviceLocator = this;
 
-    @Inject
-    ConnectionInitializer connDB;
 //    final static ConnectionInitializer connDB = new ConnectionInitializer();
+
+//    @Inject
+//    private EntityManagerFactory entityManagerFactory;
 
     @Inject
     private ProjectService projectServiceJPA;
@@ -35,7 +36,7 @@ public class Bootstrap implements ServiceLocator {
     private UserService userServiceJPA;
 
 
-   final EntityManagerFactory entityManagerFactory = connDB.getEntityManagerFactory();
+///////   final EntityManagerFactory entityManagerFactory = connDB.getEntityManagerFactory();
 
 //    final TaskService taskServiceJPA = new TaskServiceJPA(entityManagerFactory);
 //    final ProjectService projectServiceJPA = new ProjectServiceJPA(entityManagerFactory);
@@ -72,8 +73,8 @@ public class Bootstrap implements ServiceLocator {
         return userServiceJPA;
     }
 
-    @Override
-    public ConnectionInitializer connDB() {
-        return connDB;
-    }
+//    @Override
+//    public ConnectionInitializer connDB() {
+//        return connDB;
+//    }
 }
