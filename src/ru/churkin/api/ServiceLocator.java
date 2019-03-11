@@ -1,8 +1,8 @@
-package ru.churkin.api;
+package ru.churkin.tm.api;
 
-import ru.churkin.repository.ConnectionDB;
-import ru.churkin.service.TerminalService;
-import ru.churkin.service.UserServiceImpl;
+import ru.churkin.tm.repository.ConnectionDB;
+import ru.churkin.tm.service.TerminalService;
+import ru.churkin.tm.service.UserServiceImpl;
 
 import java.util.Map;
 

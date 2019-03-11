@@ -1,30 +1,46 @@
 package ru.churkin;
 
-import ru.churkin.api.ProjectService;
-import ru.churkin.api.ServiceLocator;
-import ru.churkin.api.TaskService;
-import ru.churkin.api.UserService;
-import ru.churkin.endpoint.ProjectEndpoint;
-import ru.churkin.endpoint.TaskEndpoint;
-import ru.churkin.endpoint.UserEndpoint;
-import ru.churkin.repository.ConnectionDB;
-import ru.churkin.service.ProjectServiceJPA;
-import ru.churkin.service.TaskServiceJPA;
-import ru.churkin.service.UserServiceJPA;
+import ru.churkin.tm.api.ProjectService;
+import ru.churkin.tm.api.ServiceLocator;
+import ru.churkin.tm.api.TaskService;
+import ru.churkin.tm.api.UserService;
+import ru.churkin.tm.endpoint.ProjectEndpoint;
+import ru.churkin.tm.endpoint.TaskEndpoint;
+import ru.churkin.tm.endpoint.UserEndpoint;
+import ru.churkin.tm.repository.ConnectionInitializer;
+import ru.churkin.tm.service.TaskServiceJPA;
+import ru.churkin.tm.service.UserServiceJPA;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 import javax.xml.ws.Endpoint;
 
+@ApplicationScoped
 public class Bootstrap implements ServiceLocator {
 
     final ServiceLocator serviceLocator = this;
 
-    final static ConnectionDB connDB = new ConnectionDB();
-    final static EntityManagerFactory entityManagerFactory = connDB.getEntityManagerFactory();
+    @Inject
+    ConnectionInitializer connDB;
+//    final static ConnectionInitializer connDB = new ConnectionInitializer();
 
-    final TaskService taskServiceHib = new TaskServiceJPA(entityManagerFactory);
-    final ProjectService projectServiceHib = new ProjectServiceJPA(entityManagerFactory);
-    final UserService userServiceHib = new UserServiceJPA(entityManagerFactory);
+    @Inject
+    private ProjectService projectServiceJPA;
+
+    @Inject
+    private TaskService taskServiceJPA;
+
+    @Inject
+    private UserService userServiceJPA;
+
+
+   final EntityManagerFactory entityManagerFactory = connDB.getEntityManagerFactory();
+
+//    final TaskService taskServiceJPA = new TaskServiceJPA(entityManagerFactory);
+//    final ProjectService projectServiceJPA = new ProjectServiceJPA(entityManagerFactory);
+//final UserService userServiceJPA = new UserServiceJPA(entityManagerFactory);
+
 
     final UserEndpoint userEndpoint = new UserEndpoint(serviceLocator);
     final TaskEndpoint taskEndpoint = new TaskEndpoint(serviceLocator);
@@ -43,21 +59,21 @@ public class Bootstrap implements ServiceLocator {
 
     @Override
     public TaskService getTaskService() {
-        return taskServiceHib;
+        return taskServiceJPA;
     }
 
     @Override
     public ProjectService getProjectService() {
-        return projectServiceHib;
+        return projectServiceJPA;
     }
 
     @Override
     public UserService getUserService() {
-        return userServiceHib;
+        return userServiceJPA;
     }
 
     @Override
-    public ConnectionDB connDB() {
+    public ConnectionInitializer connDB() {
         return connDB;
     }
 }
