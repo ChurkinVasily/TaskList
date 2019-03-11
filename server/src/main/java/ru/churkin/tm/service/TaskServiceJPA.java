@@ -4,7 +4,6 @@ import ru.churkin.tm.api.TaskService;
 import ru.churkin.tm.entity.Project;
 import ru.churkin.tm.entity.Task;
 import ru.churkin.tm.entity.User;
-import ru.churkin.tm.repository.ConnectionInitializer;
 import ru.churkin.tm.repository.TaskRepository;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -17,20 +16,11 @@ import java.util.UUID;
 @ApplicationScoped
 public class TaskServiceJPA implements TaskService {
 
-///////    @Inject
-// /////   private ConnectionInitializer connectionInitializer;
-
     @Inject
     private TaskRepository taskRepository;
 
     @Inject
     private EntityManagerFactory entityManagerFactory;
-
-// ///////   EntityManagerFactory entityManagerFactory = connectionInitializer.getEntityManagerFactory();
-
-//    public TaskServiceJPA(EntityManagerFactory emf) {
-//        this.entityManagerFactory = emf;
-//    }
 
     @Override
     public boolean createTask(String taskName, User user, Project project) {
@@ -41,7 +31,6 @@ public class TaskServiceJPA implements TaskService {
     @Override
     public boolean createTask(Task task) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        TaskRepository taskRepository = new TaskRepository(entityManager);
         taskRepository.setEntityManager(entityManager);
         entityManager.getTransaction().begin();
         String id = UUID.randomUUID().toString();
@@ -65,7 +54,6 @@ public class TaskServiceJPA implements TaskService {
     @Override
     public Task findTaskByName(String name) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        TaskRepository taskRepository = new TaskRepository(entityManager);
         taskRepository.setEntityManager(entityManager);
         entityManager.getTransaction().begin();
         Task task;
@@ -85,7 +73,6 @@ public class TaskServiceJPA implements TaskService {
     @Override
     public List<Task> findTaskByUserId(String userId) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        TaskRepository taskRepository = new TaskRepository(entityManager);
         taskRepository.setEntityManager(entityManager);
         entityManager.getTransaction().begin();
         List<Task> tasks;
@@ -105,7 +92,6 @@ public class TaskServiceJPA implements TaskService {
     @Override
     public boolean updateTask(String name, Task task) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        TaskRepository taskRepository = new TaskRepository(entityManager);
         taskRepository.setEntityManager(entityManager);
         entityManager.getTransaction().begin();
         boolean isConsist = false;
@@ -130,7 +116,6 @@ public class TaskServiceJPA implements TaskService {
     @Override
     public boolean deleteTask(String name) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        TaskRepository taskRepository = new TaskRepository(entityManager);
         taskRepository.setEntityManager(entityManager);
         entityManager.getTransaction().begin();
         boolean isConsist = false;
@@ -153,7 +138,6 @@ public class TaskServiceJPA implements TaskService {
     @Override
     public List<Task> getTasksAll() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        TaskRepository taskRepository = new TaskRepository(entityManager);
         taskRepository.setEntityManager(entityManager);
         entityManager.getTransaction().begin();
         List<Task> listTask = taskRepository.getTaskList();

@@ -20,15 +20,7 @@ public class UserServiceJPA implements UserService {
     @Inject
     private UserRepository userRepository;
 
-
-//    private EntityManagerFactory entityManagerFactory;
-
-
     private User currentUser;
-
-//    public UserServiceJPA(EntityManagerFactory entityManagerFactory) {
-//        this.entityManagerFactory = entityManagerFactory;
-//    }
 
     @Override
     public boolean createNewUser(String name, String pass) {
@@ -39,7 +31,6 @@ public class UserServiceJPA implements UserService {
     @Override
     public boolean createNewUser(User user) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        UserRepository userRepository = new UserRepository(entityManager);
         userRepository.setEntityManager(entityManager);
         entityManager.getTransaction().begin();
         String userId = UUID.randomUUID().toString();
@@ -67,7 +58,6 @@ public class UserServiceJPA implements UserService {
     @Override
     public User findUserById(String id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        UserRepository userRepository = new UserRepository(entityManager);
         userRepository.setEntityManager(entityManager);
         entityManager.getTransaction().begin();
         User user = userRepository.findUserById(id);
@@ -78,9 +68,8 @@ public class UserServiceJPA implements UserService {
     @Override
     public boolean isExist(String userName) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        UserRepository userRepository = new UserRepository(entityManager);
         userRepository.setEntityManager(entityManager);
-        entityManager.getTransaction().begin();
+//        entityManager.getTransaction().begin();
         boolean isTrue = false;
         for (User cUser : userRepository.getUserList()) {
             if (userName.equals(cUser.getName())) {
@@ -96,7 +85,6 @@ public class UserServiceJPA implements UserService {
     @Override
     public boolean validateUser(User user) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        UserRepository userRepository = new UserRepository(entityManager);
         userRepository.setEntityManager(entityManager);
         entityManager.getTransaction().begin();
         if (user == null) return false;
