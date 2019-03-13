@@ -15,8 +15,8 @@ import static ru.churkin.tm.dto.ProjectDTO.toDTO;
 @WebService
 public class ProjectEndpoint implements IProjectEndpoint {
 
-@Inject
-private ProjectService projectService;
+    @Inject
+    private ProjectService projectService;
 
     @Override
     public boolean createProject(@WebParam(name = "projectName") String projectName){

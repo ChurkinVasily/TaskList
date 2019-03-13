@@ -1,5 +1,7 @@
 package ru.churkin.tm.dto;
 
+import lombok.Getter;
+import lombok.Setter;
 import ru.churkin.tm.entity.User;
 
 import java.util.ArrayList;
@@ -7,6 +9,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+@Getter
+@Setter
 public class UserDTO {
 
     private String id;
@@ -45,29 +49,5 @@ public class UserDTO {
             list.add(new UserDTO(user));
         }
         return list;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

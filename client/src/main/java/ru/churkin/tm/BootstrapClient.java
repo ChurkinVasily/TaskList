@@ -26,6 +26,9 @@ public class BootstrapClient implements ServiceLocator {
     final private UserEndpointService userEndpointService = new UserEndpointService();
     private final UserEndpoint userEndpoint = userEndpointService.getUserEndpointPort();
 
+    final private SessionEndpointService sessionEndpointService = new SessionEndpointService();
+    private final SessionEndpoint sessionEndpoint = sessionEndpointService.getSessionEndpointPort();
+
     private final TerminalService terminalService = new TerminalService(reader);
 
     public String nextLine() throws IOException {
@@ -35,6 +38,8 @@ public class BootstrapClient implements ServiceLocator {
     final Map<String, Command> commandList = new HashMap<>();
 
     private Class[] cls;
+
+    private Session currentSession;
 
     @Override
     public Map<String, Command> getCommandMap() {
@@ -85,7 +90,22 @@ public class BootstrapClient implements ServiceLocator {
     }
 
     @Override
+    public SessionEndpoint getSessionEndpoint() {
+        return sessionEndpoint;
+    }
+
+    @Override
     public TerminalService getTerminalService() {
         return terminalService;
+    }
+
+    @Override
+    public Session getCurrentSession() {
+        return currentSession;
+    }
+
+    @Override
+    public void setCurrentSession(Session session) {
+        this.currentSession = session;
     }
 }

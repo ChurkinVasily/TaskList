@@ -1,8 +1,6 @@
 package ru.churkin.tm.api;
 
-import ru.churkin.tm.endpoint.ProjectEndpoint;
-import ru.churkin.tm.endpoint.TaskEndpoint;
-import ru.churkin.tm.endpoint.UserEndpoint;
+import ru.churkin.tm.endpoint.*;
 
 import java.util.Map;
 
@@ -16,6 +14,12 @@ public interface ServiceLocator {
 
     UserEndpoint getUserEndpoint();
 
+    SessionEndpoint getSessionEndpoint();
+
     Map<String, Command> getCommandMap();
+
+    public Session getCurrentSession();
+
+    public void setCurrentSession(Session session);
 
 }
