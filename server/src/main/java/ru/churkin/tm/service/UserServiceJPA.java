@@ -2,7 +2,6 @@ package ru.churkin.tm.service;
 
 import ru.churkin.tm.api.UserService;
 import ru.churkin.tm.entity.User;
-import ru.churkin.tm.repository.ConnectionInitializer;
 import ru.churkin.tm.repository.UserRepository;
 
 import javax.enterprise.context.ApplicationScoped;

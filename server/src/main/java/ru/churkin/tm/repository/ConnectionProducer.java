@@ -9,7 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
-public class ConnectionInitializer {  ///implements IConnInit {
+public class ConnectionProducer {
 
     @ApplicationScoped
     @Produces

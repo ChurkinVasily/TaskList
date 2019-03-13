@@ -5,17 +5,18 @@ import ru.churkin.tm.api.UserService;
 import ru.churkin.tm.entity.User;
 import ru.churkin.tm.dto.UserDTO;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-
-
 
 @WebService
 public class UserEndpoint implements IUserEndpoint {
 
     @Inject
-   private UserService userService;
+    private UserService userService;
+
     @Override
     public boolean createNewUser(@WebParam(name = "userName") String userName,
                                  @WebParam(name = "pass") String pass) throws Exception {
