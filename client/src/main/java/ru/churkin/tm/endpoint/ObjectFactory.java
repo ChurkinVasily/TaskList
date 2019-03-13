@@ -27,6 +27,10 @@ public class ObjectFactory {
     private final static QName _Exception_QNAME = new QName("http://endpoint.tm.churkin.ru/", "Exception");
     private final static QName _CreateSession_QNAME = new QName("http://endpoint.tm.churkin.ru/", "createSession");
     private final static QName _CreateSessionResponse_QNAME = new QName("http://endpoint.tm.churkin.ru/", "createSessionResponse");
+    private final static QName _GetSessionById_QNAME = new QName("http://endpoint.tm.churkin.ru/", "getSessionById");
+    private final static QName _GetSessionByIdResponse_QNAME = new QName("http://endpoint.tm.churkin.ru/", "getSessionByIdResponse");
+    private final static QName _Validate_QNAME = new QName("http://endpoint.tm.churkin.ru/", "validate");
+    private final static QName _ValidateResponse_QNAME = new QName("http://endpoint.tm.churkin.ru/", "validateResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ru.churkin.tm.endpoint
@@ -60,11 +64,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link UserDTO }
+     * Create an instance of {@link GetSessionById }
      * 
      */
-    public UserDTO createUserDTO() {
-        return new UserDTO();
+    public GetSessionById createGetSessionById() {
+        return new GetSessionById();
+    }
+
+    /**
+     * Create an instance of {@link GetSessionByIdResponse }
+     * 
+     */
+    public GetSessionByIdResponse createGetSessionByIdResponse() {
+        return new GetSessionByIdResponse();
+    }
+
+    /**
+     * Create an instance of {@link Validate }
+     * 
+     */
+    public Validate createValidate() {
+        return new Validate();
+    }
+
+    /**
+     * Create an instance of {@link ValidateResponse }
+     * 
+     */
+    public ValidateResponse createValidateResponse() {
+        return new ValidateResponse();
     }
 
     /**
@@ -73,6 +101,14 @@ public class ObjectFactory {
      */
     public Session createSession() {
         return new Session();
+    }
+
+    /**
+     * Create an instance of {@link UserDTO }
+     * 
+     */
+    public UserDTO createUserDTO() {
+        return new UserDTO();
     }
 
     /**
@@ -100,6 +136,42 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://endpoint.tm.churkin.ru/", name = "createSessionResponse")
     public JAXBElement<CreateSessionResponse> createCreateSessionResponse(CreateSessionResponse value) {
         return new JAXBElement<CreateSessionResponse>(_CreateSessionResponse_QNAME, CreateSessionResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetSessionById }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://endpoint.tm.churkin.ru/", name = "getSessionById")
+    public JAXBElement<GetSessionById> createGetSessionById(GetSessionById value) {
+        return new JAXBElement<GetSessionById>(_GetSessionById_QNAME, GetSessionById.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetSessionByIdResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://endpoint.tm.churkin.ru/", name = "getSessionByIdResponse")
+    public JAXBElement<GetSessionByIdResponse> createGetSessionByIdResponse(GetSessionByIdResponse value) {
+        return new JAXBElement<GetSessionByIdResponse>(_GetSessionByIdResponse_QNAME, GetSessionByIdResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Validate }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://endpoint.tm.churkin.ru/", name = "validate")
+    public JAXBElement<Validate> createValidate(Validate value) {
+        return new JAXBElement<Validate>(_Validate_QNAME, Validate.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ValidateResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://endpoint.tm.churkin.ru/", name = "validateResponse")
+    public JAXBElement<ValidateResponse> createValidateResponse(ValidateResponse value) {
+        return new JAXBElement<ValidateResponse>(_ValidateResponse_QNAME, ValidateResponse.class, null, value);
     }
 
 }

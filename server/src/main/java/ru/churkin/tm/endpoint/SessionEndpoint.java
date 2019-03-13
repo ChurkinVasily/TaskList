@@ -19,7 +19,16 @@ public class SessionEndpoint implements ISessionEndpoint {
 
     @Override
     public Session createSession(@WebParam(name = "userDTO") UserDTO user) throws Exception {
-        Session session = sessionService.createSession(user);
-        return session;
+        return sessionService.createSession(user);
+    }
+
+    @Override
+    public Session getSessionById(@WebParam(name = "sessionId") String sessionId) throws Exception {
+        return sessionService.getSessionById(sessionId);
+    }
+
+    @Override
+    public boolean validate(@WebParam(name = "session") Session session) throws Exception {
+        return sessionService.validateSession(session);
     }
 }

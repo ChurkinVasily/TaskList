@@ -29,7 +29,7 @@ public class SessionRepository {
         return entityManager.createQuery("select e from Session e", Session.class).getResultList();
     }
 
-    public Session getById(String id) {
+    public Session getSessionById(String id) {
         return entityManager.createQuery("select e from Session e where id = :sessionId", Session.class)
                 .setParameter("sessionId", id)
                 .getSingleResult();

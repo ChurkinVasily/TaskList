@@ -34,7 +34,17 @@ public class SessionServiceJPA implements ISessionService {
         return session;
     }
 
-//    @Override
+    @Override
+    public Session getSessionById(String id) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        sessionRepository.setEntityManager(entityManager);
+        entityManager.getTransaction().begin();
+        Session session = sessionRepository.getSessionById(id);
+        entityManager.close();
+        return session;
+    }
+
+    //    @Override
 //    public Session getSessionById(String id) {
 //        EntityManager entityManager = entityManagerFactory.createEntityManager();
 //        sessionRepository.setEntityManager(entityManager);
@@ -66,10 +76,17 @@ public class SessionServiceJPA implements ISessionService {
     }
 
     @Override
-    public void validateSession(Session session) {
+    public boolean validateSession(Session session) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         sessionRepository.setEntityManager(entityManager);
-
+        entityManager.getTransaction().begin();
+        String id = session.getId();
+        Session sessionInBase = getSessionById(id);
+        if (!session.getSignature().equals(sessionInBase.getSignature())) {
+            return false;
+        }
+        entityManager.close();
+        return true;
     }
 
 

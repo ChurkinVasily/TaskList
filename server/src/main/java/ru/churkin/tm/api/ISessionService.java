@@ -10,9 +10,9 @@ public interface ISessionService {
 
     void deleteSession(Session session);
 
-    void validateSession(Session session);
+    boolean validateSession(Session session);
 
-//    Session getSessionById(String id);
+    Session getSessionById(String id);
 
     Session getSessionByUserId(String userId);
 

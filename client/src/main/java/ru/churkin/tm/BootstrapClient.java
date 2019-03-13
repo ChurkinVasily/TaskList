@@ -68,8 +68,10 @@ public class BootstrapClient implements ServiceLocator {
     }
 
     public void execute(Command command) throws IOException, SQLException, Exception_Exception {
-        UserDTO user = serviceLocator.getUserEndpoint().getCurrentUser();
-        if (!command.isAuth() || (command.isAuth() && serviceLocator.getUserEndpoint().validateUser(user.getName(), user.getPassword()))) {
+//        UserDTO user = serviceLocator.getUserEndpoint().getCurrentUser();
+        Session session = getCurrentSession();
+//        if (!command.isAuth() || (command.isAuth() && serviceLocator.getUserEndpoint().validateUser(user.getName(), user.getPassword()))) {
+        if (!command.isAuth() || (command.isAuth() && serviceLocator.getSessionEndpoint().validate(session))) {
             command.execute();
         } else System.out.println("требуется авторизация");
     }
