@@ -1,6 +1,7 @@
 package ru.churkin.tm.ui;
 
 import ru.churkin.tm.endpoint.Exception_Exception;
+import ru.churkin.tm.endpoint.Session;
 
 public class UserLogoutCommand extends AbstractCommand {
 
@@ -21,7 +22,10 @@ public class UserLogoutCommand extends AbstractCommand {
 
     @Override
     public void execute() throws Exception_Exception {
-        serviceLocator.getUserEndpoint().setCurrentUser(null);
+        Session currentSession = serviceLocator.getCurrentSession();
+        serviceLocator.getSessionEndpoint().deleteSession(currentSession);
+        serviceLocator.setCurrentSession(null);
+//        serviceLocator.getUserEndpoint().setCurrentUser(null);
         System.out.println("вы вышли из профиля");
     }
 }

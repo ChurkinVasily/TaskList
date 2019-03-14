@@ -24,33 +24,36 @@ public class TaskUpdateCommand extends AbstractCommand {
 
     @Override
     public void execute() throws IOException, Exception_Exception {
+        if (!serviceLocator.getSessionEndpoint().validate(serviceLocator.getCurrentSession())) {
+            System.out.println("сессия не валидирована");
+            return;
+        }
         TaskDTO newTask = new TaskDTO();
-        String userId = serviceLocator.getUserEndpoint().getCurrentUser().getId();
+        String userId = serviceLocator.getCurrentSession().getUserId();
         System.out.println("enter task-name for update Task");
         String name = serviceLocator.getTerminalService().nextLine();
         boolean isAccess = userId.equals(serviceLocator.getTaskEndpoint().findTaskByName(name).getUserId());
-        if (isAccess) {
-            System.out.println("enter new parameters: description, time start, time finish, project name");
-            newTask.setName(name);
-            newTask.setDescription(serviceLocator.getTerminalService().nextLine());
-            newTask.setTimeStart(serviceLocator.getTerminalService().nextLine());
-            newTask.setTimeFinish(serviceLocator.getTerminalService().nextLine());
-            newTask.setProjectId(serviceLocator.getProjectEndpoint().findProjectByName(serviceLocator.getTerminalService().nextLine()).getId());
-            newTask.setUserId(userId);
-            boolean isUpdate = serviceLocator.getTaskEndpoint().updateTask(name,
-                    newTask.getName(),
-                    newTask.getDescription(),
-                    newTask.getTimeStart(),
-                    newTask.getTimeFinish(),
-                    newTask.getProjectId());
-            if (isUpdate) {
-                System.out.println("task успешно обновлен");
-            } else {
-                System.out.println("не удалось обновить Task. пустое или несуществующее имя");
-            }
-        } else {
+        if (!isAccess) {
             System.out.println("задача Task не доступна для данного профиля");
+            return;
         }
-
+        System.out.println("enter new parameters: description, time start, time finish, project name");
+        newTask.setName(name);
+        newTask.setDescription(serviceLocator.getTerminalService().nextLine());
+        newTask.setTimeStart(serviceLocator.getTerminalService().nextLine());
+        newTask.setTimeFinish(serviceLocator.getTerminalService().nextLine());
+        newTask.setProjectId(serviceLocator.getProjectEndpoint().findProjectByName(serviceLocator.getTerminalService().nextLine()).getId());
+        newTask.setUserId(userId);
+        boolean isUpdate = serviceLocator.getTaskEndpoint().updateTask(name,
+                newTask.getName(),
+                newTask.getDescription(),
+                newTask.getTimeStart(),
+                newTask.getTimeFinish(),
+                newTask.getProjectId());
+        if (!isUpdate) {
+            System.out.println("не удалось обновить Task. пустое или несуществующее имя");
+            return;
+        }
+        System.out.println("task успешно обновлен");
     }
 }

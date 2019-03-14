@@ -23,10 +23,10 @@ public class BootstrapClient implements ServiceLocator {
     private final TaskEndpointService taskEndpointService = new TaskEndpointService();
     private final TaskEndpoint taskEndpoint = taskEndpointService.getTaskEndpointPort();
 
-    final private UserEndpointService userEndpointService = new UserEndpointService();
+    private final  UserEndpointService userEndpointService = new UserEndpointService();
     private final UserEndpoint userEndpoint = userEndpointService.getUserEndpointPort();
 
-    final private SessionEndpointService sessionEndpointService = new SessionEndpointService();
+    private final SessionEndpointService sessionEndpointService = new SessionEndpointService();
     private final SessionEndpoint sessionEndpoint = sessionEndpointService.getSessionEndpointPort();
 
     private final TerminalService terminalService = new TerminalService(reader);
@@ -35,7 +35,7 @@ public class BootstrapClient implements ServiceLocator {
         return reader.readLine().trim().toLowerCase();
     }
 
-    final Map<String, Command> commandList = new HashMap<>();
+    private final Map<String, Command> commandList = new HashMap<>();
 
     private Class[] cls;
 

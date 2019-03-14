@@ -4,10 +4,8 @@ import ru.churkin.tm.api.ISessionEndpoint;
 import ru.churkin.tm.api.ISessionService;
 import ru.churkin.tm.dto.UserDTO;
 import ru.churkin.tm.entity.Session;
-import ru.churkin.tm.entity.User;
 
 import javax.inject.Inject;
-import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
@@ -30,5 +28,10 @@ public class SessionEndpoint implements ISessionEndpoint {
     @Override
     public boolean validate(@WebParam(name = "session") Session session) throws Exception {
         return sessionService.validateSession(session);
+    }
+
+    @Override
+    public void deleteSession(@WebParam(name = "session") Session session) throws Exception {
+        sessionService.deleteSession(session);
     }
 }

@@ -39,6 +39,10 @@ public class TaskCreateCommand extends AbstractCommand {
         newTask.setName(serviceLocator.getTerminalService().nextLine());
         System.out.println("enter new task parameters: project name");
         String projectName = serviceLocator.getTerminalService().nextLine();
+        if (serviceLocator.getProjectEndpoint().findProjectByName(projectName) == null) {
+            System.out.println("нет проекта с таким именем. Задача (task) не создана");
+            return;
+        }
         String projectId = serviceLocator.getProjectEndpoint().findProjectByName(projectName).getId();
         newTask.setProjectId(projectId);
         System.out.println(newTask.getProjectId());

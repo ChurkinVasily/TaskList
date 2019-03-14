@@ -1,5 +1,7 @@
 package ru.churkin.tm.service;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import ru.churkin.tm.api.ISessionService;
 import ru.churkin.tm.dto.UserDTO;
 import ru.churkin.tm.entity.Session;
@@ -76,7 +78,8 @@ public class SessionServiceJPA implements ISessionService {
     }
 
     @Override
-    public boolean validateSession(Session session) {
+    public boolean validateSession(@Nullable Session session) {
+        if (session == null) return false;
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         sessionRepository.setEntityManager(entityManager);
         entityManager.getTransaction().begin();

@@ -22,7 +22,11 @@ public class SessionRepository {
     }
 
     public void deleteSession(Session session) {
-        entityManager.remove(session);
+        if (entityManager.contains(session)) {
+            entityManager.remove(session);
+        }
+        Session tempSession = entityManager.getReference(Session.class, session.getId());
+        entityManager.remove(tempSession);
     }
 
     public List<Session> getAllSession() {

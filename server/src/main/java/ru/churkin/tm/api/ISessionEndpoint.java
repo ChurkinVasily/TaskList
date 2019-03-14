@@ -19,4 +19,7 @@ public interface ISessionEndpoint {
     @WebMethod
     boolean validate(@WebParam(name = "session") Session session) throws Exception;
 
+    @WebMethod
+    void deleteSession(@WebParam(name = "Session") Session session) throws Exception;
+
 }

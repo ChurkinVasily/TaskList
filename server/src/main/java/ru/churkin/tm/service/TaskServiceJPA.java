@@ -119,10 +119,10 @@ public class TaskServiceJPA implements TaskService {
         taskRepository.setEntityManager(entityManager);
         entityManager.getTransaction().begin();
         boolean isConsist = false;
-        String idForRemove = "";
+//        String idForRemove = "";
         for (Task ctask : taskRepository.getTaskList()) {
             if (name.equals(ctask.getName())) {
-                idForRemove = ctask.getId();
+//                idForRemove = ctask.getId();
                 isConsist = true;
             }
         }

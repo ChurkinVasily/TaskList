@@ -48,6 +48,14 @@
             <artifactId>weld-se-core</artifactId>
             <version>3.0.5.Final</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jetbrains/annotations -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>13.0</version>
+        </dependency>
+
+
     </dependencies>
 
 
