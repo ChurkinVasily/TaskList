@@ -45,10 +45,7 @@ public class UserLoginCommand extends AbstractCommand {
         user = serviceLocator.getUserEndpoint().findUserByName(userName);
         Session session = serviceLocator.getSessionEndpoint().createSession(user); // -- создали сессию в базе
         serviceLocator.setCurrentSession(session); // -- присвоили бутстрапу текущую сессию
-        System.out.println("сессия активна:");
-        System.out.println(serviceLocator.getCurrentSession().getId());
     }
-
 }
 
 ///// ---- старый метод логина----------

@@ -65,6 +65,7 @@ public class BootstrapClient implements ServiceLocator {
             }
             userInput = reader.readLine();
         }
+        serviceLocator.getSessionEndpoint().deleteSession(currentSession);
     }
 
     public void execute(Command command) throws IOException, SQLException, Exception_Exception {

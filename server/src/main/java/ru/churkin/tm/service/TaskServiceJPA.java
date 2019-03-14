@@ -82,11 +82,12 @@ public class TaskServiceJPA implements TaskService {
                 isConsist = true;
             }
         }
-        if (isConsist) {
-            tasks = taskRepository.findTasksByUserId(userId);
-            entityManager.close();
-            return tasks;
-        } else return null;
+        if (!isConsist) {
+            return null;
+        }
+        tasks = taskRepository.findTasksByUserId(userId);
+        entityManager.close();
+        return tasks;
     }
 
     @Override
