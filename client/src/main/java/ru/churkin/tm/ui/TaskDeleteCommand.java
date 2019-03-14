@@ -1,6 +1,7 @@
 package ru.churkin.tm.ui;
 
 import ru.churkin.tm.endpoint.Exception_Exception;
+import ru.churkin.tm.endpoint.Session;
 
 import java.io.IOException;
 
@@ -23,6 +24,11 @@ public class TaskDeleteCommand extends AbstractCommand {
 
     @Override
     public void execute() throws IOException, Exception_Exception {
+        Session currentSession = serviceLocator.getCurrentSession();
+        if (!serviceLocator.getSessionEndpoint().validate(currentSession)) {
+            System.out.println("сессия не валидирована");
+            return;
+        }
         System.out.println("введите имя задачи (task) для удаления");
         String name = serviceLocator.getTerminalService().nextLine();
         boolean isDelete = serviceLocator.getTaskEndpoint().deleteTask(name);

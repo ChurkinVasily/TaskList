@@ -24,7 +24,7 @@ public class TasksShowAllForUserCommand extends AbstractCommand {
 
     @Override
     public void execute() throws Exception_Exception {
-        String userId = serviceLocator.getUserEndpoint().getCurrentUser().getId();
+        String userId = serviceLocator.getCurrentSession().getUserId();
         List<TaskDTO> tasks = serviceLocator.getTaskEndpoint().findTaskByUserId(userId);
         if (tasks != null) {
             for (TaskDTO currentTask : tasks) {
