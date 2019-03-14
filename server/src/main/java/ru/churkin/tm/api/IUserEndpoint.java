@@ -18,6 +18,9 @@ public interface IUserEndpoint {
     UserDTO findUserById(@WebParam(name = "id") String id) throws Exception;
 
     @WebMethod
+    UserDTO findUserByName(@WebParam(name = "userName") String userName) throws Exception;
+
+    @WebMethod
     boolean isExist(@WebParam(name = "userName") String userName) throws Exception;
 
     @WebMethod

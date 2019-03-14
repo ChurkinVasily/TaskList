@@ -12,7 +12,8 @@ public interface ITaskEndpoint {
 
     @WebMethod
     boolean createTask(@WebParam(name = "name") String name,
-                       @WebParam(name = "projectId") String projectId) throws Exception;
+                       @WebParam(name = "projectId") String projectId,
+                       @WebParam(name = "userId") String userId) throws Exception;
 
     @WebMethod
     TaskDTO findTaskByName(@WebParam(name = "name") String name) throws Exception;

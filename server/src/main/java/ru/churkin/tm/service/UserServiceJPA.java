@@ -8,6 +8,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.sql.SQLException;
 import java.util.UUID;
 
 @ApplicationScoped
@@ -60,6 +61,16 @@ public class UserServiceJPA implements UserService {
         userRepository.setEntityManager(entityManager);
         entityManager.getTransaction().begin();
         User user = userRepository.findUserById(id);
+        entityManager.close();
+        return user;
+    }
+
+    @Override
+    public User findUserByName(String userName) throws SQLException {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        userRepository.setEntityManager(entityManager);
+        entityManager.getTransaction().begin();
+        User user = userRepository.findUserByName(userName);
         entityManager.close();
         return user;
     }

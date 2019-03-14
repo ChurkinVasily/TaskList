@@ -12,6 +12,8 @@ public interface UserService {
 
     User findUserById(String id) throws SQLException;
 
+    User findUserByName(String userName) throws SQLException;
+
     boolean isExist(String userName) throws SQLException;
 
     boolean validateUser(User user) throws SQLException;

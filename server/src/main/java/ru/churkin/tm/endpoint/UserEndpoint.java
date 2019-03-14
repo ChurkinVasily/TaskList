@@ -30,6 +30,12 @@ public class UserEndpoint implements IUserEndpoint {
     }
 
     @Override
+    public UserDTO findUserByName(String userName) throws Exception {
+        User user = userService.findUserByName(userName);
+        return UserDTO.toDTO(user);
+    }
+
+    @Override
     public boolean isExist(@WebParam(name = "userName") String userName) throws Exception {
         return userService.isExist(userName);
     }

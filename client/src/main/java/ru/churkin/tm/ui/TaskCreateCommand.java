@@ -45,7 +45,7 @@ public class TaskCreateCommand extends AbstractCommand {
 
         boolean isCreate = false;
         try {
-            isCreate = serviceLocator.getTaskEndpoint().createTask(newTask.getName(), newTask.getProjectId());
+            isCreate = serviceLocator.getTaskEndpoint().createTask(newTask.getName(), newTask.getProjectId(), newTask.getUserId());
         } catch (Exception_Exception e) {
             e.printStackTrace();
         }

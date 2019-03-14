@@ -1,14 +1,13 @@
 package ru.churkin.tm.endpoint;
 
-import ru.churkin.tm.api.ITaskEndpoint;
-import ru.churkin.tm.api.ProjectService;
-import ru.churkin.tm.api.TaskService;
-import ru.churkin.tm.api.UserService;
+import ru.churkin.tm.api.*;
 import ru.churkin.tm.entity.Project;
+import ru.churkin.tm.entity.Session;
 import ru.churkin.tm.entity.Task;
 import ru.churkin.tm.dto.TaskDTO;
 import ru.churkin.tm.entity.User;
 
+import javax.enterprise.inject.se.SeContainerInitializer;
 import javax.inject.Inject;
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -23,12 +22,13 @@ public class TaskEndpoint implements ITaskEndpoint {
     private ProjectService projectService;
     @Inject
     private UserService userService;
-    
+
     @Override
     public boolean createTask(@WebParam(name = "name") String name,
-                              @WebParam(name = "projectId") String projectId) throws Exception {
+                              @WebParam(name = "projectId") String projectId,
+                              @WebParam(name = "userId") String userId) throws Exception {
         Project project = projectService.findProjectById(projectId);
-        User user = userService.getCurrentUser();
+        User user = userService.findUserById(userId);
         return taskService.createTask(name, user, project);
     }
 
