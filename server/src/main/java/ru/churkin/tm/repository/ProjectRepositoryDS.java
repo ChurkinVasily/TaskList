@@ -22,7 +22,7 @@ public interface ProjectRepositoryDS extends FullEntityRepository<Project, Strin
     Project findProjectByName(@QueryParam("projectName") String name);
 
 
-//    ---- унаследован от родителя. find метод
+//    ---- унаследован от родителя. findBy метод
 //    Project findProjectById(String id);
 
 //    ---- унаследован от родителя. merge метод

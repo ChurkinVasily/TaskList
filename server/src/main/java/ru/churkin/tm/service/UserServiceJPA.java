@@ -1,24 +1,25 @@
 package ru.churkin.tm.service;
 
+import org.apache.deltaspike.jpa.api.transaction.Transactional;
 import ru.churkin.tm.api.UserService;
 import ru.churkin.tm.entity.User;
-import ru.churkin.tm.repository.UserRepository;
+import ru.churkin.tm.repository.UserRepositoryDS;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import java.sql.SQLException;
 import java.util.UUID;
 
 @ApplicationScoped
+@Transactional
 public class UserServiceJPA implements UserService {
 
-    @Inject
-    private EntityManagerFactory entityManagerFactory;
+//    @Inject
+//    private EntityManagerFactory entityManagerFactory;
 
     @Inject
-    private UserRepository userRepository;
+    private UserRepositoryDS userRepository;
 
     private User currentUser;
 
@@ -30,9 +31,9 @@ public class UserServiceJPA implements UserService {
 
     @Override
     public boolean createNewUser(User user) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        userRepository.setEntityManager(entityManager);
-        entityManager.getTransaction().begin();
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        userRepository.setEntityManager(entityManager);
+//        entityManager.getTransaction().begin();
         String userId = UUID.randomUUID().toString();
         user.setId(userId);
         String userName = user.getName();
@@ -41,7 +42,7 @@ public class UserServiceJPA implements UserService {
         if (userName.isEmpty() || userPassword.isEmpty()) {
             return false;
         }
-        for (User cUser : userRepository.getUserList()) {
+        for (User cUser : userRepository.findAll()) {
             if (!isConsist && userName.equals(cUser.getName())) {
                 isConsist = true;
             }
@@ -49,39 +50,42 @@ public class UserServiceJPA implements UserService {
         if (isConsist) {
             return false;
         }
-        userRepository.createUser(user);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        userRepository.persist(user);
+//        entityManager.getTransaction().commit();
+//        entityManager.close();
         return true;
     }
 
     @Override
     public User findUserById(String id) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        userRepository.setEntityManager(entityManager);
-        entityManager.getTransaction().begin();
-        User user = userRepository.findUserById(id);
-        entityManager.close();
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        userRepository.setEntityManager(entityManager);
+//        entityManager.getTransaction().begin();
+        User user = userRepository.findBy(id);
+//        entityManager.close();
         return user;
     }
 
     @Override
     public User findUserByName(String userName) throws SQLException {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        userRepository.setEntityManager(entityManager);
-        entityManager.getTransaction().begin();
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        userRepository.setEntityManager(entityManager);
+//        entityManager.getTransaction().begin();
         User user = userRepository.findUserByName(userName);
-        entityManager.close();
+//        entityManager.close();
         return user;
     }
 
+
+
+    ///// ---- метод не должен быть транзакционным ???? не закрывать транзакцию в нем!!!
     @Override
     public boolean isExist(String userName) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        userRepository.setEntityManager(entityManager);
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        userRepository.setEntityManager(entityManager);
 //        entityManager.getTransaction().begin();
         boolean isTrue = false;
-        for (User cUser : userRepository.getUserList()) {
+        for (User cUser : userRepository.findAll()) {
             if (userName.equals(cUser.getName())) {
                 isTrue = true;
                 break;
@@ -94,19 +98,19 @@ public class UserServiceJPA implements UserService {
 
     @Override
     public boolean validateUser(User user) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        userRepository.setEntityManager(entityManager);
-        entityManager.getTransaction().begin();
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        userRepository.setEntityManager(entityManager);
+//        entityManager.getTransaction().begin();
         if (user == null) return false;
         String userName = user.getName();
         String userPassword = user.getPassword();
-        for (User cUser : userRepository.getUserList()) {
+        for (User cUser : userRepository.findAll()) {
             if (userName != null && userName.equals(cUser.getName())
                     && userPassword.equals(cUser.getPassword())) {
                 return true;
             }
         }
-        entityManager.close();
+//        entityManager.close();
         return false;
     }
 
@@ -129,12 +133,12 @@ public class UserServiceJPA implements UserService {
 
     @Override
     public void getUserByName(String userName) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        userRepository.setEntityManager(entityManager);
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        entityManager.getTransaction().begin();
+//        userRepository.setEntityManager(entityManager);
         if (isExist(userName)) {
             currentUser = userRepository.findUserByName(userName);
         }
-        entityManager.close();
+//        entityManager.close();
     }
 }

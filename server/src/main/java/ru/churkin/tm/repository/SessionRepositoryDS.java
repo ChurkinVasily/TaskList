@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import ru.churkin.tm.entity.Session;
 
 @Repository
-public interface SessionRepositoryDS  extends FullEntityRepository<Session, String> {
+public interface SessionRepositoryDS extends FullEntityRepository<Session, String> {
 
 
 //    --- унаслелован от родителя. persist
