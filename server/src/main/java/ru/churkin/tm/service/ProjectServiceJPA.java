@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @ApplicationScoped
-@Transactional
+//@Transactional
 public class ProjectServiceJPA implements ProjectService {
 
 //    @Inject

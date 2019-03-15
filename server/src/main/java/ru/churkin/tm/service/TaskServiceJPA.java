@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @ApplicationScoped
-@Transactional
+//@Transactional
 public class TaskServiceJPA implements TaskService {
 
     @Inject

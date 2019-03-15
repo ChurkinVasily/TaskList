@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 @ApplicationScoped
-@Transactional
+//@Transactional
 public class UserServiceJPA implements UserService {
 
 //    @Inject

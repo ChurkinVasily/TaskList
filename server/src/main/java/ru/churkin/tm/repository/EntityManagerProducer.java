@@ -7,8 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.*;
 import javax.transaction.TransactionScoped;
 
 @ApplicationScoped
@@ -21,8 +20,8 @@ public class EntityManagerProducer {
 //        return emf;
 //    }
 
-    @Inject
-    @PersistenceUnitName("TASKList")
+//   @PersistenceUnit(unitName = "TASKList")
+    @PersistenceContext(unitName = "TASKList")
     private EntityManagerFactory entityManagerFactory;
 
     @NotNull
@@ -38,4 +37,5 @@ public class EntityManagerProducer {
             entityManager.close();
         }
     }
+
 }
