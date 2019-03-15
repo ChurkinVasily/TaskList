@@ -21,7 +21,8 @@ public class SessionServiceJPA implements ISessionService {
     private SessionRepository sessionRepository;
 
     @Override
-    public Session createSession(UserDTO user) {
+    public Session createSession(@Nullable UserDTO user) {
+        if (user == null) return null;
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         sessionRepository.setEntityManager(entityManager);
         /// создание сессии по юзеру
@@ -37,7 +38,8 @@ public class SessionServiceJPA implements ISessionService {
     }
 
     @Override
-    public Session getSessionById(String id) {
+    public Session getSessionById(@Nullable String id) {
+        if (id == null) return null;
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         sessionRepository.setEntityManager(entityManager);
         entityManager.getTransaction().begin();
@@ -58,7 +60,8 @@ public class SessionServiceJPA implements ISessionService {
 
 
     @Override
-    public Session getSessionByUserId(String userId) {
+    public Session getSessionByUserId(@Nullable String userId) {
+        if (userId == null) return null;
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         sessionRepository.setEntityManager(entityManager);
         entityManager.getTransaction().begin();
@@ -68,7 +71,8 @@ public class SessionServiceJPA implements ISessionService {
     }
 
     @Override
-    public void deleteSession(Session session) {
+    public void deleteSession(@Nullable Session session) {
+        if (session == null) return;
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         sessionRepository.setEntityManager(entityManager);
         entityManager.getTransaction().begin();

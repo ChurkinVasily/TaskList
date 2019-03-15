@@ -2,6 +2,7 @@ package ru.churkin.tm.ui;
 
 import ru.churkin.tm.endpoint.Exception_Exception;
 import ru.churkin.tm.endpoint.ProjectDTO;
+import ru.churkin.tm.endpoint.Session;
 
 import java.io.IOException;
 
@@ -23,7 +24,10 @@ public class ProjectReadByNameCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() throws IOException {
+    public void execute() throws IOException, Exception_Exception {
+        Session currentSession = serviceLocator.getCurrentSession();
+        validateSession(currentSession);
+
         System.out.println("для просмотра нужного проекта (project) введите его имя");
         String name = serviceLocator.getTerminalService().nextLine();
         try {

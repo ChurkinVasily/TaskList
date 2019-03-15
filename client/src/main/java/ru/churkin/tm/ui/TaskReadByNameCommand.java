@@ -1,6 +1,7 @@
 package ru.churkin.tm.ui;
 
 import ru.churkin.tm.endpoint.Exception_Exception;
+import ru.churkin.tm.endpoint.Session;
 import ru.churkin.tm.endpoint.TaskDTO;
 
 import java.io.IOException;
@@ -24,10 +25,9 @@ public class TaskReadByNameCommand extends AbstractCommand {
 
     @Override
     public void execute() throws IOException, Exception_Exception {
-        if (!serviceLocator.getSessionEndpoint().validate(serviceLocator.getCurrentSession())) {
-            System.out.println("сессия не валидирована");
-            return;
-        }
+        Session currentSession = serviceLocator.getCurrentSession();
+        validateSession(currentSession);
+
         String userId = serviceLocator.getCurrentSession().getUserId();
         System.out.println("для просмотра нужной задачи (task) введите ее имя");
         String name = serviceLocator.getTerminalService().nextLine();

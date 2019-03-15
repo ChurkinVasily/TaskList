@@ -25,10 +25,8 @@ public class TaskDeleteCommand extends AbstractCommand {
     @Override
     public void execute() throws IOException, Exception_Exception {
         Session currentSession = serviceLocator.getCurrentSession();
-        if (!serviceLocator.getSessionEndpoint().validate(currentSession)) {
-            System.out.println("сессия не валидирована");
-            return;
-        }
+        validateSession(currentSession);
+
         System.out.println("введите имя задачи (task) для удаления");
         String name = serviceLocator.getTerminalService().nextLine();
         boolean isDelete = serviceLocator.getTaskEndpoint().deleteTask(name);

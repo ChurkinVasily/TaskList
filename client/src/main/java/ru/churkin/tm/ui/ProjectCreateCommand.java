@@ -3,6 +3,7 @@ package ru.churkin.tm.ui;
 
 import ru.churkin.tm.endpoint.Exception_Exception;
 import ru.churkin.tm.endpoint.ProjectDTO;
+import ru.churkin.tm.endpoint.Session;
 
 import java.io.IOException;
 
@@ -25,6 +26,9 @@ public class ProjectCreateCommand extends AbstractCommand {
 
     @Override
     public void execute() throws IOException, Exception_Exception {
+        Session currentSession = serviceLocator.getCurrentSession();
+        validateSession(currentSession);
+
         ProjectDTO newProject = new ProjectDTO();
         System.out.println("enter new project parameters: name");
         newProject.setName(serviceLocator.getTerminalService().nextLine());

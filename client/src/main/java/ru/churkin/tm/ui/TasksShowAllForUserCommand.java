@@ -1,6 +1,7 @@
 package ru.churkin.tm.ui;
 
 import ru.churkin.tm.endpoint.Exception_Exception;
+import ru.churkin.tm.endpoint.Session;
 import ru.churkin.tm.endpoint.TaskDTO;
 
 import java.util.List;
@@ -24,6 +25,9 @@ public class TasksShowAllForUserCommand extends AbstractCommand {
 
     @Override
     public void execute() throws Exception_Exception {
+        Session currentSession = serviceLocator.getCurrentSession();
+        validateSession(currentSession);
+
         String userId = serviceLocator.getCurrentSession().getUserId();
         List<TaskDTO> tasks = serviceLocator.getTaskEndpoint().findTaskByUserId(userId);
         if (!tasks.isEmpty()) {

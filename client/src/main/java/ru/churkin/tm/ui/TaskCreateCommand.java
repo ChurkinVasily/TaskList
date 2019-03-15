@@ -30,10 +30,8 @@ public class TaskCreateCommand extends AbstractCommand {
         TaskDTO newTask = new TaskDTO();
 
         Session currentSession = serviceLocator.getCurrentSession();
-        if (!serviceLocator.getSessionEndpoint().validate(currentSession)) {
-            System.out.println("сессия не валидирована");
-            return;
-        }
+        validateSession(currentSession);
+
         newTask.setUserId(currentSession.getUserId());
         System.out.println("enter new task parameters: name");
         newTask.setName(serviceLocator.getTerminalService().nextLine());

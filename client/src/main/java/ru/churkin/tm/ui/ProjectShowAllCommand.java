@@ -2,6 +2,7 @@ package ru.churkin.tm.ui;
 
 import ru.churkin.tm.endpoint.Exception_Exception;
 import ru.churkin.tm.endpoint.ProjectDTO;
+import ru.churkin.tm.endpoint.Session;
 
 import java.util.List;
 
@@ -24,6 +25,9 @@ public class ProjectShowAllCommand extends AbstractCommand {
 
     @Override
     public void execute() throws Exception_Exception {
+        Session currentSession = serviceLocator.getCurrentSession();
+        validateSession(currentSession);
+
         List<ProjectDTO> projects = serviceLocator.getProjectEndpoint().getAllProjects();
         if (projects != null) {
             for (ProjectDTO currentProject : projects) {
