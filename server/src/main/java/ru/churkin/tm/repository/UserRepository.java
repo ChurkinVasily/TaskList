@@ -14,11 +14,6 @@ public class UserRepository implements IUserRepository {
 
     EntityManager entityManager;
 
-//    private EntityManager entityManager;
-//    public UserRepository(EntityManager entityManager) {
-//        this.entityManager = entityManager;
-//    }
-
     @Override
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;

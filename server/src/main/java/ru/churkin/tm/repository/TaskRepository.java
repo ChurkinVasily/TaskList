@@ -12,10 +12,6 @@ public class TaskRepository implements ITaskRepository {
 
     EntityManager entityManager;
 
-//    public TaskRepository(EntityManager entityManager) {
-//        this.entityManager = entityManager;
-//    }
-
     @Override
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;

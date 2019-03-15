@@ -7,10 +7,6 @@ import org.apache.deltaspike.data.api.Repository;
 import org.jetbrains.annotations.NotNull;
 import ru.churkin.tm.entity.Project;
 
-import javax.persistence.EntityManager;
-import java.sql.SQLException;
-import java.util.List;
-
 @Repository
 public interface ProjectRepositoryDS extends FullEntityRepository<Project, String> {
 
