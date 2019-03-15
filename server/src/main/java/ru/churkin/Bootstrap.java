@@ -41,9 +41,4 @@ public class Bootstrap{
         Endpoint.publish("http://localhost:8080/TaskList/session?wsdl", sessionEndpoint);
 
     }
-
-//    @Override
-//    public ConnectionProducer connDB() {
-//        return connDB;
-//    }
 }
