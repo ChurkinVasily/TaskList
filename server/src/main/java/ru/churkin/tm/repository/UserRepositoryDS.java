@@ -7,6 +7,7 @@ import org.apache.deltaspike.data.api.Repository;
 import org.jetbrains.annotations.NotNull;
 import ru.churkin.tm.entity.User;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,6 +17,8 @@ public interface UserRepositoryDS extends FullEntityRepository<User, String> {
 
 //    ------ не нужен
 //    void setEntityManager(EntityManager entityManager);
+@Inject
+void setEntityManager(EntityManager entityManager);
 
 //    --- унаследован от родителя. persist
 //    void createUser(User user) throws SQLException;

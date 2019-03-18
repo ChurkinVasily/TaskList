@@ -7,11 +7,16 @@ import org.apache.deltaspike.data.api.Repository;
 import org.jetbrains.annotations.NotNull;
 import ru.churkin.tm.entity.Project;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+
 @Repository
 public interface ProjectRepositoryDS extends FullEntityRepository<Project, String> {
 
 //   ------ не нужен
 //    void setEntityManager(EntityManager entityManager);
+    @Inject
+    void setEntityManager(EntityManager entityManager);
 
 //   ---- унаследован от родителя. persist метод
 //   void createProject(Project project) throws SQLException;

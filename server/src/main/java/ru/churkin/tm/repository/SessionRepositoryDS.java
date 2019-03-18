@@ -7,12 +7,17 @@ import org.apache.deltaspike.data.api.Repository;
 import org.jetbrains.annotations.NotNull;
 import ru.churkin.tm.entity.Session;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+
 @Repository
 public interface SessionRepositoryDS extends FullEntityRepository<Session, String> {
 
 
 //    --- унаслелован от родителя. persist
 //    void createSession(Session session);
+@Inject
+void setEntityManager(EntityManager entityManager);
 
 //    public void deleteSession(Session session) {
 //        if (entityManager.contains(session)) {

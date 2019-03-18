@@ -78,7 +78,7 @@ public class UserServiceJPA implements UserService {
 
 
 
-    ///// ---- метод не должен быть транзакционным ???? не закрывать транзакцию в нем!!!
+    ///// ---- метод не должен быть транзакционным ???? не закрывать транзакцию в нем
     @Override
     public boolean isExist(String userName) {
 //        EntityManager entityManager = entityManagerFactory.createEntityManager();
