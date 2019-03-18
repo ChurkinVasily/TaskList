@@ -11,8 +11,8 @@ import javax.persistence.EntityManager;
 import java.sql.SQLException;
 import java.util.UUID;
 
-@ApplicationScoped
-//@Transactional
+//@ApplicationScoped
+@Transactional
 public class UserServiceJPA implements UserService {
 
 //    @Inject

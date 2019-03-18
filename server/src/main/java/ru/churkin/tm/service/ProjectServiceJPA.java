@@ -13,8 +13,8 @@ import javax.persistence.EntityManagerFactory;
 import java.util.List;
 import java.util.UUID;
 
-@ApplicationScoped
-//@Transactional
+//@ApplicationScoped
+@Transactional
 public class ProjectServiceJPA implements ProjectService {
 
 //    @Inject

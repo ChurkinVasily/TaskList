@@ -10,7 +10,7 @@ import ru.churkin.tm.repository.SessionRepositoryDS;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-//@Transactional
+@Transactional
 public class SessionServiceJPA implements ISessionService {
 
 //    @Inject

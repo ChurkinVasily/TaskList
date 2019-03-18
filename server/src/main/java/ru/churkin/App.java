@@ -12,7 +12,9 @@ public class App {
         SeContainerInitializer.newInstance()
                 .addPackages(App.class.getClasses())
                 .initialize()
-                .select(Bootstrap.class).get().init();
+                .select(Bootstrap.class)
+                .get()
+                .init();
 
 
     }
