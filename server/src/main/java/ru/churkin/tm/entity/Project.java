@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -15,7 +16,7 @@ import java.util.List;
 public class Project {
 
     @Id
-    private String id;
+    private String id = UUID.randomUUID().toString();
 
     private String name;
     private String description;

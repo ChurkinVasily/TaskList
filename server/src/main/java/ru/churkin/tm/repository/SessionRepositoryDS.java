@@ -16,8 +16,9 @@ public interface SessionRepositoryDS extends FullEntityRepository<Session, Strin
 
 //    --- унаслелован от родителя. persist
 //    void createSession(Session session);
-@Inject
-void setEntityManager(EntityManager entityManager);
+
+
+//    void persist(Session session);
 
 //    public void deleteSession(Session session) {
 //        if (entityManager.contains(session)) {

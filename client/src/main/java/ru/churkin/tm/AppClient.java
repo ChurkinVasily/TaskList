@@ -11,7 +11,8 @@ public class AppClient {
             TaskCreateCommand.class, TaskDeleteCommand.class, TaskUpdateCommand.class, TaskReadByNameCommand.class, TasksShowAllForUserCommand.class,
             ProjectCreateCommand.class, ProjectDeleteCommand.class, ProjectUpdateCommand.class, ProjectReadByNameCommand.class, ProjectShowAllCommand.class,
             HelpCommand.class,
-            UserCreateCommand.class, UserLoginCommand.class, UserLogoutCommand.class
+            UserCreateCommand.class, UserLoginCommand.class, UserLogoutCommand.class,
+            TestCommand.class
     };
 
     public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, SQLException, Exception_Exception {

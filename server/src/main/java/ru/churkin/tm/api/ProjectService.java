@@ -19,6 +19,8 @@ public interface ProjectService {
 
     boolean deleteProject(String name) throws SQLException;
 
-    List<Project> getProjectAll() throws SQLException;
+    List<Project> getProjectAll();
+
+    void pers(Project project);
 
 }

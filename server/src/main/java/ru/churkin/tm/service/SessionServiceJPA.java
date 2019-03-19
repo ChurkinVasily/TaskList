@@ -8,90 +8,70 @@ import ru.churkin.tm.entity.Session;
 import ru.churkin.tm.repository.SessionRepositoryDS;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
+import java.util.logging.Logger;
 
 @Transactional
 public class SessionServiceJPA implements ISessionService {
 
-//    @Inject
-//    private EntityManagerFactory entityManagerFactory;
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Inject
     private SessionRepositoryDS sessionRepository;
 
     @Override
+    @Transactional
     public Session createSession(@Nullable UserDTO user) {
+        logger.info(" --------------create session start");
         if (user == null) return null;
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        sessionRepository.setEntityManager(entityManager);
         /// создание сессии по юзеру
         Session session = new Session(user.getId());
-        Integer sign = (user.getName() + user.getPassword()).hashCode();
-        session.setSignature(sign.toString());
-
-//        entityManager.getTransaction().begin();
+        int sign = (user.getName() + user.getPassword()).hashCode();
+        session.setSignature(Integer.toString(sign));
         sessionRepository.persist(session);
-//        entityManager.getTransaction().commit();
-//        entityManager.close();
+        logger.info(" --------------create session finish " + session);
         return session;
     }
 
     @Override
     public Session getSessionById(@Nullable String id) {
-        if (id == null) return null;
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        sessionRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
+        logger.info("--------------get session by id start");
+        if (id == null) {
+            return null;
+        }
         Session session = sessionRepository.getSessionById(id);
-//        entityManager.close();
+        logger.info("--------------get session by id finish " + session);
         return session;
     }
 
-    //    @Override
-//    public Session getSessionById(String id) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        sessionRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
-//        Session sessionFromBase = sessionRepository.getById(id);
-//        entityManager.close();
-//        return sessionFromBase;
-//    }
-
-
     @Override
     public Session getSessionByUserId(@Nullable String userId) {
+        logger.info("------------------get session by user id start ");
         if (userId == null) return null;
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        sessionRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
         Session session = sessionRepository.getByUserId(userId);
-//        entityManager.close();
+        logger.info("------------------get session by user id finish " + session);
         return session;
     }
 
     @Override
     public void deleteSession(@Nullable Session session) {
+        logger.info(" ----------------- delete session start" );
         if (session == null) return;
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        sessionRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
         sessionRepository.remove(session);
-//        entityManager.getTransaction().commit();
-//        entityManager.close();
+        logger.info(" ----------------- delete session finish" );
     }
 
     @Override
     public boolean validateSession(@Nullable Session session) {
+        logger.info(" ----------------- validate session start" );
         if (session == null) return false;
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        sessionRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
         String id = session.getId();
+        logger.info(" ----------------- validate session id " + id);
         Session sessionInBase = getSessionById(id);
+        logger.info(" ----------------- validate session: session in Base " + sessionInBase);
         if (!session.getSignature().equals(sessionInBase.getSignature())) {
             return false;
         }
-//        entityManager.close();
+        logger.info(" ----------------- validate session finish ");
         return true;
     }
 

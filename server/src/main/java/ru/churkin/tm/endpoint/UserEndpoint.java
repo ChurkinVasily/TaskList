@@ -2,12 +2,10 @@ package ru.churkin.tm.endpoint;
 
 import ru.churkin.tm.api.IUserEndpoint;
 import ru.churkin.tm.api.UserService;
-import ru.churkin.tm.entity.User;
 import ru.churkin.tm.dto.UserDTO;
+import ru.churkin.tm.entity.User;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 

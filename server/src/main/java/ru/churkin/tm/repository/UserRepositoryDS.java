@@ -17,8 +17,6 @@ public interface UserRepositoryDS extends FullEntityRepository<User, String> {
 
 //    ------ не нужен
 //    void setEntityManager(EntityManager entityManager);
-@Inject
-void setEntityManager(EntityManager entityManager);
 
 //    --- унаследован от родителя. persist
 //    void createUser(User user) throws SQLException;

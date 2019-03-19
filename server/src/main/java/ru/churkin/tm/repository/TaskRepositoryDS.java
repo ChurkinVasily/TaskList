@@ -16,8 +16,6 @@ public interface TaskRepositoryDS extends FullEntityRepository<Task, String> {
 
 // ---- не нужен
 //    void setEntityManager(EntityManager entityManager);
-@Inject
-void setEntityManager(EntityManager entityManager);
 
 //    --- унаследован от родителя. persist метод
 //    void createTask(Task task) throws SQLException;

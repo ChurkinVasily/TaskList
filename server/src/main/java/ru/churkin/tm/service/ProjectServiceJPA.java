@@ -3,17 +3,12 @@ package ru.churkin.tm.service;
 import org.apache.deltaspike.jpa.api.transaction.Transactional;
 import ru.churkin.tm.api.ProjectService;
 import ru.churkin.tm.entity.Project;
-import ru.churkin.tm.repository.ProjectRepository;
 import ru.churkin.tm.repository.ProjectRepositoryDS;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import java.util.List;
 import java.util.UUID;
 
-//@ApplicationScoped
 @Transactional
 public class ProjectServiceJPA implements ProjectService {
 
@@ -22,6 +17,10 @@ public class ProjectServiceJPA implements ProjectService {
 
     @Inject
     private ProjectRepositoryDS projectRepository;
+
+    public void pers(Project project) {
+        projectRepository.persist(project);
+    }
 
     public boolean createProject(String projectName) {
         Project project = new Project(projectName);

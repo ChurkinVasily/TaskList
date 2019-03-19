@@ -13,10 +13,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 //@ApplicationScoped
 @Transactional
 public class TaskServiceJPA implements TaskService {
+
+    Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Inject
     private TaskRepositoryDS taskRepository;
@@ -26,6 +29,7 @@ public class TaskServiceJPA implements TaskService {
 
     @Override
     public boolean createTask(String taskName, User user, Project project) {
+        logger.info(" -------------------- create task start");
         Task task = new Task(taskName, user, project);
         return createTask(task);
     }
@@ -35,6 +39,7 @@ public class TaskServiceJPA implements TaskService {
 //        EntityManager entityManager = entityManagerFactory.createEntityManager();
 //        taskRepository.setEntityManager(entityManager);
 //        entityManager.getTransaction().begin();
+        logger.info(" -------------------- create task start");
         String id = UUID.randomUUID().toString();
         task.setId(id);
         boolean isConsist = false;
@@ -44,9 +49,11 @@ public class TaskServiceJPA implements TaskService {
             }
         }
         if (isConsist || task.getName().isEmpty()) {
+            logger.info(" -------------------- create task false");
             return false;
         }
         taskRepository.persist(task);
+        logger.info(" -------------------- create task true");
 //        entityManager.getTransaction().commit();
 //        entityManager.close();
         return true;
@@ -58,6 +65,7 @@ public class TaskServiceJPA implements TaskService {
 //        EntityManager entityManager = entityManagerFactory.createEntityManager();
 //        taskRepository.setEntityManager(entityManager);
 //        entityManager.getTransaction().begin();
+        logger.info(" -------------------- find task by name start");
         Task task;
         boolean isConsist = false;
         for (Task cTask : taskRepository.findAll()) {
@@ -68,6 +76,7 @@ public class TaskServiceJPA implements TaskService {
         if (isConsist) {
             task = taskRepository.findTaskByName(name);
 //            entityManager.close();
+            logger.info(" -------------------- find task by name finish");
             return task;
         } else return null;
     }
@@ -77,6 +86,7 @@ public class TaskServiceJPA implements TaskService {
 //        EntityManager entityManager = entityManagerFactory.createEntityManager();
 //        taskRepository.setEntityManager(entityManager);
 //        entityManager.getTransaction().begin();
+        logger.info(" -------------------- find task by User id start");
         List<Task> tasks;
         boolean isConsist = false;
         for (Task cTask : taskRepository.findAll()) {
@@ -89,6 +99,7 @@ public class TaskServiceJPA implements TaskService {
         }
         tasks = taskRepository.findTasksByUserId(userId);
 //        entityManager.close();
+        logger.info(" -------------------- find task by User id finish");
         return tasks;
     }
 
@@ -97,6 +108,7 @@ public class TaskServiceJPA implements TaskService {
 //        EntityManager entityManager = entityManagerFactory.createEntityManager();
 //        taskRepository.setEntityManager(entityManager);
 //        entityManager.getTransaction().begin();
+        logger.info(" -------------------- update task  start");
         boolean isConsist = false;
         String id = "";
         for (Task cTask : taskRepository.findAll()) {
@@ -112,29 +124,27 @@ public class TaskServiceJPA implements TaskService {
         taskRepository.merge(task);
 //        entityManager.getTransaction().commit();
 //        entityManager.close();
+        logger.info(" -------------------- update task finish");
         return true;
     }
 
 
     @Override
     public boolean deleteTask(String name) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        taskRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
+        logger.info(" -------------------- delete task  start");
         boolean isConsist = false;
-//        String idForRemove = "";
         for (Task ctask : taskRepository.findAll()) {
             if (name.equals(ctask.getName())) {
-//                idForRemove = ctask.getId();
                 isConsist = true;
+                logger.info(" -------------------- delete task : is consist");
             }
         }
         if (!isConsist || name.isEmpty()) {
+            logger.info(" -------------------- delete task : is consist == false");
             return false;
         }
         taskRepository.remove(taskRepository.findTaskByName(name));
-//        entityManager.getTransaction().commit();
-//        entityManager.close();
+        logger.info(" -------------------- delete task  finish");
         return true;
     }
 
@@ -143,8 +153,10 @@ public class TaskServiceJPA implements TaskService {
 //        EntityManager entityManager = entityManagerFactory.createEntityManager();
 //        taskRepository.setEntityManager(entityManager);
 //        entityManager.getTransaction().begin();
+        logger.info(" -------------------- get all tasks start");
         List<Task> listTask = taskRepository.findAll();
 //        entityManager.close();
+        logger.info(" -------------------- get all tasks finish");
         return listTask;
     }
 }

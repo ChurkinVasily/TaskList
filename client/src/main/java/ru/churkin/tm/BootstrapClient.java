@@ -11,8 +11,11 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class BootstrapClient implements ServiceLocator {
+
+    Logger logger = Logger.getLogger(this.getClass().getName());
 
     private final ServiceLocator serviceLocator = this;
     private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -71,9 +74,12 @@ public class BootstrapClient implements ServiceLocator {
     public void execute(Command command) throws IOException, SQLException, Exception_Exception {
 //        UserDTO user = serviceLocator.getUserEndpoint().getCurrentUser();
         Session session = getCurrentSession();
+        logger.info("---- get current session in bootstrap");
 //        if (!command.isAuth() || (command.isAuth() && serviceLocator.getUserEndpoint().validateUser(user.getName(), user.getPassword()))) {
         if (!command.isAuth() || (command.isAuth() && serviceLocator.getSessionEndpoint().validate(session))) {
+            logger.info("---- executing...... bootstrap");
             command.execute();
+            logger.info("---- execute bootstrap");
         } else System.out.println("требуется авторизация");
     }
 

@@ -5,18 +5,15 @@ import ru.churkin.tm.api.UserService;
 import ru.churkin.tm.entity.User;
 import ru.churkin.tm.repository.UserRepositoryDS;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import java.sql.SQLException;
 import java.util.UUID;
+import java.util.logging.Logger;
 
-//@ApplicationScoped
 @Transactional
 public class UserServiceJPA implements UserService {
 
-//    @Inject
-//    private EntityManagerFactory entityManagerFactory;
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Inject
     private UserRepositoryDS userRepository;
@@ -25,15 +22,14 @@ public class UserServiceJPA implements UserService {
 
     @Override
     public boolean createNewUser(String name, String pass) {
+        logger.info("-------------------------create new user method");
         User user = new User(name, pass);
         return createNewUser(user);
     }
 
     @Override
     public boolean createNewUser(User user) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        userRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
+        logger.info("-------------------create new user method user");
         String userId = UUID.randomUUID().toString();
         user.setId(userId);
         String userName = user.getName();
@@ -51,39 +47,29 @@ public class UserServiceJPA implements UserService {
             return false;
         }
         userRepository.persist(user);
-//        entityManager.getTransaction().commit();
-//        entityManager.close();
         return true;
     }
 
     @Override
     public User findUserById(String id) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        userRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
+        logger.info("-----------------------------find user by id");
         User user = userRepository.findBy(id);
-//        entityManager.close();
+        logger.info("---------------------------find user by id" + user);
         return user;
     }
 
     @Override
     public User findUserByName(String userName) throws SQLException {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        userRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
+        logger.info("-----------------------------------find user by name");
         User user = userRepository.findUserByName(userName);
-//        entityManager.close();
+        logger.info("--------------------------------find user by name" + user);
         return user;
     }
-
-
 
     ///// ---- метод не должен быть транзакционным ???? не закрывать транзакцию в нем
     @Override
     public boolean isExist(String userName) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        userRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
+        logger.info("--------------------------------------isExist");
         boolean isTrue = false;
         for (User cUser : userRepository.findAll()) {
             if (userName.equals(cUser.getName())) {
@@ -91,26 +77,24 @@ public class UserServiceJPA implements UserService {
                 break;
             }
         }
-//        entityManager.close();
+        logger.info("--------------------------------------isExist " + isTrue);
         return isTrue;
     }
 
-
     @Override
     public boolean validateUser(User user) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        userRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
+        logger.info("--------------------------------------validate user");
         if (user == null) return false;
         String userName = user.getName();
         String userPassword = user.getPassword();
         for (User cUser : userRepository.findAll()) {
             if (userName != null && userName.equals(cUser.getName())
                     && userPassword.equals(cUser.getPassword())) {
+                logger.info("--------------------------------------validate user true");
                 return true;
             }
         }
-//        entityManager.close();
+        logger.info("--------------------------------------validate user false");
         return false;
     }
 
@@ -118,7 +102,6 @@ public class UserServiceJPA implements UserService {
     public boolean validateUser(String name, String pass) {
         User user = new User(name, pass);
         return validateUser(user);
-
     }
 
     @Override
@@ -133,12 +116,10 @@ public class UserServiceJPA implements UserService {
 
     @Override
     public void getUserByName(String userName) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        entityManager.getTransaction().begin();
-//        userRepository.setEntityManager(entityManager);
+        logger.info("--------------------------------------get user by name");
         if (isExist(userName)) {
             currentUser = userRepository.findUserByName(userName);
         }
-//        entityManager.close();
+        logger.info("--------------------------------------get user by name finish");
     }
 }
