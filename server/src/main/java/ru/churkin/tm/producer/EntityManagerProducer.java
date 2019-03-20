@@ -1,7 +1,6 @@
 package ru.churkin.tm.producer;
 
 import org.apache.deltaspike.jpa.api.transaction.TransactionScoped;
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.PostConstruct;

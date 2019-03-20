@@ -4,28 +4,21 @@ import org.apache.deltaspike.data.api.FullEntityRepository;
 import org.apache.deltaspike.data.api.Query;
 import org.apache.deltaspike.data.api.QueryParam;
 import org.apache.deltaspike.data.api.Repository;
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
 import org.jetbrains.annotations.NotNull;
 import ru.churkin.tm.entity.Project;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-
 @Repository
-@Transactional
 public interface ProjectRepositoryDS extends FullEntityRepository<Project, String> {
-
-//   ------ не нужен
-//    void setEntityManager(EntityManager entityManager);
-
-//   ---- унаследован от родителя. persist метод
-//   void createProject(Project project) throws SQLException;
-
 
     @NotNull
     @Query(value = "select e from Project e where e.name = :projectName")
     Project findProjectByName(@QueryParam("projectName") String name);
 
+//   ------ не нужен
+//    void setEntityManager(EntityManager entityManager);
+//   ---- унаследован от родителя. persist метод
+
+//   void createProject(Project project) throws SQLException;
 
 //    ---- унаследован от родителя. findBy метод
 //    Project findProjectById(String id);
@@ -41,7 +34,4 @@ public interface ProjectRepositoryDS extends FullEntityRepository<Project, Strin
 //        return entityManager.createQuery("select e from Project e", Project.class)
 //                .getResultList();
 //    }
-
-
-
 }

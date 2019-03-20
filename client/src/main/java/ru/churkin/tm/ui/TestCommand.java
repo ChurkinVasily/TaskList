@@ -24,7 +24,8 @@ public class TestCommand extends AbstractCommand{
     @Override
     public void execute() throws IOException, SQLException, Exception_Exception {
 
-        System.out.println(serviceLocator.getTaskEndpoint().deleteTask("task1_1"));
+        System.out.println("test command finish");
+        //System.out.println(serviceLocator.getTaskEndpoint().deleteTask("task1_1"));
 
     }
 }

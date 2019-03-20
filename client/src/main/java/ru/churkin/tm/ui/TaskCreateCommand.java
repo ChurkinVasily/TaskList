@@ -1,6 +1,5 @@
 package ru.churkin.tm.ui;
 
-
 import ru.churkin.tm.endpoint.Exception_Exception;
 import ru.churkin.tm.endpoint.Session;
 import ru.churkin.tm.endpoint.TaskDTO;
@@ -43,8 +42,6 @@ public class TaskCreateCommand extends AbstractCommand {
         }
         String projectId = serviceLocator.getProjectEndpoint().findProjectByName(projectName).getId();
         newTask.setProjectId(projectId);
-        System.out.println(newTask.getProjectId());
-
         boolean isCreate = false;
         try {
             isCreate = serviceLocator.getTaskEndpoint().createTask(newTask.getName(), newTask.getProjectId(), newTask.getUserId());

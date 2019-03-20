@@ -66,7 +66,6 @@ public class UserServiceJPA implements UserService {
         return user;
     }
 
-    ///// ---- метод не должен быть транзакционным ???? не закрывать транзакцию в нем
     @Override
     public boolean isExist(String userName) {
         logger.info("--------------------------------------isExist");

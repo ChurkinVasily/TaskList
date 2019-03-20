@@ -21,7 +21,6 @@ public interface ITaskEndpoint {
     @WebMethod
     List<TaskDTO> findTaskByUserId(@WebParam(name = "id") String id) throws Exception;
 
-
 //    boolean updateTask(@WebParam(name = "id") String id, @WebParam(name = "task") Task task) throws Exception;
 
     @WebMethod
@@ -30,8 +29,8 @@ public interface ITaskEndpoint {
                        @WebParam(name = "description") String description,
                        @WebParam(name = "timeStart") String timeStart,
                        @WebParam(name = "tineFinish") String timeFinish,
-                       @WebParam(name = "projectID") String projectId
-//                       @WebParam(name = "userID") String userId
+                       @WebParam(name = "projectID") String projectId,
+                       @WebParam(name = "userID") String userId
     ) throws Exception;
 
     @WebMethod

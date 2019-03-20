@@ -7,19 +7,10 @@ import org.apache.deltaspike.data.api.Repository;
 import org.jetbrains.annotations.NotNull;
 import ru.churkin.tm.entity.Task;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
 public interface TaskRepositoryDS extends FullEntityRepository<Task, String> {
-
-// ---- не нужен
-//    void setEntityManager(EntityManager entityManager);
-
-//    --- унаследован от родителя. persist метод
-//    void createTask(Task task) throws SQLException;
-
 
     @NotNull
     @Query("select t from Task t where t.name = :taskName")
@@ -28,6 +19,13 @@ public interface TaskRepositoryDS extends FullEntityRepository<Task, String> {
     @NotNull
     @Query("select t from Task t where t.user.id = :userId")
     List<Task> findTasksByUserId(@QueryParam("userId") String userId);
+
+// ---- не нужен
+//    void setEntityManager(EntityManager entityManager);
+
+//    --- унаследован от родителя. persist метод
+//    void createTask(Task task) throws SQLException;
+
 
 //    ---- унаследован от родителя. merge метод
 //    void updateTask(Task task) throws SQLException;

@@ -50,8 +50,8 @@ public class TaskEndpoint implements ITaskEndpoint {
                               @WebParam(name = "description") String description,
                               @WebParam(name = "timeStart") String timeStart,
                               @WebParam(name = "tineFinish") String timeFinish,
-                              @WebParam(name = "projectID") String projectId
-//                              @WebParam(name = "userID") String userId
+                              @WebParam(name = "projectID") String projectId,
+                              @WebParam(name = "userID") String userId
                               ) throws Exception {
         Task task = taskService.findTaskByName(name);
         task.setName(newName);
@@ -60,7 +60,7 @@ public class TaskEndpoint implements ITaskEndpoint {
         task.setTimeFinish(timeFinish);
         task.setProject(projectService.findProjectById(projectId));
         task.setUser(userService.getCurrentUser());
-//        task.setUser(serviceLocator.getUserService().findUserById(userId));
+        task.setUser(userService.findUserById(userId));
         return taskService.updateTask(name, task);
     }
 

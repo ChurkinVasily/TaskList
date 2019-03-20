@@ -12,15 +12,12 @@ import java.util.UUID;
 @Transactional
 public class ProjectServiceJPA implements ProjectService {
 
-//    @Inject
-//    private EntityManagerFactory entityManagerFactory;
-
     @Inject
     private ProjectRepositoryDS projectRepository;
 
-    public void pers(Project project) {
-        projectRepository.persist(project);
-    }
+//    public void pers(Project project) {
+//        projectRepository.persist(project);
+//    }  /// ------ тестовый метод. создавался для тестирования транзакций
 
     public boolean createProject(String projectName) {
         Project project = new Project(projectName);
@@ -29,8 +26,6 @@ public class ProjectServiceJPA implements ProjectService {
 
     @Override
     public boolean createProject(Project project) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        projectRepository.setEntityManager(entityManager);
         String id = UUID.randomUUID().toString();
         project.setId(id);
         String projectName = project.getName();
@@ -43,17 +38,12 @@ public class ProjectServiceJPA implements ProjectService {
         if (isConsist || project.getName().isEmpty()) {
             return false;
         }
-//        entityManager.getTransaction().begin();
         projectRepository.persist(project);
-//        entityManager.getTransaction().commit();
-//        entityManager.close();
         return true;
     }
 
     @Override
     public Project findProjectByName(String name) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        projectRepository.setEntityManager(entityManager);
         boolean isConsist = false;
         for (Project cProject : projectRepository.findAll()) {
             if (name.equals(cProject.getName())) {
@@ -63,27 +53,18 @@ public class ProjectServiceJPA implements ProjectService {
         if (!isConsist) {
             return null;
         }
-//        entityManager.getTransaction().begin();
         Project project = projectRepository.findProjectByName(name);
-//        entityManager.close();
         return project;
     }
 
     @Override
     public Project findProjectById(String id) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        projectRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
         Project project = projectRepository.findBy(id);
-//        entityManager.close();
         return project;
     }
 
     @Override
     public boolean updateProject(String name, Project project) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        projectRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
         boolean isConsist = false;
         for (Project cProject : projectRepository.findAll()) {
             if (name.equals(cProject.getName())) {
@@ -96,17 +77,11 @@ public class ProjectServiceJPA implements ProjectService {
             return false;
         }
         projectRepository.merge(project);
-//        entityManager.getTransaction().commit();
-//        entityManager.close();
         return true;
     }
 
-
     @Override
     public boolean deleteProject(String name) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        projectRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
         boolean isConsist = false;
         String idForRemove = "";
         for (Project cProject : projectRepository.findAll()) {
@@ -118,20 +93,14 @@ public class ProjectServiceJPA implements ProjectService {
         if (!isConsist || name.equals("")) {
             return false;
         }
-            projectRepository.remove(projectRepository.findBy(idForRemove));
-//            entityManager.getTransaction().commit();
-//            entityManager.close();
-            return true;
+        projectRepository.remove(projectRepository.findBy(idForRemove));
+        return true;
     }
 
     @Override
     public List<Project> getProjectAll() {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        projectRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
         List<Project> listProject = projectRepository.findAll();
         if (listProject.isEmpty()) return null;
-//        entityManager.close();
         return listProject;
     }
 }

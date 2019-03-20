@@ -54,15 +54,15 @@ public class SessionServiceJPA implements ISessionService {
 
     @Override
     public void deleteSession(@Nullable Session session) {
-        logger.info(" ----------------- delete session start" );
+        logger.info(" ----------------- delete session start");
         if (session == null) return;
         sessionRepository.remove(session);
-        logger.info(" ----------------- delete session finish" );
+        logger.info(" ----------------- delete session finish");
     }
 
     @Override
     public boolean validateSession(@Nullable Session session) {
-        logger.info(" ----------------- validate session start" );
+        logger.info(" ----------------- validate session start");
         if (session == null) return false;
         String id = session.getId();
         logger.info(" ----------------- validate session id " + id);

@@ -68,18 +68,17 @@ public class BootstrapClient implements ServiceLocator {
             }
             userInput = reader.readLine();
         }
-        serviceLocator.getSessionEndpoint().deleteSession(currentSession);
+        Session sessionCur = currentSession;
+        serviceLocator.getSessionEndpoint().deleteSession(sessionCur);
+        currentSession = null;
     }
 
     public void execute(Command command) throws IOException, SQLException, Exception_Exception {
 //        UserDTO user = serviceLocator.getUserEndpoint().getCurrentUser();
         Session session = getCurrentSession();
-        logger.info("---- get current session in bootstrap");
 //        if (!command.isAuth() || (command.isAuth() && serviceLocator.getUserEndpoint().validateUser(user.getName(), user.getPassword()))) {
         if (!command.isAuth() || (command.isAuth() && serviceLocator.getSessionEndpoint().validate(session))) {
-            logger.info("---- executing...... bootstrap");
             command.execute();
-            logger.info("---- execute bootstrap");
         } else System.out.println("требуется авторизация");
     }
 

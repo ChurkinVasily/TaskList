@@ -7,29 +7,8 @@ import org.apache.deltaspike.data.api.Repository;
 import org.jetbrains.annotations.NotNull;
 import ru.churkin.tm.entity.Session;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-
 @Repository
 public interface SessionRepositoryDS extends FullEntityRepository<Session, String> {
-
-
-//    --- унаслелован от родителя. persist
-//    void createSession(Session session);
-
-
-//    void persist(Session session);
-
-//    public void deleteSession(Session session) {
-//        if (entityManager.contains(session)) {
-//            entityManager.remove(session);
-//        }
-//        Session tempSession = entityManager.getReference(Session.class, session.getId());
-//        entityManager.remove(tempSession);
-//    }
-
-//    --- унаследован от родителя
-//    List<Session> getAllSession();
 
     @NotNull
     @Query("select e from Session e where id = :sessionId")
@@ -38,5 +17,20 @@ public interface SessionRepositoryDS extends FullEntityRepository<Session, Strin
     @NotNull
     @Query("select e from Session e where userId = :userId")
     Session getByUserId(@QueryParam("userId") String userId);
+
+//    --- унаслелован от родителя. persist
+
+///////////// - ----- удаление сессиии методом remove не работает.
+//    void createSession(Session session);
+//    public void deleteSession(Session session) {
+//        if (entityManager.contains(session)) {
+//            entityManager.remove(session);
+//        }
+//        Session tempSession = entityManager.getReference(Session.class, session.getId());
+//        entityManager.remove(tempSession);
+
+//    }
+//    --- унаследован от родителя
+//    List<Session> getAllSession();
 
 }

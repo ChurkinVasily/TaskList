@@ -7,15 +7,11 @@ import ru.churkin.tm.entity.Task;
 import ru.churkin.tm.entity.User;
 import ru.churkin.tm.repository.TaskRepositoryDS;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-//@ApplicationScoped
 @Transactional
 public class TaskServiceJPA implements TaskService {
 
@@ -23,9 +19,6 @@ public class TaskServiceJPA implements TaskService {
 
     @Inject
     private TaskRepositoryDS taskRepository;
-
-//    @Inject
-//    private EntityManagerFactory entityManagerFactory;
 
     @Override
     public boolean createTask(String taskName, User user, Project project) {
@@ -36,9 +29,6 @@ public class TaskServiceJPA implements TaskService {
 
     @Override
     public boolean createTask(Task task) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        taskRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
         logger.info(" -------------------- create task start");
         String id = UUID.randomUUID().toString();
         task.setId(id);
@@ -54,17 +44,11 @@ public class TaskServiceJPA implements TaskService {
         }
         taskRepository.persist(task);
         logger.info(" -------------------- create task true");
-//        entityManager.getTransaction().commit();
-//        entityManager.close();
         return true;
-
     }
 
     @Override
     public Task findTaskByName(String name) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        taskRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
         logger.info(" -------------------- find task by name start");
         Task task;
         boolean isConsist = false;
@@ -75,7 +59,6 @@ public class TaskServiceJPA implements TaskService {
         }
         if (isConsist) {
             task = taskRepository.findTaskByName(name);
-//            entityManager.close();
             logger.info(" -------------------- find task by name finish");
             return task;
         } else return null;
@@ -83,9 +66,6 @@ public class TaskServiceJPA implements TaskService {
 
     @Override
     public List<Task> findTaskByUserId(String userId) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        taskRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
         logger.info(" -------------------- find task by User id start");
         List<Task> tasks;
         boolean isConsist = false;
@@ -98,16 +78,12 @@ public class TaskServiceJPA implements TaskService {
             return null;
         }
         tasks = taskRepository.findTasksByUserId(userId);
-//        entityManager.close();
         logger.info(" -------------------- find task by User id finish");
         return tasks;
     }
 
     @Override
     public boolean updateTask(String name, Task task) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        taskRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
         logger.info(" -------------------- update task  start");
         boolean isConsist = false;
         String id = "";
@@ -122,8 +98,6 @@ public class TaskServiceJPA implements TaskService {
             return false;
         }
         taskRepository.merge(task);
-//        entityManager.getTransaction().commit();
-//        entityManager.close();
         logger.info(" -------------------- update task finish");
         return true;
     }
@@ -150,12 +124,8 @@ public class TaskServiceJPA implements TaskService {
 
     @Override
     public List<Task> getTasksAll() {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        taskRepository.setEntityManager(entityManager);
-//        entityManager.getTransaction().begin();
         logger.info(" -------------------- get all tasks start");
         List<Task> listTask = taskRepository.findAll();
-//        entityManager.close();
         logger.info(" -------------------- get all tasks finish");
         return listTask;
     }

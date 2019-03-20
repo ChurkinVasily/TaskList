@@ -1,8 +1,6 @@
 package ru.churkin.tm.ui;
 
-import ru.churkin.tm.endpoint.Exception_Exception;
-import ru.churkin.tm.endpoint.Session;
-import ru.churkin.tm.endpoint.TaskDTO;
+import ru.churkin.tm.endpoint.*;
 
 import java.io.IOException;
 
@@ -42,14 +40,23 @@ public class TaskUpdateCommand extends AbstractCommand {
         newTask.setDescription(serviceLocator.getTerminalService().nextLine());
         newTask.setTimeStart(serviceLocator.getTerminalService().nextLine());
         newTask.setTimeFinish(serviceLocator.getTerminalService().nextLine());
-        newTask.setProjectId(serviceLocator.getProjectEndpoint().findProjectByName(serviceLocator.getTerminalService().nextLine()).getId());
+
+        String projectName = serviceLocator.getTerminalService().nextLine();
+        ProjectDTO project = serviceLocator.getProjectEndpoint().findProjectByName(projectName);
+        if (project == null){
+            System.out.println("несуществующее имя проекта");
+            return;
+        }
+
+        newTask.setProjectId(project.getId());
         newTask.setUserId(userId);
         boolean isUpdate = serviceLocator.getTaskEndpoint().updateTask(name,
                 newTask.getName(),
                 newTask.getDescription(),
                 newTask.getTimeStart(),
                 newTask.getTimeFinish(),
-                newTask.getProjectId());
+                newTask.getProjectId(),
+                newTask.getUserId());
         if (!isUpdate) {
             System.out.println("не удалось обновить Task. пустое или несуществующее имя");
             return;
