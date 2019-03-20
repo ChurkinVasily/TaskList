@@ -7,7 +7,7 @@
         bean-discovery-mode="all">
 
     <!--<alternatives>-->
-        <!--<class>org.apache.deltaspike.jpa.impl.transaction.EnvironmentAwareTransactionStrategy</class>-->
+    <!--<class>org.apache.deltaspike.jpa.impl.transaction.EnvironmentAwareTransactionStrategy</class>-->
     <!--</alternatives>-->
 
     <alternatives>

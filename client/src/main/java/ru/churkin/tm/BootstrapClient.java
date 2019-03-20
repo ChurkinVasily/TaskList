@@ -26,7 +26,7 @@ public class BootstrapClient implements ServiceLocator {
     private final TaskEndpointService taskEndpointService = new TaskEndpointService();
     private final TaskEndpoint taskEndpoint = taskEndpointService.getTaskEndpointPort();
 
-    private final  UserEndpointService userEndpointService = new UserEndpointService();
+    private final UserEndpointService userEndpointService = new UserEndpointService();
     private final UserEndpoint userEndpoint = userEndpointService.getUserEndpointPort();
 
     private final SessionEndpointService sessionEndpointService = new SessionEndpointService();

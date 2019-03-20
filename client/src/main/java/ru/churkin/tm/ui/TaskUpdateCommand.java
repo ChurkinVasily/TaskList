@@ -43,7 +43,7 @@ public class TaskUpdateCommand extends AbstractCommand {
 
         String projectName = serviceLocator.getTerminalService().nextLine();
         ProjectDTO project = serviceLocator.getProjectEndpoint().findProjectByName(projectName);
-        if (project == null){
+        if (project == null) {
             System.out.println("несуществующее имя проекта");
             return;
         }

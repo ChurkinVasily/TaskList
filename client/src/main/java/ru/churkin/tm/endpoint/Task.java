@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for task complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="task"&gt;
  *   &lt;complexContent&gt;
@@ -28,18 +28,16 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "task", propOrder = {
-    "description",
-    "id",
-    "name",
-    "project",
-    "timeFinish",
-    "timeStart",
-    "user"
+        "description",
+        "id",
+        "name",
+        "project",
+        "timeFinish",
+        "timeStart",
+        "user"
 })
 public class Task {
 
@@ -53,11 +51,9 @@ public class Task {
 
     /**
      * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getDescription() {
         return description;
@@ -65,11 +61,9 @@ public class Task {
 
     /**
      * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDescription(String value) {
         this.description = value;
@@ -77,11 +71,9 @@ public class Task {
 
     /**
      * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getId() {
         return id;
@@ -89,11 +81,9 @@ public class Task {
 
     /**
      * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setId(String value) {
         this.id = value;
@@ -101,11 +91,9 @@ public class Task {
 
     /**
      * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getName() {
         return name;
@@ -113,11 +101,9 @@ public class Task {
 
     /**
      * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setName(String value) {
         this.name = value;
@@ -125,11 +111,9 @@ public class Task {
 
     /**
      * Gets the value of the project property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Project }
-     *     
+     *
+     * @return possible object is
+     * {@link Project }
      */
     public Project getProject() {
         return project;
@@ -137,11 +121,9 @@ public class Task {
 
     /**
      * Sets the value of the project property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Project }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Project }
      */
     public void setProject(Project value) {
         this.project = value;
@@ -149,11 +131,9 @@ public class Task {
 
     /**
      * Gets the value of the timeFinish property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getTimeFinish() {
         return timeFinish;
@@ -161,11 +141,9 @@ public class Task {
 
     /**
      * Sets the value of the timeFinish property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTimeFinish(String value) {
         this.timeFinish = value;
@@ -173,11 +151,9 @@ public class Task {
 
     /**
      * Gets the value of the timeStart property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getTimeStart() {
         return timeStart;
@@ -185,11 +161,9 @@ public class Task {
 
     /**
      * Sets the value of the timeStart property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTimeStart(String value) {
         this.timeStart = value;
@@ -197,11 +171,9 @@ public class Task {
 
     /**
      * Gets the value of the user property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link User }
-     *     
+     *
+     * @return possible object is
+     * {@link User }
      */
     public User getUser() {
         return user;
@@ -209,11 +181,9 @@ public class Task {
 
     /**
      * Sets the value of the user property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link User }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link User }
      */
     public void setUser(User value) {
         this.user = value;

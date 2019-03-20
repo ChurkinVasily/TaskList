@@ -5,7 +5,7 @@ import ru.churkin.tm.endpoint.Exception_Exception;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class TestCommand extends AbstractCommand{
+public class TestCommand extends AbstractCommand {
     @Override
     public boolean isAuth() {
         return false;

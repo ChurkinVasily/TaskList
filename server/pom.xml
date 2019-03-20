@@ -25,15 +25,15 @@
 
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
         <!--<dependency>-->
-            <!--<groupId>org.hibernate</groupId>-->
-            <!--<artifactId>hibernate-entitymanager</artifactId>-->
-            <!--<version>5.3.3.Final</version>-->
+        <!--<groupId>org.hibernate</groupId>-->
+        <!--<artifactId>hibernate-entitymanager</artifactId>-->
+        <!--<version>5.3.3.Final</version>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
-            <!--<groupId>org.hibernate</groupId>-->
-            <!--<artifactId>hibernate-c3p0</artifactId>-->
-            <!--<version>5.3.7.Final</version>-->
+        <!--<groupId>org.hibernate</groupId>-->
+        <!--<artifactId>hibernate-c3p0</artifactId>-->
+        <!--<version>5.3.7.Final</version>-->
         <!--</dependency>-->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -95,24 +95,23 @@
         </dependency>
 
 
-
         <!--<dependency>-->
-            <!--<groupId>org.apache.deltaspike.cdictrl</groupId>-->
-            <!--<artifactId>deltaspike-cdictrl-weld</artifactId>-->
-            <!--<version>RELEASE</version>-->
-            <!--&lt;!&ndash;<scope>compile</scope>&ndash;&gt;-->
+        <!--<groupId>org.apache.deltaspike.cdictrl</groupId>-->
+        <!--<artifactId>deltaspike-cdictrl-weld</artifactId>-->
+        <!--<version>RELEASE</version>-->
+        <!--&lt;!&ndash;<scope>compile</scope>&ndash;&gt;-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.apache.deltaspike.modules</groupId>-->
-            <!--<artifactId>deltaspike-data-module-api</artifactId>-->
-            <!--<version>RELEASE</version>-->
-            <!--&lt;!&ndash;<scope>compile</scope>&ndash;&gt;-->
+        <!--<groupId>org.apache.deltaspike.modules</groupId>-->
+        <!--<artifactId>deltaspike-data-module-api</artifactId>-->
+        <!--<version>RELEASE</version>-->
+        <!--&lt;!&ndash;<scope>compile</scope>&ndash;&gt;-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.apache.deltaspike.modules</groupId>-->
-            <!--<artifactId>deltaspike-data-module-impl</artifactId>-->
-            <!--<version>RELEASE</version>-->
-            <!--&lt;!&ndash;<scope>compile</scope>&ndash;&gt;-->
+        <!--<groupId>org.apache.deltaspike.modules</groupId>-->
+        <!--<artifactId>deltaspike-data-module-impl</artifactId>-->
+        <!--<version>RELEASE</version>-->
+        <!--&lt;!&ndash;<scope>compile</scope>&ndash;&gt;-->
         <!--</dependency>-->
 
 
