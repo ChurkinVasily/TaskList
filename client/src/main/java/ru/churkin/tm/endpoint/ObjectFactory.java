@@ -28,6 +28,8 @@ public class ObjectFactory {
     private final static QName _CreateSession_QNAME = new QName("http://endpoint.tm.churkin.ru/", "createSession");
     private final static QName _CreateSessionResponse_QNAME = new QName("http://endpoint.tm.churkin.ru/", "createSessionResponse");
     private final static QName _DeleteSession_QNAME = new QName("http://endpoint.tm.churkin.ru/", "deleteSession");
+    private final static QName _DeleteSessionById_QNAME = new QName("http://endpoint.tm.churkin.ru/", "deleteSessionById");
+    private final static QName _DeleteSessionByIdResponse_QNAME = new QName("http://endpoint.tm.churkin.ru/", "deleteSessionByIdResponse");
     private final static QName _DeleteSessionResponse_QNAME = new QName("http://endpoint.tm.churkin.ru/", "deleteSessionResponse");
     private final static QName _GetSessionById_QNAME = new QName("http://endpoint.tm.churkin.ru/", "getSessionById");
     private final static QName _GetSessionByIdResponse_QNAME = new QName("http://endpoint.tm.churkin.ru/", "getSessionByIdResponse");
@@ -71,6 +73,22 @@ public class ObjectFactory {
      */
     public DeleteSession createDeleteSession() {
         return new DeleteSession();
+    }
+
+    /**
+     * Create an instance of {@link DeleteSessionById }
+     * 
+     */
+    public DeleteSessionById createDeleteSessionById() {
+        return new DeleteSessionById();
+    }
+
+    /**
+     * Create an instance of {@link DeleteSessionByIdResponse }
+     * 
+     */
+    public DeleteSessionByIdResponse createDeleteSessionByIdResponse() {
+        return new DeleteSessionByIdResponse();
     }
 
     /**
@@ -163,6 +181,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://endpoint.tm.churkin.ru/", name = "deleteSession")
     public JAXBElement<DeleteSession> createDeleteSession(DeleteSession value) {
         return new JAXBElement<DeleteSession>(_DeleteSession_QNAME, DeleteSession.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DeleteSessionById }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://endpoint.tm.churkin.ru/", name = "deleteSessionById")
+    public JAXBElement<DeleteSessionById> createDeleteSessionById(DeleteSessionById value) {
+        return new JAXBElement<DeleteSessionById>(_DeleteSessionById_QNAME, DeleteSessionById.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DeleteSessionByIdResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://endpoint.tm.churkin.ru/", name = "deleteSessionByIdResponse")
+    public JAXBElement<DeleteSessionByIdResponse> createDeleteSessionByIdResponse(DeleteSessionByIdResponse value) {
+        return new JAXBElement<DeleteSessionByIdResponse>(_DeleteSessionByIdResponse_QNAME, DeleteSessionByIdResponse.class, null, value);
     }
 
     /**

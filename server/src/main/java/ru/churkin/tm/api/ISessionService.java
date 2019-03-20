@@ -10,6 +10,8 @@ public interface ISessionService {
 
     void deleteSession(Session session);
 
+    void deleteSessionById(String id);
+
     boolean validateSession(Session session);
 
     Session getSessionById(String id);

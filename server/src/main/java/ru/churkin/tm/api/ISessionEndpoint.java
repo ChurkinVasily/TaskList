@@ -22,4 +22,7 @@ public interface ISessionEndpoint {
     @WebMethod
     void deleteSession(@WebParam(name = "Session") Session session) throws Exception;
 
+    @WebMethod
+    void deleteSessionById(@WebParam(name = "sessionId") String id) throws Exception;
+
 }

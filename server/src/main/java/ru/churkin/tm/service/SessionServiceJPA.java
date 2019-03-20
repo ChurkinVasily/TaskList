@@ -61,6 +61,16 @@ public class SessionServiceJPA implements ISessionService {
     }
 
     @Override
+    public void deleteSessionById(String id) {
+        logger.info("-------------------delete session by id start");
+        if (id == null) return;
+        Session sessionInstance = sessionRepository.merge(getSessionById(id));
+        sessionRepository.remove(sessionInstance);
+//        sessionRepository.deleteSessionById(id);
+        logger.info("delete session by id finish");
+    }
+
+    @Override
     public boolean validateSession(@Nullable Session session) {
         logger.info(" ----------------- validate session start");
         if (session == null) return false;

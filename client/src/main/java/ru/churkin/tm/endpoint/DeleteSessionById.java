@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for isExist complex type.
+ * <p>Java class for deleteSessionById complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="isExist"&gt;
+ * &lt;complexType name="deleteSessionById"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="userName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -26,35 +26,35 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "isExist", propOrder = {
-    "userName"
+@XmlType(name = "deleteSessionById", propOrder = {
+    "id"
 })
-public class IsExist {
+public class DeleteSessionById {
 
-    protected String userName;
+    protected String id;
 
     /**
-     * Gets the value of the userName property.
+     * Gets the value of the id property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getUserName() {
-        return userName;
+    public String getId() {
+        return id;
     }
 
     /**
-     * Sets the value of the userName property.
+     * Sets the value of the id property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setUserName(String value) {
-        this.userName = value;
+    public void setId(String value) {
+        this.id = value;
     }
 
 }

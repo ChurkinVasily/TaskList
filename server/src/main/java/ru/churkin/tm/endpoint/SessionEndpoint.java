@@ -34,4 +34,9 @@ public class SessionEndpoint implements ISessionEndpoint {
     public void deleteSession(@WebParam(name = "session") Session session) throws Exception {
         sessionService.deleteSession(session);
     }
+
+    @Override
+    public void deleteSessionById(@WebParam(name = "id") String id) throws Exception {
+        sessionService.deleteSessionById(id);
+    }
 }

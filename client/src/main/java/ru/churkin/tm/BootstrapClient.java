@@ -68,8 +68,7 @@ public class BootstrapClient implements ServiceLocator {
             }
             userInput = reader.readLine();
         }
-        Session sessionCur = currentSession;
-        serviceLocator.getSessionEndpoint().deleteSession(sessionCur);
+        serviceLocator.getSessionEndpoint().deleteSessionById(currentSession.getId());
         currentSession = null;
     }
 
