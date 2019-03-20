@@ -18,8 +18,8 @@ public interface SessionRepositoryDS extends FullEntityRepository<Session, Strin
     @Query("select e from Session e where userId = :userId")
     Session getByUserId(@QueryParam("userId") String userId);
 
-    @Query("delete from Session e where id = :id")
-    void deleteSessionById(@QueryParam("id") String id);
+//    @Query("delete from Session e where id = :id")
+//    void deleteSessionById(@QueryParam("id") String id);
 
 //    --- унаслелован от родителя. persist
 

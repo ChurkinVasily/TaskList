@@ -8,6 +8,7 @@ import ru.churkin.tm.entity.Session;
 import ru.churkin.tm.repository.SessionRepositoryDS;
 
 import javax.inject.Inject;
+import java.util.Date;
 import java.util.logging.Logger;
 
 @Transactional
@@ -25,8 +26,9 @@ public class SessionServiceJPA implements ISessionService {
         if (user == null) return null;
         /// создание сессии по юзеру
         Session session = new Session(user.getId());
-        int sign = (user.getName() + user.getPassword()).hashCode();
-        session.setSignature(Integer.toString(sign));
+//        int sign = (user.getName() + user.getPassword()).hashCode(); ----------------
+//        session.setSignature(Integer.toString(sign));    ----------------------------
+        session.setSignature(createSignature(user));
         sessionRepository.persist(session);
         logger.info(" --------------create session finish " + session);
         return session;
@@ -66,7 +68,6 @@ public class SessionServiceJPA implements ISessionService {
         if (id == null) return;
         Session sessionInstance = sessionRepository.merge(getSessionById(id));
         sessionRepository.remove(sessionInstance);
-//        sessionRepository.deleteSessionById(id);
         logger.info("delete session by id finish");
     }
 
@@ -83,6 +84,18 @@ public class SessionServiceJPA implements ISessionService {
         }
         logger.info(" ----------------- validate session finish ");
         return true;
+    }
+
+    public String createSignature(UserDTO user) {
+        String sault = "qsqs";
+        int count = 5;
+        long time = System.currentTimeMillis();
+        String signature = (user.getName() + user.getPassword() + time).hashCode() + "";
+        for (int i=0; i<count; i++) {
+            signature = (signature  + sault).hashCode() + "";
+            System.out.println(signature);
+        }
+        return signature;
     }
 
 

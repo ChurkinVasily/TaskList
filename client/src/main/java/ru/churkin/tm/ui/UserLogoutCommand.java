@@ -25,9 +25,7 @@ public class UserLogoutCommand extends AbstractCommand {
         Session currentSession = serviceLocator.getCurrentSession();
         String sessionId = currentSession.getId();
         serviceLocator.getSessionEndpoint().deleteSessionById(sessionId);
-        System.out.println("удалено из базы");
         serviceLocator.setCurrentSession(null);
-//        serviceLocator.getUserEndpoint().setCurrentUser(null);
         System.out.println("вы вышли из профиля");
     }
 }
