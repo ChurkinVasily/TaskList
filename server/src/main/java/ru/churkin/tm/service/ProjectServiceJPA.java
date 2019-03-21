@@ -1,6 +1,8 @@
 package ru.churkin.tm.service;
 
+import lombok.NoArgsConstructor;
 import org.apache.deltaspike.jpa.api.transaction.Transactional;
+import org.jetbrains.annotations.Nullable;
 import ru.churkin.tm.api.ProjectService;
 import ru.churkin.tm.entity.Project;
 import ru.churkin.tm.repository.ProjectRepositoryDS;
@@ -10,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Transactional
+@NoArgsConstructor
 public class ProjectServiceJPA implements ProjectService {
 
     @Inject
@@ -42,8 +45,10 @@ public class ProjectServiceJPA implements ProjectService {
         return true;
     }
 
+    @Nullable
     @Override
-    public Project findProjectByName(String name) {
+    public Project findProjectByName(@Nullable final String name) {
+        if (name == null || name.isEmpty()) return null;
         boolean isConsist = false;
         for (Project cProject : projectRepository.findAll()) {
             if (name.equals(cProject.getName())) {
@@ -57,14 +62,17 @@ public class ProjectServiceJPA implements ProjectService {
         return project;
     }
 
+    @Nullable
     @Override
-    public Project findProjectById(String id) {
+    public Project findProjectById(@Nullable final String id) {
+        if (id == null || id.isEmpty()) return null;
         Project project = projectRepository.findBy(id);
         return project;
     }
 
     @Override
-    public boolean updateProject(String name, Project project) {
+    public boolean updateProject(@Nullable final String name, Project project) {
+        if (name == null || name.isEmpty()) return false;
         boolean isConsist = false;
         for (Project cProject : projectRepository.findAll()) {
             if (name.equals(cProject.getName())) {
@@ -73,15 +81,14 @@ public class ProjectServiceJPA implements ProjectService {
                 isConsist = true;
             }
         }
-        if (!isConsist || name.isEmpty()) {
-            return false;
-        }
+        if (!isConsist) return false;
         projectRepository.merge(project);
         return true;
     }
 
     @Override
-    public boolean deleteProject(String name) {
+    public boolean deleteProject(@Nullable final String name) {
+        if (name == null || name.isEmpty()) return false;
         boolean isConsist = false;
         String idForRemove = "";
         for (Project cProject : projectRepository.findAll()) {
@@ -90,13 +97,12 @@ public class ProjectServiceJPA implements ProjectService {
                 isConsist = true;
             }
         }
-        if (!isConsist || name.equals("")) {
-            return false;
-        }
+        if (!isConsist) return false;
         projectRepository.remove(projectRepository.findBy(idForRemove));
         return true;
     }
 
+    @Nullable
     @Override
     public List<Project> getProjectAll() {
         List<Project> listProject = projectRepository.findAll();

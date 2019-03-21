@@ -2,6 +2,8 @@ package ru.churkin.tm.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,8 +17,10 @@ public class User {
     @Id
     private String id;
 
+    @Nullable
     private String name;
 
+    @Nullable
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

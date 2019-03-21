@@ -1,6 +1,7 @@
 package ru.churkin.tm.service;
 
 import org.apache.deltaspike.jpa.api.transaction.Transactional;
+import org.jetbrains.annotations.Nullable;
 import ru.churkin.tm.api.TaskService;
 import ru.churkin.tm.entity.Project;
 import ru.churkin.tm.entity.Task;
@@ -21,8 +22,11 @@ public class TaskServiceJPA implements TaskService {
     private TaskRepositoryDS taskRepository;
 
     @Override
-    public boolean createTask(String taskName, User user, Project project) {
+    public boolean createTask(@Nullable final String taskName,
+                              @Nullable final User user,
+                              @Nullable final Project project) {
         logger.info(" -------------------- create task start");
+        if (taskName == null || user == null || project == null) return false;
         Task task = new Task(taskName, user, project);
         return createTask(task);
     }
@@ -30,7 +34,7 @@ public class TaskServiceJPA implements TaskService {
     @Override
     public boolean createTask(Task task) {
         logger.info(" -------------------- create task start");
-        String id = UUID.randomUUID().toString();
+        final String id = UUID.randomUUID().toString();
         task.setId(id);
         boolean isConsist = false;
         for (Task cTask : taskRepository.findAll()) {
@@ -47,9 +51,11 @@ public class TaskServiceJPA implements TaskService {
         return true;
     }
 
+    @Nullable
     @Override
-    public Task findTaskByName(String name) {
+    public Task findTaskByName(@Nullable final String name) {
         logger.info(" -------------------- find task by name start");
+        if (name == null || name.isEmpty()) return null;
         Task task;
         boolean isConsist = false;
         for (Task cTask : taskRepository.findAll()) {
@@ -65,8 +71,9 @@ public class TaskServiceJPA implements TaskService {
     }
 
     @Override
-    public List<Task> findTaskByUserId(String userId) {
+    public List<Task> findTaskByUserId(@Nullable final String userId) {
         logger.info(" -------------------- find task by User id start");
+        if (userId == null || userId.isEmpty()) return null;
         List<Task> tasks;
         boolean isConsist = false;
         for (Task cTask : taskRepository.findAll()) {
@@ -83,8 +90,9 @@ public class TaskServiceJPA implements TaskService {
     }
 
     @Override
-    public boolean updateTask(String name, Task task) {
+    public boolean updateTask(@Nullable final String name, Task task) {
         logger.info(" -------------------- update task  start");
+        if (name == null || name.isEmpty()) return false;
         boolean isConsist = false;
         String id = "";
         for (Task cTask : taskRepository.findAll()) {
@@ -104,8 +112,9 @@ public class TaskServiceJPA implements TaskService {
 
 
     @Override
-    public boolean deleteTask(String name) {
+    public boolean deleteTask(@Nullable final String name) {
         logger.info(" -------------------- delete task  start");
+        if (name == null || name.isEmpty()) return false;
         boolean isConsist = false;
         for (Task ctask : taskRepository.findAll()) {
             if (name.equals(ctask.getName())) {

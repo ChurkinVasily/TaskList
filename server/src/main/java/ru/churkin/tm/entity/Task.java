@@ -3,6 +3,8 @@ package ru.churkin.tm.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.persistence.*;
 
@@ -15,9 +17,13 @@ public class Task {
 
     @Id
     private String id;
+
     private String name;
+    @Nullable
     private String description;
+    @Nullable
     private String timeStart;
+    @Nullable
     private String timeFinish;
 
     @ManyToOne

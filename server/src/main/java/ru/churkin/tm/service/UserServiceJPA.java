@@ -1,6 +1,8 @@
 package ru.churkin.tm.service;
 
 import org.apache.deltaspike.jpa.api.transaction.Transactional;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import ru.churkin.tm.api.UserService;
 import ru.churkin.tm.entity.User;
 import ru.churkin.tm.repository.UserRepositoryDS;
@@ -21,8 +23,9 @@ public class UserServiceJPA implements UserService {
     private User currentUser;
 
     @Override
-    public boolean createNewUser(String name, String pass) {
+    public boolean createNewUser(@Nullable final String name, @Nullable final String pass) {
         logger.info("-------------------------create new user method");
+        if (name == null || name.isEmpty() || pass == null || pass.isEmpty()) return false;
         User user = new User(name, pass);
         return createNewUser(user);
     }
@@ -30,12 +33,12 @@ public class UserServiceJPA implements UserService {
     @Override
     public boolean createNewUser(User user) {
         logger.info("-------------------create new user method user");
-        String userId = UUID.randomUUID().toString();
+        final String userId = UUID.randomUUID().toString();
         user.setId(userId);
-        String userName = user.getName();
-        String userPassword = user.getPassword();
+        final String userName = user.getName();
+        final String userPassword = user.getPassword();
         boolean isConsist = false;
-        if (userName.isEmpty() || userPassword.isEmpty()) {
+        if (userName == null || userName.isEmpty() || userPassword == null || userPassword.isEmpty()) {
             return false;
         }
         for (User cUser : userRepository.findAll()) {
@@ -51,23 +54,27 @@ public class UserServiceJPA implements UserService {
     }
 
     @Override
-    public User findUserById(String id) {
-        logger.info("-----------------------------find user by id");
+    public User findUserById(@Nullable final String id) {
+        logger.info("-----------------------------find user by id start");
+        if (id == null || id.isEmpty()) return null;
         User user = userRepository.findBy(id);
-        logger.info("---------------------------find user by id" + user);
+        logger.info("---------------------------find user by id " + user);
         return user;
     }
 
+    @Nullable
     @Override
-    public User findUserByName(String userName) throws SQLException {
+    public User findUserByName(@Nullable final String userName) throws SQLException {
         logger.info("-----------------------------------find user by name");
+        if (userName == null || userName.isEmpty()) return null;
         User user = userRepository.findUserByName(userName);
         logger.info("--------------------------------find user by name" + user);
         return user;
     }
 
     @Override
-    public boolean isExist(String userName) {
+    public boolean isExist(@Nullable final String userName) {
+        if (userName == null || userName.isEmpty()) return false;
         logger.info("--------------------------------------isExist");
         boolean isTrue = false;
         for (User cUser : userRepository.findAll()) {
@@ -114,8 +121,9 @@ public class UserServiceJPA implements UserService {
     }
 
     @Override
-    public void getUserByName(String userName) {
+    public void getUserByName(@Nullable final String userName) {
         logger.info("--------------------------------------get user by name");
+        if (userName == null || userName.isEmpty()) return;
         if (isExist(userName)) {
             currentUser = userRepository.findUserByName(userName);
         }

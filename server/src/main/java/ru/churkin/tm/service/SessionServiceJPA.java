@@ -8,7 +8,6 @@ import ru.churkin.tm.entity.Session;
 import ru.churkin.tm.repository.SessionRepositoryDS;
 
 import javax.inject.Inject;
-import java.util.Date;
 import java.util.logging.Logger;
 
 @Transactional
@@ -20,8 +19,8 @@ public class SessionServiceJPA implements ISessionService {
     private SessionRepositoryDS sessionRepository;
 
     @Override
-    @Transactional
-    public Session createSession(@Nullable UserDTO user) {
+//    @Transactional
+    public Session createSession(@Nullable final UserDTO user) {
         logger.info(" --------------create session start");
         if (user == null) return null;
         /// создание сессии по юзеру
@@ -34,10 +33,11 @@ public class SessionServiceJPA implements ISessionService {
         return session;
     }
 
+    @Nullable
     @Override
-    public Session getSessionById(@Nullable String id) {
+    public Session getSessionById(@Nullable final String id) {
         logger.info("--------------get session by id start");
-        if (id == null) {
+        if (id == null || id.isEmpty()) {
             return null;
         }
         Session session = sessionRepository.getSessionById(id);
@@ -45,17 +45,18 @@ public class SessionServiceJPA implements ISessionService {
         return session;
     }
 
+    @Nullable
     @Override
-    public Session getSessionByUserId(@Nullable String userId) {
+    public Session getSessionByUserId(@Nullable final String userId) {
         logger.info("------------------get session by user id start ");
-        if (userId == null) return null;
+        if (userId == null || userId.isEmpty()) return null;
         Session session = sessionRepository.getByUserId(userId);
         logger.info("------------------get session by user id finish " + session);
         return session;
     }
 
     @Override
-    public void deleteSession(@Nullable Session session) {
+    public void deleteSession(@Nullable final Session session) {
         logger.info(" ----------------- delete session start");
         if (session == null) return;
         sessionRepository.remove(session);
@@ -63,22 +64,20 @@ public class SessionServiceJPA implements ISessionService {
     }
 
     @Override
-    public void deleteSessionById(String id) {
+    public void deleteSessionById(@Nullable final String id) {
         logger.info("-------------------delete session by id start");
-        if (id == null) return;
+        if (id == null || id.isEmpty()) return;
         Session sessionInstance = sessionRepository.merge(getSessionById(id));
         sessionRepository.remove(sessionInstance);
         logger.info("delete session by id finish");
     }
 
     @Override
-    public boolean validateSession(@Nullable Session session) {
+    public boolean validateSession(@Nullable final Session session) {
         logger.info(" ----------------- validate session start");
         if (session == null) return false;
         String id = session.getId();
-        logger.info(" ----------------- validate session id " + id);
         Session sessionInBase = getSessionById(id);
-        logger.info(" ----------------- validate session: session in Base " + sessionInBase);
         if (!session.getSignature().equals(sessionInBase.getSignature())) {
             return false;
         }
@@ -86,9 +85,9 @@ public class SessionServiceJPA implements ISessionService {
         return true;
     }
 
-    public String createSignature(UserDTO user) {
-        String sault = "qsqs";
-        int count = 5;
+    private String createSignature(@Nullable final UserDTO user) {
+        final String sault = "qsqs";
+        final int count = 5;
         long time = System.currentTimeMillis();
         String signature = (user.getName() + user.getPassword() + time).hashCode() + "";
         for (int i=0; i<count; i++) {

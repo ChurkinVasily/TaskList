@@ -2,6 +2,7 @@ package ru.churkin.tm.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.Nullable;
 import ru.churkin.tm.entity.User;
 
 import java.util.*;
@@ -11,7 +12,9 @@ import java.util.*;
 public class UserDTO {
 
     private String id;
+    @Nullable
     private String name;
+    @Nullable
     private String password;
 
     public UserDTO(String name) {

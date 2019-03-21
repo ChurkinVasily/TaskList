@@ -3,6 +3,7 @@ package ru.churkin.tm.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jetbrains.annotations.Nullable;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,11 +19,16 @@ public class Project {
     @Id
     private String id = UUID.randomUUID().toString();
 
+    @Nullable
     private String name;
+    @Nullable
     private String description;
+    @Nullable
     private String timeStart;
+    @Nullable
     private String timeFinish;
 
+    @Nullable
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks;
 

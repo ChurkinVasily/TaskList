@@ -1,5 +1,8 @@
 package ru.churkin.tm.dto;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ru.churkin.tm.entity.Project;
 
 import java.util.ArrayList;
@@ -7,6 +10,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class ProjectDTO {
 
     private String id;
@@ -21,9 +27,6 @@ public class ProjectDTO {
         this.description = description;
         this.timeStart = timeStart;
         this.timeFinish = timeFinish;
-    }
-
-    public ProjectDTO() {
     }
 
     public ProjectDTO(final Project project) {
@@ -47,46 +50,6 @@ public class ProjectDTO {
             list.add(new ProjectDTO(project));
         }
         return list;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getTimeStart() {
-        return timeStart;
-    }
-
-    public void setTimeStart(String timeStart) {
-        this.timeStart = timeStart;
-    }
-
-    public String getTimeFinish() {
-        return timeFinish;
-    }
-
-    public void setTimeFinish(String timeFinish) {
-        this.timeFinish = timeFinish;
     }
 
     @Override
