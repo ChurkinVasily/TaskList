@@ -1,26 +1,29 @@
 package ru.churkin.tm.endpoint;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.churkin.tm.api.*;
 import ru.churkin.tm.entity.Project;
-import ru.churkin.tm.entity.Session;
 import ru.churkin.tm.entity.Task;
 import ru.churkin.tm.dto.TaskDTO;
 import ru.churkin.tm.entity.User;
 
-import javax.enterprise.inject.se.SeContainerInitializer;
-import javax.inject.Inject;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.List;
 
+@Component
 @WebService
 public class TaskEndpoint implements ITaskEndpoint {
 
-    @Inject
+//    @Inject
+    @Autowired
     private TaskService taskService;
-    @Inject
+//    @Inject
+    @Autowired
     private ProjectService projectService;
-    @Inject
+//    @Inject
+    @Autowired
     private UserService userService;
 
     @Override

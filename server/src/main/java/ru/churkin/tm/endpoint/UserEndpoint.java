@@ -1,18 +1,21 @@
 package ru.churkin.tm.endpoint;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.churkin.tm.api.IUserEndpoint;
 import ru.churkin.tm.api.UserService;
 import ru.churkin.tm.dto.UserDTO;
 import ru.churkin.tm.entity.User;
 
-import javax.inject.Inject;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
+@Component
 @WebService
 public class UserEndpoint implements IUserEndpoint {
 
-    @Inject
+//    @Inject
+    @Autowired
     private UserService userService;
 
     @Override

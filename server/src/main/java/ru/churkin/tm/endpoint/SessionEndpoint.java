@@ -1,18 +1,21 @@
 package ru.churkin.tm.endpoint;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.churkin.tm.api.ISessionEndpoint;
 import ru.churkin.tm.api.ISessionService;
 import ru.churkin.tm.dto.UserDTO;
 import ru.churkin.tm.entity.Session;
 
-import javax.inject.Inject;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
+@Component
 @WebService
 public class SessionEndpoint implements ISessionEndpoint {
 
-    @Inject
+//    @Inject
+    @Autowired
     private ISessionService sessionService;
 
     @Override

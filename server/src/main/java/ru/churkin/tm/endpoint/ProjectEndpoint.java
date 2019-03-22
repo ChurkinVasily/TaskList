@@ -1,21 +1,23 @@
 package ru.churkin.tm.endpoint;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.churkin.tm.api.IProjectEndpoint;
 import ru.churkin.tm.api.ProjectService;
 import ru.churkin.tm.dto.ProjectDTO;
 import ru.churkin.tm.entity.Project;
 
-import javax.inject.Inject;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.List;
 
 import static ru.churkin.tm.dto.ProjectDTO.toDTO;
 
+@Component
 @WebService
 public class ProjectEndpoint implements IProjectEndpoint {
 
-    @Inject
+    @Autowired
     private ProjectService projectService;
 
     @Override
