@@ -17,6 +17,12 @@ public class Bootstrap{
 //    @Inject
 //    private ProjectService projectService;
 
+//    @PostConstruct
+////    private void initq() throws SQLException {
+////        projectService.pers(new Project());
+////    } /// --------тестирование транзакций
+
+
     @Inject
     private IProjectEndpoint projectEndpoint;
 
@@ -28,11 +34,6 @@ public class Bootstrap{
 
     @Inject
     private ISessionEndpoint sessionEndpoint;
-
-//    @PostConstruct
-////    private void initq() throws SQLException {
-////        projectService.pers(new Project());
-////    } /// --------тестирование транзакций
 
     public void init() {
 
