@@ -1,26 +1,25 @@
 package ru.churkin.tm.service;
 
 import lombok.NoArgsConstructor;
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.churkin.tm.api.ProjectService;
 import ru.churkin.tm.entity.Project;
 import ru.churkin.tm.repository.ProjectRepositoryDS;
 
-import javax.inject.Inject;
 import java.util.List;
 import java.util.UUID;
 
 @Transactional
 @NoArgsConstructor
+@Service
 public class ProjectServiceJPA implements ProjectService {
 
-    @Inject
+//    @Inject
+    @Autowired
     private ProjectRepositoryDS projectRepository;
-
-//    public void pers(Project project) {
-//        projectRepository.persist(project);
-//    }  /// ------ тестовый метод. создавался для тестирования транзакций
 
     public boolean createProject(String projectName) {
         Project project = new Project(projectName);
