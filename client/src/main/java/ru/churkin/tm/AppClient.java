@@ -1,5 +1,9 @@
 package ru.churkin.tm;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import ru.churkin.tm.boot.BootstrapClient;
+import ru.churkin.tm.config.AppClientConfig;
 import ru.churkin.tm.endpoint.Exception_Exception;
 import ru.churkin.tm.ui.*;
 
@@ -17,8 +21,14 @@ public class AppClient {
 
     public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, SQLException, Exception_Exception {
 
-        BootstrapClient bootstrap = new BootstrapClient();
+        final ApplicationContext ctx = new AnnotationConfigApplicationContext(AppClientConfig.class);
+        final BootstrapClient bootstrap = ctx.getBean(BootstrapClient.class);
         bootstrap.init(classes);
+
+
+
+//        BootstrapClient bootstrap = new BootstrapClient();
+//        bootstrap.init(classes);
 
     }
 }

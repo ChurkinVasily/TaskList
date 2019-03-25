@@ -10,8 +10,8 @@ public class App {
 
     public static void main(String[] args) {
 
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
-        Bootstrap bootstrap = (Bootstrap) ctx.getBean(Bootstrap.class);
+        final ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+        final Bootstrap bootstrap = (Bootstrap) ctx.getBean(Bootstrap.class);
         bootstrap.init();
 
     }
