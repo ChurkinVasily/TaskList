@@ -1,34 +1,35 @@
 package ru.churkin.tm.service;
 
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
+import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.churkin.tm.api.ISessionService;
 import ru.churkin.tm.dto.UserDTO;
 import ru.churkin.tm.entity.Session;
-import ru.churkin.tm.repository.SessionRepositoryDS;
+import ru.churkin.tm.repository.SessionRepository;
 
-import javax.inject.Inject;
 import java.util.logging.Logger;
 
 @Transactional
+@NoArgsConstructor
+@Service
 public class SessionServiceJPA implements ISessionService {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    @Inject
-    private SessionRepositoryDS sessionRepository;
+    @Autowired
+    private SessionRepository sessionRepository;
 
     @Override
-//    @Transactional
     public Session createSession(@Nullable final UserDTO user) {
         logger.info(" --------------create session start");
         if (user == null) return null;
         /// создание сессии по юзеру
         Session session = new Session(user.getId());
-//        int sign = (user.getName() + user.getPassword()).hashCode(); ----------------
-//        session.setSignature(Integer.toString(sign));    ----------------------------
         session.setSignature(createSignature(user));
-        sessionRepository.persist(session);
+        sessionRepository.save(session);
         logger.info(" --------------create session finish " + session);
         return session;
     }
@@ -59,7 +60,7 @@ public class SessionServiceJPA implements ISessionService {
     public void deleteSession(@Nullable final Session session) {
         logger.info(" ----------------- delete session start");
         if (session == null) return;
-        sessionRepository.remove(session);
+        sessionRepository.delete(session);
         logger.info(" ----------------- delete session finish");
     }
 
@@ -67,8 +68,8 @@ public class SessionServiceJPA implements ISessionService {
     public void deleteSessionById(@Nullable final String id) {
         logger.info("-------------------delete session by id start");
         if (id == null || id.isEmpty()) return;
-        Session sessionInstance = sessionRepository.merge(getSessionById(id));
-        sessionRepository.remove(sessionInstance);
+        Session sessionInstance = sessionRepository.save(getSessionById(id));
+        sessionRepository.delete(sessionInstance);
         logger.info("delete session by id finish");
     }
 
@@ -86,13 +87,12 @@ public class SessionServiceJPA implements ISessionService {
     }
 
     private String createSignature(@Nullable final UserDTO user) {
-        final String sault = "qsqs";
+        final String salt = "qsqs";
         final int count = 5;
         long time = System.currentTimeMillis();
         String signature = (user.getName() + user.getPassword() + time).hashCode() + "";
         for (int i=0; i<count; i++) {
-            signature = (signature  + sault).hashCode() + "";
-            System.out.println(signature);
+            signature = (signature  + salt).hashCode() + "";
         }
         return signature;
     }

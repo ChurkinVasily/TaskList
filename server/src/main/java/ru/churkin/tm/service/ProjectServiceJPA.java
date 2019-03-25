@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.churkin.tm.api.ProjectService;
 import ru.churkin.tm.entity.Project;
-import ru.churkin.tm.repository.ProjectRepositoryDS;
+import ru.churkin.tm.repository.ProjectRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Transactional
@@ -17,9 +18,8 @@ import java.util.UUID;
 @Service
 public class ProjectServiceJPA implements ProjectService {
 
-//    @Inject
     @Autowired
-    private ProjectRepositoryDS projectRepository;
+    private ProjectRepository projectRepository;
 
     public boolean createProject(String projectName) {
         Project project = new Project(projectName);
@@ -40,7 +40,7 @@ public class ProjectServiceJPA implements ProjectService {
         if (isConsist || project.getName().isEmpty()) {
             return false;
         }
-        projectRepository.persist(project);
+        projectRepository.save(project);
         return true;
     }
 
@@ -65,7 +65,8 @@ public class ProjectServiceJPA implements ProjectService {
     @Override
     public Project findProjectById(@Nullable final String id) {
         if (id == null || id.isEmpty()) return null;
-        Project project = projectRepository.findBy(id);
+        Optional<Project> list = projectRepository.findById(id);
+        Project project = (Project) list.get();
         return project;
     }
 
@@ -81,7 +82,7 @@ public class ProjectServiceJPA implements ProjectService {
             }
         }
         if (!isConsist) return false;
-        projectRepository.merge(project);
+        projectRepository.save(project);
         return true;
     }
 
@@ -97,7 +98,7 @@ public class ProjectServiceJPA implements ProjectService {
             }
         }
         if (!isConsist) return false;
-        projectRepository.remove(projectRepository.findBy(idForRemove));
+        projectRepository.delete(projectRepository.getOne(idForRemove));
         return true;
     }
 

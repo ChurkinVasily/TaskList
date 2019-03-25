@@ -14,13 +14,5 @@ public class App {
         Bootstrap bootstrap = (Bootstrap) ctx.getBean(Bootstrap.class);
         bootstrap.init();
 
-
-//        SeContainerInitializer.newInstance()
-//                .addPackages(App.class.getPackage())
-//                .initialize()
-//                .select(Bootstrap.class)
-//                .get()
-//                .init();
-
     }
 }

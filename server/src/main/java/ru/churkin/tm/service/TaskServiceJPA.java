@@ -1,25 +1,29 @@
 package ru.churkin.tm.service;
 
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
+import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.churkin.tm.api.TaskService;
 import ru.churkin.tm.entity.Project;
 import ru.churkin.tm.entity.Task;
 import ru.churkin.tm.entity.User;
-import ru.churkin.tm.repository.TaskRepositoryDS;
+import ru.churkin.tm.repository.TaskRepository;
 
-import javax.inject.Inject;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
 @Transactional
+@NoArgsConstructor
+@Service
 public class TaskServiceJPA implements TaskService {
 
     Logger logger = Logger.getLogger(this.getClass().getName());
 
-    @Inject
-    private TaskRepositoryDS taskRepository;
+    @Autowired
+    private TaskRepository taskRepository;
 
     @Override
     public boolean createTask(@Nullable final String taskName,
@@ -46,7 +50,7 @@ public class TaskServiceJPA implements TaskService {
             logger.info(" -------------------- create task false");
             return false;
         }
-        taskRepository.persist(task);
+        taskRepository.save(task);
         logger.info(" -------------------- create task true");
         return true;
     }
@@ -102,10 +106,10 @@ public class TaskServiceJPA implements TaskService {
                 isConsist = true;
             }
         }
-        if (!isConsist || name.equals("")) {
+        if (!isConsist) {
             return false;
         }
-        taskRepository.merge(task);
+        taskRepository.save(task);
         logger.info(" -------------------- update task finish");
         return true;
     }
@@ -122,11 +126,11 @@ public class TaskServiceJPA implements TaskService {
                 logger.info(" -------------------- delete task : is consist");
             }
         }
-        if (!isConsist || name.isEmpty()) {
+        if (!isConsist) {
             logger.info(" -------------------- delete task : is consist == false");
             return false;
         }
-        taskRepository.remove(taskRepository.findTaskByName(name));
+        taskRepository.delete(taskRepository.findTaskByName(name));
         logger.info(" -------------------- delete task  finish");
         return true;
     }

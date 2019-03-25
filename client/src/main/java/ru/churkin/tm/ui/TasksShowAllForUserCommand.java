@@ -1,8 +1,6 @@
 package ru.churkin.tm.ui;
 
-import ru.churkin.tm.endpoint.Exception_Exception;
-import ru.churkin.tm.endpoint.Session;
-import ru.churkin.tm.endpoint.TaskDTO;
+import ru.churkin.tm.endpoint.*;
 
 import java.util.List;
 
@@ -32,14 +30,15 @@ public class TasksShowAllForUserCommand extends AbstractCommand {
         List<TaskDTO> tasks = serviceLocator.getTaskEndpoint().findTaskByUserId(userId);
         if (!tasks.isEmpty()) {
             for (TaskDTO currentTask : tasks) {
+                String projectId = currentTask.getProjectId();
                 System.out.println("Task{" +
                         "id='" + currentTask.getId() + '\'' +
                         ", name='" + currentTask.getName() + '\'' +
                         ", description='" + currentTask.getDescription() + '\'' +
                         ", timeStart='" + currentTask.getTimeStart() + '\'' +
                         ", timeFinish='" + currentTask.getTimeFinish() + '\'' +
-                        ", project='" + serviceLocator.getProjectEndpoint().findProjectById(currentTask.getProjectId()).getName() + '\'' +
-                        ", userName='" + serviceLocator.getUserEndpoint().findUserById(currentTask.getUserId()).getName() +
+                        ", project='" + serviceLocator.getProjectEndpoint().findProjectById(projectId).getName() + '\'' +
+                        ", userName='" + serviceLocator.getUserEndpoint().findUserById(userId).getName() +
                         '}');
             }
         } else {

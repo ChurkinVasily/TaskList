@@ -1,23 +1,26 @@
 package ru.churkin.tm.service;
 
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
-import org.jetbrains.annotations.NotNull;
+import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.churkin.tm.api.UserService;
 import ru.churkin.tm.entity.User;
 import ru.churkin.tm.repository.UserRepositoryDS;
 
-import javax.inject.Inject;
 import java.sql.SQLException;
 import java.util.UUID;
 import java.util.logging.Logger;
 
 @Transactional
+@Service
+@NoArgsConstructor
 public class UserServiceJPA implements UserService {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    @Inject
+    @Autowired
     private UserRepositoryDS userRepository;
 
     private User currentUser;
@@ -49,7 +52,7 @@ public class UserServiceJPA implements UserService {
         if (isConsist) {
             return false;
         }
-        userRepository.persist(user);
+        userRepository.save(user);
         return true;
     }
 
@@ -57,7 +60,7 @@ public class UserServiceJPA implements UserService {
     public User findUserById(@Nullable final String id) {
         logger.info("-----------------------------find user by id start");
         if (id == null || id.isEmpty()) return null;
-        User user = userRepository.findBy(id);
+        User user = userRepository.getOne(id);
         logger.info("---------------------------find user by id " + user);
         return user;
     }
