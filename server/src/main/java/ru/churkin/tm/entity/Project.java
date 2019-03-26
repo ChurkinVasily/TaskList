@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.jetbrains.annotations.Nullable;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,6 +26,8 @@ public class Project {
     private String description;
     @Nullable
     private String timeStart;
+//    @Nullable
+//    private Date timeStart;
     @Nullable
     private String timeFinish;
 

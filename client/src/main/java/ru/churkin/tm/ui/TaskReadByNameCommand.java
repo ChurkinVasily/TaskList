@@ -43,9 +43,7 @@ public class TaskReadByNameCommand extends AbstractCommand {
         }
         TaskDTO currentTask = serviceLocator.getTaskEndpoint().findTaskByName(name);
         String projectId = currentTask.getProjectId();
-        System.out.println(projectId);
         ProjectDTO projectDTO = serviceLocator.getProjectEndpoint().findProjectById(projectId);
-        System.out.println(projectDTO);
         System.out.println("Task{" +
                 "id='" + currentTask.getId() + '\'' +
                 ", name='" + currentTask.getName() + '\'' +

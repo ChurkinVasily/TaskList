@@ -11,7 +11,7 @@ public class App {
     public static void main(String[] args) {
 
         final ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
-        final Bootstrap bootstrap = (Bootstrap) ctx.getBean(Bootstrap.class);
+        final Bootstrap bootstrap = ctx.getBean(Bootstrap.class);
         bootstrap.init();
 
     }
